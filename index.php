@@ -13,7 +13,7 @@
             <img src="images/good.png" class="logo">
             <nav>
                 <ul>
-                    <li><a href="">Rolex</a></li>
+                    <li><a href="">Rolexx</a></li>
                     <li><a href="">Audemar Piguet</a></li>
                     <li><a href="">Richard Mille</a></li>
                     <li><a href="">Tudor</a></li>
