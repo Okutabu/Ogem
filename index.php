@@ -1,6 +1,6 @@
 <?php
 
-$page = "acceuil";
+$page = "accueil";
 if (isset($_GET["page"]))
     $page = $_GET["page"];
 

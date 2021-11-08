@@ -9,7 +9,7 @@
                 <h3>la Rolex GMT-Master Batman</h3>
             </div>
             <div class="col-2">
-                    <img src="images/batman2.png" class="batman">
+                    <img src="./images/batman2.png" class="batman">
                     <div class="color-box"></div>
             </div>
         </div>
