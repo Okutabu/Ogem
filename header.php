@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
     <title>OGEM</title>
 </head>
 <body>
@@ -17,8 +18,14 @@
                     <li><a href="">Rolex</a></li>
                     <li><a href="">Audemar Piguet</a></li>
                     <li><a href="">Richard Mille</a></li>
-                    <li><a href="">Tudor</a></li>
+                    <li><a href="">More</a></li>
+                    <li><div id="search_bar">
+                        <form action="/action_page.php">
+                            <input type="text" placeholder="Search..">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div></li>
                 </ul>
             </nav>
         </div>
-        
+</header>

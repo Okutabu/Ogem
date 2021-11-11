@@ -14,6 +14,6 @@
             </div>
         </div>
     </div>
-    </header> <!-- Penser à fermer le header sur toutes les autres pages --> <!-- à modifier-->
+ 
 
 </body>
