@@ -3,6 +3,7 @@ include "connect.php";
 
 function display_watch(){
     // in row container
+    echo "somethings is up";
     global $result;
     while($row = mysqli_fetch_assoc($result)){
         echo "<div class='col-lg-3'>";
