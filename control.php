@@ -3,9 +3,10 @@ include "connect.php";
 
 function display_watch(){
     // in row container
-    echo "somethings is up";
+    
     global $result;
     while($row = mysqli_fetch_assoc($result)){
+        echo $row["name"];
         echo "<div class='col-lg-3'>";
         echo "<img src='./images/".$row["user"]."_".$row["brand"]."_".$row["name"]."_image"."png'>";
         echo "</div>";
