@@ -16,7 +16,7 @@ include "control.php";
     </div>
 
     <div class="container-fluid watch_display_container">
-        <div class="row">
+        <div class="row red">
         <?php
         display_watch();
 
