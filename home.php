@@ -1,11 +1,5 @@
-<div class="container">
-
-<?php
-    include "connectforwatches.php";
-    include "control.php";
-?>
-
-        <div class="row">
+<main id="container">
+    <div class="row">
             <div class="col-1">
                 <h2>La montre aux super-pouvoirs:</h2>
                 <h3>la Rolex GMT-Master Batman</h3>
@@ -21,8 +15,10 @@
         <?php
         display_watch();
 
+</main>
+
+        
+
 
         ?>
-        </div>
-    </div>
-</div>
+        
