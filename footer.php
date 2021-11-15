@@ -1,7 +1,3 @@
-<!-- FOOTER -->
-	<footer>
-		&copy; OGEM 21
-	</footer>
-
-</body>
-</html>
+<footer>
+	<p>&copy; 2021 OGEM</p>
+</footer>

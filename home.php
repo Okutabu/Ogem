@@ -1,8 +1,9 @@
-<!-- HOME -->
-
 <div class="container">
 
-    
+<?php
+    include "connectforwatches.php";
+    include "control.php";
+?>
 
         <div class="row">
             <div class="col-1">
@@ -14,4 +15,14 @@
                     <div class="color-box"></div>
             </div>
         </div>
+
+    <div class="container-fluid watch_display_container">
+        <div class="row red">
+        <?php
+        display_watch();
+
+
+        ?>
+        </div>
+    </div>
 </div>
