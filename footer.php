@@ -1,4 +1,7 @@
-<footer>
+<!-- FOOTER -->
+	<footer>
+		&copy; OGEM 21
+	</footer>
 
-</footer>
+</body>
 </html>

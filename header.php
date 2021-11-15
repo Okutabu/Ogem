@@ -1,31 +1,26 @@
+<!-- HEADER -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <title>OGEM</title>
+	<meta charset="utf-8">
+	<title>Includes</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body>
-    <header>
-    <div class="container">
-        <div class="navbar">
+
+
+<body id="<?= $page ?>">
+	<div class="navbar">
             <img src="images/good.png" class="logo">
             <nav>
                 <ul>
-                    <li><a href="">Rolex</a></li>
-                    <li><a href="">Audemar Piguet</a></li>
-                    <li><a href="">Richard Mille</a></li>
-                    <li><a href="">More</a></li>
-                    <li><div id="search_bar">
-                        <form action="/action_page.php">
-                            <input type="text" placeholder="Search..">
-                            <button type="submit"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div></li>
+                    <li><a href=".?page=rolex">Rolex</a></li>
+                    <li><a href=".?page=main">Connexion</a></li>
+                    <li><a href=".?page=inscription">inscription</a></li>
+                    <li><a href="">Tudor</a></li>
                 </ul>
             </nav>
         </div>
-</header>
+
+
+</body>
+</html>
