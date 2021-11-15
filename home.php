@@ -14,11 +14,5 @@
         <div class="row red">
         <?php
         display_watch();
-
-</main>
-
-        
-
-
         ?>
-        
+</main>
