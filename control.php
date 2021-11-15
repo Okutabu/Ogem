@@ -1,5 +1,5 @@
 <?php
-include "connect.php";
+include "connectforwatches.php";
 
 function display_watch(){
     // in row container
