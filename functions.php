@@ -1,7 +1,7 @@
 <?php
 
 function display_watch(){
-    //future fonction qui affiche les montres, a modif
+    //future fonction qui affiche les montres sur la page search, a modif
 
     global $result;
     while($row = mysqli_fetch_assoc($result)){

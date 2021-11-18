@@ -1,11 +1,13 @@
 <header id="navbar">
-    <img src="images/good.png" class="logo">
+    <img src="images/logo.png" id="logo">
 </header>
 <nav>
     <ul>
-        <li><a href=".?page=rolex">Rolex</a></li>
-        <li><a href=".?page=main">Connexion</a></li>
-        <li><a href=".?page=inscription">inscription</a></li>
-        <li><a href="">Tudor</a></li>
+        <li><a href=".?page=home">Accueil</a></li>
+        <li><a href=".?page=search">Montres à vendre</a></li>
+        <li><a href=".?page=sell">Vendre</a></li>
+        <li><a href=".?page=sign">Connexion/Inscription</a></li>
+        <!-- Mettre photo de profil ci-dessous et quand on clique menu déroulant avec profil, vendre, panier et se déconnecter -->
+        <li><p>Profil</p></li> 
     </ul>
 </nav>
