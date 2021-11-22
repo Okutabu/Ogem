@@ -12,4 +12,6 @@ if (array_search($page, $pages) === FALSE){
 	$page = "404";
 }
 
+
+
 ?>
