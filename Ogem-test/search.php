@@ -1,3 +1,0 @@
-<?php
-    display_watch()
-?>  

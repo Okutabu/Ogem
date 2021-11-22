@@ -68,7 +68,7 @@ nav ul li a:hover{
   left: -40px;
   top: 8px;
 }
-.col-2{
+.col-2 {
   position: relative;
   flex-basis: 60%;
   display: flex;
@@ -76,6 +76,40 @@ nav ul li a:hover{
 }
 .batman{
   width: 100%;
+}
+#button{
+  flex: 1;
+  text-align: left;
+
+}
+#button a {
+  text-decoration: none;
+  font-size: 30px;
+}
+#buttona:visited {
+  color:black;
+}
+#button ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  padding:0px;
+  margin:0px;
+}
+#button li {
+  background-color: white;
+  padding:2px;
+  display: block;
+  width:100%;
+  text-align:start;
+  border: black solid 3px;
+  border-collapse: collapse;
+  font-size: 30px;
+
+}
+#button li:hover{
+  background-color: #15606c;
+
 }
 
 /* Dev by Octavocado */

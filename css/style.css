@@ -105,6 +105,56 @@ nav ul li a:hover {
   width: 100%;
 }
 
+#button nav{
+  text-align: left;
+}
+#button a {
+  text-decoration: none;
+  font-size: 30px;
+  color:#2c6e49;
+}
+#buttona:visited {
+  color:#2c6e49;
+}
+#button ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  padding:0px;
+  margin:0px;
+  padding-top: 5vh;
+}
+#button li {
+  background-color: white;
+  padding:2px;
+  display: block;
+  width:100%;
+  text-align:center;
+  border: #2c6e49 solid 3px;
+  border-radius: 30px;
+  font-size: 30px;
+
+}
+#button li:hover{
+  background-color: #2c6e49;
+  color:white;
+  transition: all 0.5s ease-in;
+  animation: lihov 1s ease 0s 1 normal forwards;
+}
+@keyframes lihov {
+  0% {
+    transform: scale(1);
+  }
+  
+  100% {
+    transform: scale(1.05);
+  }
+}
+#button li:hover a {
+  transition: all 0.5s ease-in;
+  color:white;
+}
+
 /* Dev by Octavocado */
 #search_bar button {
   padding: 14px;
