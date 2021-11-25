@@ -1,4 +1,12 @@
 <main id="container">
+    <div>
+        <nav id="button">
+            <ul>
+            <li id="achatban"><a href=".?page=search">Acheter une montre</a></li>
+            <li id="venteban"><a href=".?page=sell"><img src="">Vendre une montre</a></li>
+            </ul>
+        </nav>
+    </div>
     <article class="row">
         <div class="col-1">
             <h2>La montre aux super-pouvoirs:</h2>

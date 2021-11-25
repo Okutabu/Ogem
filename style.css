@@ -1,7 +1,5 @@
-*{
-  margin: 0px;
-  padding: 0px;
-  font-family: sans-serif;
+body {
+  margin:0px;
 }
 
 #container {
@@ -98,6 +96,10 @@ nav ul li a:hover{
   color:#2c6e49;
 }
 
+#button img {
+  position: relative;
+}
+
 #buttona:visited {
   color:#2c6e49;
 }
@@ -142,6 +144,34 @@ nav ul li a:hover{
 #button li:hover a {
   transition: all 0.5s ease-in;
   color:white;
+}
+
+#achatban a {
+  font-size: 35px;
+  padding:2px;
+  min-height: 25vh;
+  display: block;
+  background: url("banniererolexgauche.png") center center no-repeat;
+  background-size: cover;
+}
+
+#venteban a {
+  font-size: 35px;
+  padding:2px;
+  min-height: 25vh;
+  display: block;
+  background: url("banniy10.png") center center no-repeat;
+  background-size: cover;
+}
+
+#sous{
+  display:none;
+  box-shadow: 0px 1px 2px #CCC;
+  background-color:white;
+}
+
+nav > ul li:hover .sous {
+  display:block;
 }
 
 /* Dev by Octavocado */
