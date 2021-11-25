@@ -12,6 +12,8 @@
     }
 }
 
+//----------------- Fonctions pour la gestion de comptes ------------------- 
+
 function insciption($pseudo1, $mail2, $password3, $retypedPassword4){
     // Si les variables existent et qu'elles ne sont pas vides
     if(!empty($pseudo1) && !empty($mail2) && !empty($password3) && !empty($retypedPassword4))
@@ -100,8 +102,9 @@ function connexion($mail1, $password2){
             if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 // Si le mot de passe est le bon
                 if(password_verify($password, $data['password'])) {
-                    // On créer la session et on redirige sur landing.php
+                    // On crée la session 
                     $_SESSION['user'] = $data['token'];
+                    // On redirige sur landing.php
                     header('Location: .?page=landing');
                     die();
                 }
@@ -116,11 +119,29 @@ function connexion($mail1, $password2){
     }
 }
 
+function landProperly(){
+
+    session_start();
+   // si on arrive ici sans être connecté on redirige
+    if(!isset($_SESSION['user'])){
+        header('Location: .');
+        die();
+    }
+
+    // Sinon on récupere les données de l'utilisateur pour afficher la belle page de landing
+    $req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
+    $req->execute(array($_SESSION['user']));
+    $data = $req->fetch();
+    
+}
+
 function deconnection(){
     session_destroy();
     header('Location: .?page=home');
     die();
 }
+
+//Traitement erreurs
 
 function errors_accounts($error){
     
@@ -145,5 +166,7 @@ function errors_accounts($error){
     }
     echo '</div>';
 }
+
+//-----------------------------------------------------------------
 
 ?>

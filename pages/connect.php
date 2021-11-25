@@ -1,7 +1,3 @@
-<?php
-    connectOrCreate();
-?>
-
 <main class="login-form">
     <h2 class="text-center">Connectez-vous</h2>
     <form action="../index.php" method="post">
