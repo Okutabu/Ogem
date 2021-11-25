@@ -2,7 +2,7 @@
     session_start(); // Démarrage de la session
     require_once 'config.php'; // On inclut la connexion à la base de données
 
-    if(!empty($_POST['email']) && !empty($_POST['password'])) // Si il existe les champs email, password et qu'il sont pas vident
+    if(!empty($_POST['email']) && !empty($_POST['password'])) // Si il existe les champs email, password et qu'ils ne sont pas vides
     {
         // Patch XSS
         $email = htmlspecialchars($_POST['email']); 
