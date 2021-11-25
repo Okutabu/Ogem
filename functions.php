@@ -12,12 +12,6 @@
     }
 }
 
-function connectOrCreate(){
-    if (!isset($_SESSION('user')){
-        header('Location:.?page="inscription"');
-    }
-}
-
 function insciption($pseudo1, $mail2, $password3, $retypedPassword4){
     // Si les variables existent et qu'elles ne sont pas vides
     if(!empty($pseudo1) && !empty($mail2) && !empty($password3) && !empty($retypedPassword4))
