@@ -12,15 +12,15 @@
     }
 }
 
-function insciption(){
+function insciption($pseudo1, $mail2, $password3, $retypedPassword4){
     // Si les variables existent et qu'elles ne sont pas vides
-    if(!empty($_POST['pseudo']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['password_retype']))
+    if(!empty($pseudo1) && !empty($mail2) && !empty($password3) && !empty($retypedPassword4))
     {
         // Patch XSS
-        $pseudo = htmlspecialchars($_POST['pseudo']);
-        $email = htmlspecialchars($_POST['email']);
-        $password = htmlspecialchars($_POST['password']);
-        $password_retype = htmlspecialchars($_POST['password_retype']);
+        $pseudo = htmlspecialchars($pseudo1);
+        $email = htmlspecialchars($mail2);
+        $password = htmlspecialchars($password3);
+        $password_retype = htmlspecialchars($retypedPassword4);
 
         // On vérifie si l'utilisateur existe
         $check = $bdd->prepare('SELECT pseudo, email, password FROM utilisateurs WHERE email = ?');
@@ -54,23 +54,65 @@ function insciption(){
                                 'token' => bin2hex(openssl_random_pseudo_bytes(64))
                             ));
                             // On redirige avec le message de succès
-                            header('Location:.?page=main');
+                            header('Location: .?page=home');
                             die();
                         } else{ 
-                            header('Location:.?page=inscription&amp;reg_err=password'); 
+                            header('Location: .?page=inscription&amp;reg_err=password'); 
                             die();}
                     }else{ 
-                        header('Location:.?page=inscription&amp;reg_err=email'); 
+                        header('Location: .?page=inscription&amp;reg_err=email'); 
                         die();}
                 }else{ 
-                    header('Location:.?page=inscription&amp;reg_err=email_length'); 
+                    header('Location: .?page=inscription&amp;reg_err=email_length'); 
                     die();}
             }else{ 
-                header('Location:.?page=inscription&amp;reg_err=pseudo_length'); 
+                header('Location: .?page=inscription&amp;reg_err=pseudo_length'); 
                 die();}
         }else{ 
             header('Location:.?page=inscription&amp;reg_err=already'); 
             die();}
+    }
+}
+
+function connexion($mail1, $password2){
+    
+    session_start(); // Démarrage de la session
+
+    if(!empty($mail1) && !empty($password2)) // Si il existe les champs email, password et qu'ils ne sont pas vides
+    {
+        // Patch XSS
+        $email = htmlspecialchars($mail1); 
+        $password = htmlspecialchars($password2);
+        
+        $email = strtolower($email); // email transformé en minuscule
+        
+        // On regarde si l'utilisateur est inscrit dans la table utilisateurs
+        $check = $bdd->prepare('SELECT pseudo, email, password, token FROM utilisateurs WHERE email = ?');
+        $check->execute(array($email));
+        $data = $check->fetch();
+        $row = $check->rowCount();
+        
+        
+
+        // Si > à 0 alors l'utilisateur existe
+        if($row > 0) {
+            // Si le mail est bon niveau format
+            if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                // Si le mot de passe est le bon
+                if(password_verify($password, $data['password'])) {
+                    // On créer la session et on redirige sur landing.php
+                    $_SESSION['user'] = $data['token'];
+                    header('Location: landing.php');
+                    die();
+                }
+                else{ 
+                    header('Location: .?login_err=password'); die(); }
+            }
+            else{ 
+                header('Location: .?login_err=email'); die(); }
+        }
+        else{ 
+            header('Location: .?login_err=already'); die(); }
     }
 }
 

@@ -1,4 +1,4 @@
-<div class="login-form">
+<main class="login-form">
             <?php 
                 if(isset($_GET['login_err'])){
                     $err = htmlspecialchars($_GET['login_err']);
@@ -31,20 +31,14 @@
                     }
                 }
             ?> 
-            
-            <form action="connection.php" method="post">
-                <h2 class="text-center">Connexion</h2>       
-                <div class="form-group">
-                    <input type="email" name="email" class="form-control" placeholder="Email" required="required" autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="Mot de passe" required="required" autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block">Connexion</button>
-                </div>   
-            </form>
-            
-        </div>
+
+    <h2 class="text-center">Connexion</h2>
+    <form action="index.php" method="post">
+        <input type="hidden" name="action" value="connexion">
+        <input type="email" name="email" class="form-control" placeholder="Email" required="required" autocomplete="off">
+        <input type="password" name="password" class="form-control" placeholder="Mot de passe" required="required" autocomplete="off">
+        <button type="submit" class="btn btn-primary btn-block">Connexion</button>  
+    </form>
+</main>
 
         

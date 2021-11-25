@@ -5,12 +5,7 @@
 
 .navbar {
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
 .logo {
@@ -25,9 +20,6 @@
 }
 
 nav {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
   text-align: right;
 }
 
@@ -48,21 +40,11 @@ nav ul li a:hover {
 }
 
 .row {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   margin: 100px 0;
 }
 
 .col-1 {
-  -ms-flex-preferred-size: 40%;
-      flex-basis: 40%;
   position: relative;
   margin-left: 50px;
 }
@@ -91,14 +73,7 @@ nav ul li a:hover {
 
 .col-2 {
   position: relative;
-  -ms-flex-preferred-size: 60%;
-      flex-basis: 60%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
 .batman {
@@ -169,5 +144,56 @@ nav ul li a:hover {
   height: 100vh;
 }
 
-/* Dev by Octavocado */
-/*# sourceMappingURL=style.css.map */
+/* pour la page inscription */
+.login-form {
+  width: 340px;
+  margin: 50px auto;
+  text-align: center;
+}
+.login-form form {
+  margin-bottom: 15px;
+  background: #f8f9fa;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  border-radius: 10px;
+}
+.login-form h2 {
+  margin: 0 0 15px;
+  text-align: center;
+}
+.form-control, .btn {
+  min-height: 38px;
+  border-radius: 2px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  text-align: center;
+}
+.btn {        
+  font-size: 20px;
+  padding-left: 17px;
+  padding-right: 17px;
+  background: linear-gradient(#4c956c, #2c6e49);
+  border: none;
+}
+
+#landdiv{
+  text-align: center;
+  margin-top: 15%;
+}
+#landfoot{
+  bottom: 20px;
+  margin-left: 2vw;
+  position: absolute;
+}
+#landdiv a{
+    outline: none;
+    text-decoration: none;
+    display: inline-block;
+    width:170px;
+    margin-top: 20px;
+    margin-right: 0.625%;
+    text-align: center;
+    line-height: 3;
+    color: black;
+    background: linear-gradient(#4c956c, #2c6e49);
+}
