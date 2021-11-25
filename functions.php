@@ -54,22 +54,22 @@ function insciption($pseudo1, $mail2, $password3, $retypedPassword4){
                                 'token' => bin2hex(openssl_random_pseudo_bytes(64))
                             ));
                             // On redirige avec le message de succès
-                            header('Location: .?page=home');
+                            header('Location: .?page=home&amp;acc_err=success');
                             die();
                         } else{ 
-                            header('Location: .?page=inscription&amp;reg_err=password'); 
+                            header('Location: .?page=inscription&amp;acc_err=passwordCorresponding'); 
                             die();}
-                    }else{ 
-                        header('Location: .?page=inscription&amp;reg_err=email'); 
+                    } else{ 
+                        header('Location: .?page=inscription&amp;acc_err=emailValidity'); 
                         die();}
-                }else{ 
-                    header('Location: .?page=inscription&amp;reg_err=email_length'); 
+                } else{ 
+                    header('Location: .?page=inscription&amp;acc_err=email_length'); 
                     die();}
-            }else{ 
-                header('Location: .?page=inscription&amp;reg_err=pseudo_length'); 
+            } else{ 
+                header('Location: .?page=inscription&amp;acc_err=pseudo_length'); 
                 die();}
-        }else{ 
-            header('Location:.?page=inscription&amp;reg_err=already'); 
+        } else{ 
+            header('Location:.?page=inscription&amp;acc_err=already'); 
             die();}
     }
 }
@@ -106,20 +106,44 @@ function connexion($mail1, $password2){
                     die();
                 }
                 else{ 
-                    header('Location: .?login_err=password'); die(); }
+                    header('Location: .?acc_err=password'); die(); }
             }
             else{ 
-                header('Location: .?login_err=email'); die(); }
+                header('Location: .?acc_err=email'); die(); }
         }
         else{ 
-            header('Location: .?login_err=already'); die(); }
+            header('Location: .?acc_err=notExisting'); die(); }
     }
 }
 
 function deconnection(){
     session_destroy();
-    header('Location: .'); 
+    header('Location: .?page=home');
     die();
+}
+
+function errors_accounts($error){
+    
+    $err = htmlspecialchars($error);
+    if ($err == 'success') {
+            echo '<div class="alert alert-success">';
+    } else {
+        echo '<div class="alert alert-danger">';
+    }
+    switch($err) {
+        //pour les connexions
+        case 'password': echo '<strong>Erreur</strong>, mot de passe incorrect';
+        case 'email': echo'<strong>Erreur</strong>, email incorrect';
+        case 'notExisting': echo'<strong>Erreur</strong>, le compte n\'existe pas';
+        //pour l'inscription
+        case 'success': echo'<strong>Erreur</strong>, les mots de passe ne correspondent pas';
+        case 'passwordCorresponding': echo'<strong>Erreur</strong>, les mots de passe ne correspondent pas';
+        case 'emailValidity': echo'<strong>Erreur</strong>, l\'email n\'est pas valide';
+        case 'email_length': echo'<strong>Erreur</strong>, l\'email est trop long';
+        case 'pseudo_length': echo'<strong>Erreur</strong>, le pseudo est trop long';
+        case 'already': echo'<strong>Erreur</strong>, adresse email déjà utilisée';
+    }
+    echo '</div>';
 }
 
 ?>

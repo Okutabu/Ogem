@@ -12,6 +12,8 @@ if (array_search($page, $pages) === FALSE){
 	$page = "404";
 }
 
+// traitement formulaires inscription / connexion
+
 if (isset($_POST["action"])){
     if ($_POST["action"] == "connexion"){
         connexion($_POST['email'], $_POST['password']);
@@ -20,5 +22,12 @@ if (isset($_POST["action"])){
         inscription($_POST['pseudo'], $_POST['email'], $_POST['password'], $_POST['password_retype']);
     }
 }
+
+// Erreurs
+
+if (isset($_GET['acc_err'])){
+	errors_account($_GET['acc_err']);
+}
+
 
 ?>
