@@ -25,12 +25,6 @@ if (isset($_POST["action"])){
     }
 }
 
-//Procédure d'entrée dans landing.php
-
-if ($_GET["page"] = "landing"){
-    landProperly();
-}
-
 // Erreurs
 
 if (isset($_GET['acc_err'])){
