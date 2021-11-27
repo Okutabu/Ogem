@@ -9,7 +9,7 @@
     <?php
 
     include("header.php");
-    include($page . ".php");
+    include("pages/" . $page . ".php");
     include("footer.php");
 
     ?>
