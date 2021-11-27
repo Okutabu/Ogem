@@ -132,6 +132,8 @@ function landProperly(){
     $req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
     $req->execute(array($_SESSION['user']));
     $data = $req->fetch();
+
+    echo('<h1> Bonjour '.$data['pseudo'].', vous êtes bien connecté</h1>');
     
 }
 
