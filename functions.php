@@ -1,15 +1,7 @@
 <?php
 
-//function display_watch(sortBy = 'views', views = False, pricemin = 0, pricemax = , flag4 = False, sort){
-    function display_watch(){
-    //future fonction qui affiche les montres sur la page search, a modif
-    global $result;
+function display_watch(){
     
-    while($row = mysqli_fetch_assoc($result)){
-        echo "<div class='col-lg-3'>";
-        echo "<img src='./images/".$row["user"]."_".$row["brand"]."_".$row["name"]."_image"."png'>";
-        echo "</div>";
-    }
 }
 
 //----------------- Fonctions pour la gestion de comptes ------------------- 
@@ -30,7 +22,7 @@ function insciption($pseudo1, $mail2, $password3, $retypedPassword4){
         $data = $check->fetch();
         $row = $check->rowCount();
 
-        $email = strtolower($email); // on transforme toute les lettres majuscule en minuscule pour éviter que Foo@gmail.com et foo@gmail.com soient deux compte différents ..
+        $email = strtolower($email); // on transforme toute les lettres majuscule en minuscule pour éviter que Foo@gmail.com et foo@gmail.com soient deux compte différents 
         
         // Si la requete renvoie un 0 alors l'utilisateur n'existe pas 
         if($row == 0){ 
@@ -98,23 +90,16 @@ function connexion($mail1, $password2){
 
         // Si > à 0 alors l'utilisateur existe
         if($row > 0) {
-            // Si le mail est bon niveau format
-            if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                // Si le mot de passe est le bon
-                if(password_verify($password, $data['password'])) {
-                    // On crée la session 
-                    $_SESSION['user'] = $data['token'];
-                    // On redirige sur landing.php
-                    header('Location: .?page=landing');
-                    die();
-                }
-                else{ 
-                    header('Location: .?acc_err=password'); die(); }
-            }
-            else{ 
-                header('Location: .?acc_err=email'); die(); }
-        }
-        else{ 
+            // Si le mot de passe est le bon
+            if(password_verify($password, $data['password'])) {
+                // On crée la session 
+                $_SESSION['user'] = $data['token'];
+                // On redirige sur landing.php
+                header('Location: .?page=landing');
+                die();
+            } else { 
+                header('Location: .?acc_err=password'); die(); }
+        } else { 
             header('Location: .?acc_err=notExisting'); die(); }
     }
 }
@@ -156,7 +141,6 @@ function errors_accounts($error){
     switch($err) {
         //pour les connexions
         case 'password': echo '<strong>Erreur</strong>, mot de passe incorrect';
-        case 'email': echo'<strong>Erreur</strong>, email incorrect';
         case 'notExisting': echo'<strong>Erreur</strong>, le compte n\'existe pas';
         //pour l'inscription
         case 'success': echo'<strong>Erreur</strong>, les mots de passe ne correspondent pas';
