@@ -8,9 +8,9 @@
 <body>
     <?php
 
-    include("header.php");
+    // include("header.php");
     include("pages/" . $page . ".php");
-    include("footer.php");
+    // include("footer.php");
 
     ?>
 
