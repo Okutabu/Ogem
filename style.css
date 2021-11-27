@@ -190,7 +190,7 @@ nav > ul li:hover .sous {
 
 /* pour la page inscription */
 .login-form {
-  width: 340px;
+  width: 500px;
   margin: 50px auto;
   text-align: center;
 }
@@ -204,15 +204,14 @@ nav > ul li:hover .sous {
 }
 
 .login-form h2 {
-  margin: 0 0 15px;
+  margin: 0 15px;
   text-align: center;
 }
 
 .form-control, .btn {
   min-height: 38px;
-  border-radius: 2px;
   margin-bottom: 5px;
-  border-radius: 10px;
+  border-radius: 5px;
   text-align: center;
 }
 
