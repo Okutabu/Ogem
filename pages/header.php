@@ -7,6 +7,7 @@
         <li><a href=".?page=search">Montres à vendre</a></li>
         <li><a href=".?page=sell">Vendre</a></li>
         <li><a href=".?page=connect">Connexion/Inscription</a></li>
+        <li><a href=".?page=add_marketplace">clickhere</a></li>
         <!-- Mettre photo de profil ci-dessous et quand on clique menu déroulant avec profil, vendre, panier et se déconnecter -->
         <li><p>Profil</p></li> 
     </ul>
