@@ -1,6 +1,6 @@
 <?php
 
-class database {
+class database_pull {
     
     public $data_source_name = 'mysql:host=localhost;dbname=scgllydo_main;charset=utf8';
 

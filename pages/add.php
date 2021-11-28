@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $description = $_POST["description"];
 
     if($data_is_correct){
-        $database_watches = new database;
+        $database_watches = new database_pull;
         $database_watches->watches_connect();
         $sql = "insert into scgllydo_watches (user, brand, name, date, price, buynow, description)
          values ('$user', '$brand', '$name', '$date', '$price', '$buynow, '$description')";
