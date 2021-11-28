@@ -11,10 +11,10 @@
         echo "</div>";
     }
 }
-
+include "config.php";
 //----------------- Fonctions pour la gestion de comptes ------------------- 
 
-function insciption($pseudo1, $mail2, $password3, $retypedPassword4){
+function inscription($pseudo1, $mail2, $password3, $retypedPassword4){
     // Si les variables existent et qu'elles ne sont pas vides
     if(!empty($pseudo1) && !empty($mail2) && !empty($password3) && !empty($retypedPassword4))
     {
@@ -25,6 +25,8 @@ function insciption($pseudo1, $mail2, $password3, $retypedPassword4){
         $password_retype = htmlspecialchars($retypedPassword4);
 
         // On vérifie si l'utilisateur existe
+        // $database_instance = new database;
+        // $database_instance->users_connect();
         $check = $bdd->prepare('SELECT pseudo, email, password FROM utilisateurs WHERE email = ?');
         $check->execute(array($email));
         $data = $check->fetch();

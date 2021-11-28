@@ -34,7 +34,7 @@ if ($_GET["page"] = "landing"){
 // Erreurs
 
 if (isset($_GET['acc_err'])){
-	errors_account($_GET['acc_err']);
+	errors_accounts($_GET['acc_err']);
 }
 
 
