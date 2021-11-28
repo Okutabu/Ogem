@@ -1,6 +1,6 @@
 <?php
 
-include "config.php";
+
 function redirect(){
     header("Location: .?page=add_marketplace");
 }
@@ -18,11 +18,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $description = $_POST["description"];
 
     if($data_is_correct){
-        $database_watches = new database_pull;
-        $database_watches->watches_connect();
+        // $database_watches = new database;
+        // $database_watches->watches_connect();
         $sql = "insert into scgllydo_watches (user, brand, name, date, price, buynow, description)
-         values ('$user', '$brand', '$name', '$date', '$price', '$buynow, '$description')";
-        // $database_watches->prepare($sql);
+         values (:user, :brand, :name, :date, :price, :buynow, :description)";
+        // $prep = $database_watches->prepare($sql);
+        // $prep->execute(['user' => $user, 'brand' => $brand, 'name' => $name, 'date' => $date,
+        //  'price' => $price, 'buynow' => $buynow, 'description' => $description])
 
         mysqli_query($connect, $sql);
         redirect();
