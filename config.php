@@ -1,4 +1,5 @@
 <?php
+$data_source_name = 'mysql:host=localhost;dbname=scgllydo_main;charset=utf8';
 
 // class database{
     
@@ -26,7 +27,7 @@
 //     }
 // }
 try {
-    $bdd = new PDO($this->data_source_name, 'scgllydo_enzo', 'EGcJAPF?baPO');
+    $bdd = new PDO($data_source_name, 'root', '');
 } catch(PDOException $e) {
     die('Erreur : '.$e->getMessage());
 }
