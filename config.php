@@ -27,7 +27,7 @@ $data_source_name = 'mysql:host=localhost;dbname=scgllydo_main;charset=utf8';
 //     }
 // }
 try {
-    $bdd = new PDO($data_source_name, 'scgllydo_enzo', 'EGcJAPF?baPO');
+    $bdd = new PDO($data_source_name, 'scgllydo_enzo', 'EGcJAPF?baP');
 } catch(PDOException $e) {
     die('Erreur : '.$e->getMessage());
 }
