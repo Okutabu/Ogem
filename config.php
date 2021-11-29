@@ -31,7 +31,7 @@ try {
 } catch(PDOException $e) {
     die('Erreur : '.$e->getMessage());
 }
-echo "conenction successful";
+
 
 
     
