@@ -2,7 +2,7 @@
 
 function display_watch(){
     global $bdd;
-    $req = $bdd->prepare('SELECT * FROM watches');
+    $req = $bdd->prepare('SELECT token, marque, materiaux, prix, date, buy,  FROM watches');
     $req->execute(array($watches));
     $data = $req->fetch();
 
@@ -55,23 +55,28 @@ function inscription($pseudo1, $mail2, $password3, $retypedPassword4){
                                 'token' => bin2hex(openssl_random_pseudo_bytes(64))
                             ));
                             // On redirige avec le message de succès
-                            echo "<script>alert('Inscription effectuée !')</script>";
-                            header('Refresh:0; url=.?page=connect');
+                            $_SESSION['flash'] = 'success';
+                            header('Location: .?page=connect');
                             die();
                         } else{ 
-                            header('Location: .?page=inscription&acc_err=passwordCorresponding'); 
+                            $_SESSION['flash'] = 'passwordCorresponding';
+                            header('Location: .?page=inscription'); 
                             die();}
                     } else{ 
-                        header('Location: .?page=inscription&acc_err=emailValidity'); 
+                        $_SESSION['flash'] = 'emailValidity';
+                        header('Location: .?page=inscription'); 
                         die();}
                 } else{ 
-                    header('Location: .?page=inscription&acc_err=email_length'); 
+                    $_SESSION['flash'] = 'email_length';
+                    header('Location: .?page=inscription'); 
                     die();}
             } else{ 
-                header('Location: .?page=inscription&acc_err=pseudo_length'); 
+                $_SESSION['flash'] = 'pseudo_length';
+                header('Location: .?page=inscription'); 
                 die();}
         } else{ 
-            header('Location:.?page=inscription&acc_err=already'); 
+            $_SESSION['flash'] = 'already';
+            header('Location:.?page=inscription'); 
             die();}
     }
 }
@@ -89,80 +94,68 @@ function connexion($mail1, $password2){
         $email = strtolower($email); // email transformé en minuscule
 
         // On regarde si l'utilisateur est inscrit dans la table utilisateurs
-        $check = $bdd->prepare('SELECT pseudo, email, password, token FROM utilisateurs WHERE email = ?');
+        $check = $bdd->prepare('SELECT password, token FROM utilisateurs WHERE email = ?');
         $check->execute(array($email));
         $data = $check->fetch();
         $row = $check->rowCount();
-
-        
-        
 
         // Si > à 0 alors l'utilisateur existe
         if($row > 0) {
             // Si le mot de passe est le bon
             if(password_verify($password, $data['password'])) {
                 // On crée la session 
-                $_SESSION['user'] = $data['token'];
+                $req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
+                $req->execute(array($data['token']));
+                $_SESSION['user'] = $req->fetch();
+                
                 // On redirige sur landing.php
                 header('Location: .?page=landing');
                 die();
             } else { 
-                header('Location: .?page=connect&acc_err=password'); die(); }
+                $_SESSION['flash'] = 'password';
+                header('Location: .?page=connect'); die(); }
         } else { 
-            header('Location: .?page=connect&acc_err=notExisting'); die(); }
+            $_SESSION['flash'] = 'notExisting';
+            header('Location: .?page=connect'); die(); }
     }
-}
-
-function landProperly(){
-
-    global $bdd;
-    // si on arrive ici sans être connecté on redirige
-    if(!isset($_SESSION['user'])){
-        header('Location: .');
-        die();
-    }
-
-    // Sinon on récupere les données de l'utilisateur pour afficher la belle page de landing
-    $req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
-    $req->execute(array($_SESSION['user']));
-    $_SESSION['dataUser'] = $req->fetch();
 }
 
 function welcome(){
-    $data = $_SESSION['dataUser'];
+    $data = $_SESSION['user'];
     echo '<img src="images/' . $data['picture'] . '" alt="profil picture" id="landimg">';
     echo('<h1>Bonjour '.$data['pseudo'].', vous êtes bien connecté !</h1>');
 }
 
 function deconnexion(){
-    unset($_SESSION);
-    session_destroy();
-    header('Location: .?page=connect');
+    unset($_SESSION['user']); //on efface tout ce qui concerne l'utilisateur dans la variable superglobale $_SESSION
+    header('Location: .');
     die;
 }
 
 //Traitement erreurs & succès
 
 function errors_accounts(){
-    if (isset($_GET['acc_err'])){
-        $err = htmlspecialchars($_GET['acc_err']);
+    if (isset($_SESSION['flash'])){
+        $err = htmlspecialchars($_SESSION['flash']);
+        unset($_SESSION['flash']);
         switch($err) {
             //pour les connexions
             case 'password': echo '<div class="alert"><p><strong>Erreur</strong>, mot de passe incorrect</p></div>'; break;
             case 'notExisting': echo'<div class="alert"><p><strong>Erreur</strong>, le compte n\'existe pas</p></div>'; break;
             //pour l'inscription
+            case 'success': echo'<div id="success"><h1>Inscription effectuée avec succès !</h1></div>'; break;
             case 'passwordCorresponding': echo'<div class="alert"><p><strong>Erreur</strong>, les mots de passe ne correspondent pas</p></div>'; break;
             case 'emailValidity': echo'<div class="alert"><p><strong>Erreur</strong>, l\'email n\'est pas valide</p></div>'; break;
             case 'email_length': echo'<div class="alert"><p><strong>Erreur</strong>, l\'email est trop long</p></div>'; break;
             case 'pseudo_length': echo'<div class="alert"><p><strong>Erreur</strong>, le pseudo est trop long</p></div>'; break;
-            case 'already': echo'<div class="alert"><p><strong>Erreur</strong>, adresse email déjà utilisée</p></div>';
+            case 'already': echo'<div class="alert"><p><strong>Erreur</strong>, adresse email déjà utilisée</p></div>'; break;
         }
     }
 }
 
 function profil_connected(){
-    if(isset($_SESSION['dataUser'])){
-        $data = $_SESSION['dataUser'];
+    if(isset($_SESSION['user'])){
+        $data = $_SESSION['user'];
         echo '<img src="images/' . $data['picture'] . '" alt="profil picture" id="profilePic">';
     } else {
         echo '<p>Profil</p>';
