@@ -7,12 +7,12 @@
         <li><a href=".?page=search">Acheter</a></li>
         <li><a href=".?page=sell">Vendre</a></li>
         <li><a href=".?page=connect">Connexion/Inscription</a></li>
-        <li id="menuderoulant"><a>Profil</a>
+        <li id="menuderoulant"><?php profil_connected(); ?>
             <ul id="sousmenu">
-                <li><a href=".?page=sign">Inscription</a></li>
+                <li><a href=".?page=inscription">Inscription</a></li>
                 <li><a href=".?page=connect">Connexion</a></li>
                 <li><a href=".?page=cart">Panier</a></li>
-                <li><button onclick="deconnexion();">Déconnexion</button></li>
+                <li><a href=".?page=deco">Déconnexion</a></li>
             </ul>
         </li>
     </ul>

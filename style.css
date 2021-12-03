@@ -1,6 +1,7 @@
 html {
-    height:100%;
+  height:100%;
 }
+
 body {
   margin:0px;
   position: relative;
@@ -247,14 +248,20 @@ footer{
 }
 
 #landdiv a{
-    outline: none;
-    text-decoration: none;
-    display: inline-block;
-    width:170px;
-    margin-top: 20px;
-    margin-right: 0.625%;
-    text-align: center;
-    line-height: 3;
-    color: black;
-    background: linear-gradient(#4c956c, #2c6e49);
+  outline: none;
+  text-decoration: none;
+  display: inline-block;
+  width:170px;
+  margin-top: 20px;
+  margin-right: 0.625%;
+  text-align: center;
+  line-height: 3;
+  color: black;
+  background: linear-gradient(#4c956c, #2c6e49);
+}
+
+/*pour le style du profil en haut a gauche dans le menu*/
+
+#profilePic{
+  height: 50px;
 }

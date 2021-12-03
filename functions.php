@@ -1,10 +1,13 @@
 <?php
 
 function display_watch(){
-    
+    global $bdd;
+    $req = $bdd->prepare('SELECT * FROM watches');
+    $req->execute(array($watches));
+    $data = $req->fetch();
+
 }
 
-include "config.php";
 //----------------- Fonctions pour la gestion de comptes ------------------- 
 
 function inscription($pseudo1, $mail2, $password3, $retypedPassword4){
@@ -122,22 +125,25 @@ function landProperly(){
     // Sinon on récupere les données de l'utilisateur pour afficher la belle page de landing
     $req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
     $req->execute(array($_SESSION['user']));
-    $data = $req->fetch();
+    $_SESSION['dataUser'] = $req->fetch();
+}
 
-    echo('<h1> Bonjour '.$data['pseudo'].', vous êtes bien connecté</h1>');
-    
+function welcome(){
+    $data = $_SESSION['dataUser'];
+    echo '<img src="images/' . $data['picture'] . '" alt="profil picture" id="landimg">';
+    echo('<h1>Bonjour '.$data['pseudo'].', vous êtes bien connecté !</h1>');
 }
 
 function deconnexion(){
+    unset($_SESSION);
     session_destroy();
-    header('Location: .');
-    die();
+    header('Location: .?page=connect');
+    die;
 }
 
 //Traitement erreurs & succès
 
 function errors_accounts(){
-    
     if (isset($_GET['acc_err'])){
         $err = htmlspecialchars($_GET['acc_err']);
         switch($err) {
@@ -151,6 +157,15 @@ function errors_accounts(){
             case 'pseudo_length': echo'<div class="alert"><p><strong>Erreur</strong>, le pseudo est trop long</p></div>'; break;
             case 'already': echo'<div class="alert"><p><strong>Erreur</strong>, adresse email déjà utilisée</p></div>';
         }
+    }
+}
+
+function profil_connected(){
+    if(isset($_SESSION['dataUser'])){
+        $data = $_SESSION['dataUser'];
+        echo '<img src="images/' . $data['picture'] . '" alt="profil picture" id="profilePic">';
+    } else {
+        echo '<p>Profil</p>';
     }
 }
 

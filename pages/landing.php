@@ -1,5 +1,4 @@
 <main id="landdiv">
-    <img src="images/good.png" id="landimg" >
-    <?php landProperly(); ?>
+    <?php welcome(); ?>
     <a href=".">Page d'Accueil</a>
 </main>
