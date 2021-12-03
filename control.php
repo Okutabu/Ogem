@@ -13,10 +13,11 @@ if (array_search($page, $pages) === FALSE){
 	$page = "404";
 }
 
-if ($page == "landing"){
-    landProperly();
-} elseif (($page == "sell" || $page == "profile" || $page == "messages" || $page == "cart") && {
 
+if (($page == "sell" || $page == "profile" || $page == "messages" || $page == "landing") && (!isset($_SESSION['user']))){ //on interdit l'accès a certaines pages aux utilisateurs non connectés
+    echo "<script>alert('Accès refusé, veuillez vous connecter');</script>";
+    header("Refresh:0.1; url=.?page=home");
+    die();
 }
 
 // traitement formulaires inscription / connexion
