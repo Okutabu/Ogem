@@ -7,11 +7,16 @@ if (isset($_GET["page"])){
 	$page = $_GET["page"];
 }
 	
-
-$pages = ["home", "inscription", "sell", "search", "profile", "messages", "cart", "connect", "landing", "add"];
+$pages = ["home", "inscription", "sell", "search", "profile", "messages", "cart", "connect", "landing", "deco"];
 
 if (array_search($page, $pages) === FALSE){
 	$page = "404";
+}
+
+if ($page == "landing"){
+    landProperly();
+} elseif (($page == "sell" || $page == "profile" || $page == "messages" || $page == "cart") && {
+
 }
 
 // traitement formulaires inscription / connexion
