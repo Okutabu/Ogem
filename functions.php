@@ -7,6 +7,7 @@ function display_watch(){
 //----------------- Fonctions pour la gestion de comptes ------------------- 
 
 function insciption($pseudo1, $mail2, $password3, $retypedPassword4){
+    global $bdd;
     // Si les variables existent et qu'elles ne sont pas vides
     if(!empty($pseudo1) && !empty($mail2) && !empty($password3) && !empty($retypedPassword4))
     {
@@ -70,21 +71,22 @@ function insciption($pseudo1, $mail2, $password3, $retypedPassword4){
 
 function connexion($mail1, $password2){
     
-    session_start(); // Démarrage de la session
-
+    global $bdd;
     if(!empty($mail1) && !empty($password2)) // Si il existe les champs email, password et qu'ils ne sont pas vides
     {
+
         // Patch XSS
         $email = htmlspecialchars($mail1); 
         $password = htmlspecialchars($password2);
-        
+            
         $email = strtolower($email); // email transformé en minuscule
-        
+
         // On regarde si l'utilisateur est inscrit dans la table utilisateurs
         $check = $bdd->prepare('SELECT pseudo, email, password, token FROM utilisateurs WHERE email = ?');
         $check->execute(array($email));
         $data = $check->fetch();
         $row = $check->rowCount();
+
         
         
 
@@ -106,7 +108,7 @@ function connexion($mail1, $password2){
 
 function landProperly(){
 
-    session_start();
+
    // si on arrive ici sans être connecté on redirige
     if(!isset($_SESSION['user'])){
         header('Location: .');
@@ -122,9 +124,9 @@ function landProperly(){
     
 }
 
-function deconnection(){
+function deconnexion(){
     session_destroy();
-    header('Location: .?page=home');
+    header('Location: .');
     die();
 }
 
@@ -133,26 +135,41 @@ function deconnection(){
 function errors_accounts($error){
     
     $err = htmlspecialchars($error);
-    if ($err == 'success') {
-            echo '<div class="alert alert-success">';
-    } else {
-        echo '<div class="alert alert-danger">';
-    }
+    echo '<div class="alert alert-danger">';
     switch($err) {
         //pour les connexions
-        case 'password': echo '<strong>Erreur</strong>, mot de passe incorrect';
-        case 'notExisting': echo'<strong>Erreur</strong>, le compte n\'existe pas';
+        case 'password': echo '<strong>Erreur</strong>, mot de passe incorrect'; echo '</div>'; break;
+        case 'notExisting': echo'<strong>Erreur</strong>, le compte n\'existe pas'; echo '</div>'; break;
         //pour l'inscription
-        case 'success': echo'<strong>Erreur</strong>, les mots de passe ne correspondent pas';
-        case 'passwordCorresponding': echo'<strong>Erreur</strong>, les mots de passe ne correspondent pas';
-        case 'emailValidity': echo'<strong>Erreur</strong>, l\'email n\'est pas valide';
-        case 'email_length': echo'<strong>Erreur</strong>, l\'email est trop long';
-        case 'pseudo_length': echo'<strong>Erreur</strong>, le pseudo est trop long';
-        case 'already': echo'<strong>Erreur</strong>, adresse email déjà utilisée';
+        case 'success': echo'<strong>Inscription enregistrée</strong>'; echo '</div>'; break;
+        case 'passwordCorresponding': echo'<strong>Erreur</strong>, les mots de passe ne correspondent pas'; echo '</div>'; break;
+        case 'emailValidity': echo'<strong>Erreur</strong>, l\'email n\'est pas valide'; echo '</div>'; break;
+        case 'email_length': echo'<strong>Erreur</strong>, l\'email est trop long'; echo '</div>'; break;
+        case 'pseudo_length': echo'<strong>Erreur</strong>, le pseudo est trop long'; echo '</div>'; break;
+        case 'already': echo'<strong>Erreur</strong>, adresse email déjà utilisée'; echo '</div>';
     }
-    echo '</div>';
+    echo "<script>alert('Erreur')</script>";
 }
 
 //-----------------------------------------------------------------
+
+function add_watches($user, $brand, $materiaux, $name, $prix, $buy){
+
+    global $bdd;
+    $sql = "INSERT INTO watches(user, marque, materiaux, name, prix, buy, image_token)
+    VALUES (:user, :marque, :materiaux, :name, :prix, :buy, :imagetoken)";
+    $stmt = $bdd->prepare($sql);
+    $stmt->execute(array(
+        'user' => $user,
+        'marque' => $brand,
+        'materiaux' => $materiaux,
+        'name' => $name,
+        'prix' => $prix,
+        'buy' => $buy,
+        'imagetoken' => bin2hex(openssl_random_pseudo_bytes(64))
+    ));
+    header('Location: .?page=search');
+    
+}
 
 ?>

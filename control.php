@@ -8,7 +8,7 @@ if (isset($_GET["page"])){
 }
 	
 
-$pages = ["home", "inscription", "sell", "search", "profile", "messages", "cart", "connect", "landing"];
+$pages = ["home", "inscription", "sell", "search", "profile", "messages", "cart", "connect", "landing", "add"];
 
 if (array_search($page, $pages) === FALSE){
 	$page = "404";
@@ -23,12 +23,15 @@ if (isset($_POST["action"])){
 	if ($_POST["action"] == "inscription"){
         inscription($_POST['pseudo'], $_POST['email'], $_POST['password'], $_POST['password_retype']);
     }
+    if ($_POST["action"] == "add_watches"){
+        add_watches($_POST['user'], $_POST['brand'], $_POST['materiaux'], $_POST['name'], $_POST['price'], $_POST['buy']);
+    }
 }
 
 // Erreurs
 
 if (isset($_GET['acc_err'])){
-	errors_account($_GET['acc_err']);
+	errors_accounts($_GET['acc_err']);
 }
 
 
