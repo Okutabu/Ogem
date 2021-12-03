@@ -2,8 +2,8 @@
     <div>
         <nav id="button">
             <ul>
-            <li id="achatban"><a href=".?page=search">Acheter une montre</a></li>
-            <li id="venteban"><a href=".?page=sell">Vendre une montre</a></li>
+                <li id="achatban"><a href=".?page=search">Acheter une montre</a></li>
+                <li id="venteban"><a href=".?page=sell">Vendre une montre</a></li>
             </ul>
         </nav>
     </div>

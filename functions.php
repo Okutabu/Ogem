@@ -1,20 +1,14 @@
 <?php
 
-//function display_watch(sortBy = 'views', views = False, pricemin = 0, pricemax = , flag4 = False, sort){
-    function display_watch(){
-    //future fonction qui affiche les montres sur la page search, a modif
-    global $result;
+function display_watch(){
     
-    while($row = mysqli_fetch_assoc($result)){
-        echo "<div class='col-lg-3'>";
-        echo "<img src='./images/".$row["user"]."_".$row["brand"]."_".$row["name"]."_image"."png'>";
-        echo "</div>";
-    }
 }
+
 include "config.php";
 //----------------- Fonctions pour la gestion de comptes ------------------- 
 
 function inscription($pseudo1, $mail2, $password3, $retypedPassword4){
+    global $bdd;
     // Si les variables existent et qu'elles ne sont pas vides
     if(!empty($pseudo1) && !empty($mail2) && !empty($password3) && !empty($retypedPassword4))
     {
@@ -32,7 +26,7 @@ function inscription($pseudo1, $mail2, $password3, $retypedPassword4){
         $data = $check->fetch();
         $row = $check->rowCount();
 
-        $email = strtolower($email); // on transforme toute les lettres majuscule en minuscule pour éviter que Foo@gmail.com et foo@gmail.com soient deux compte différents ..
+        $email = strtolower($email); // on transforme toute les lettres majuscule en minuscule pour éviter que Foo@gmail.com et foo@gmail.com soient deux compte différents 
         
         // Si la requete renvoie un 0 alors l'utilisateur n'existe pas 
         if($row == 0){ 
@@ -58,73 +52,68 @@ function inscription($pseudo1, $mail2, $password3, $retypedPassword4){
                                 'token' => bin2hex(openssl_random_pseudo_bytes(64))
                             ));
                             // On redirige avec le message de succès
-                            header('Location: .?page=home&amp;acc_err=success');
+                            echo "<script>alert('Inscription effectuée !')</script>";
+                            header('Refresh:0; url=.?page=connect');
                             die();
                         } else{ 
-                            header('Location: .?page=inscription&amp;acc_err=passwordCorresponding'); 
+                            header('Location: .?page=inscription&acc_err=passwordCorresponding'); 
                             die();}
                     } else{ 
-                        header('Location: .?page=inscription&amp;acc_err=emailValidity'); 
+                        header('Location: .?page=inscription&acc_err=emailValidity'); 
                         die();}
                 } else{ 
-                    header('Location: .?page=inscription&amp;acc_err=email_length'); 
+                    header('Location: .?page=inscription&acc_err=email_length'); 
                     die();}
             } else{ 
-                header('Location: .?page=inscription&amp;acc_err=pseudo_length'); 
+                header('Location: .?page=inscription&acc_err=pseudo_length'); 
                 die();}
         } else{ 
-            header('Location:.?page=inscription&amp;acc_err=already'); 
+            header('Location:.?page=inscription&acc_err=already'); 
             die();}
     }
 }
 
 function connexion($mail1, $password2){
     
-    session_start(); // Démarrage de la session
-
+    global $bdd;
     if(!empty($mail1) && !empty($password2)) // Si il existe les champs email, password et qu'ils ne sont pas vides
     {
+
         // Patch XSS
         $email = htmlspecialchars($mail1); 
         $password = htmlspecialchars($password2);
-        
+            
         $email = strtolower($email); // email transformé en minuscule
-        
+
         // On regarde si l'utilisateur est inscrit dans la table utilisateurs
         $check = $bdd->prepare('SELECT pseudo, email, password, token FROM utilisateurs WHERE email = ?');
         $check->execute(array($email));
         $data = $check->fetch();
         $row = $check->rowCount();
+
         
         
 
         // Si > à 0 alors l'utilisateur existe
         if($row > 0) {
-            // Si le mail est bon niveau format
-            if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                // Si le mot de passe est le bon
-                if(password_verify($password, $data['password'])) {
-                    // On crée la session 
-                    $_SESSION['user'] = $data['token'];
-                    // On redirige sur landing.php
-                    header('Location: .?page=landing');
-                    die();
-                }
-                else{ 
-                    header('Location: .?acc_err=password'); die(); }
-            }
-            else{ 
-                header('Location: .?acc_err=email'); die(); }
-        }
-        else{ 
-            header('Location: .?acc_err=notExisting'); die(); }
+            // Si le mot de passe est le bon
+            if(password_verify($password, $data['password'])) {
+                // On crée la session 
+                $_SESSION['user'] = $data['token'];
+                // On redirige sur landing.php
+                header('Location: .?page=landing');
+                die();
+            } else { 
+                header('Location: .?page=connect&acc_err=password'); die(); }
+        } else { 
+            header('Location: .?page=connect&acc_err=notExisting'); die(); }
     }
 }
 
 function landProperly(){
 
-    session_start();
-   // si on arrive ici sans être connecté on redirige
+    global $bdd;
+    // si on arrive ici sans être connecté on redirige
     if(!isset($_SESSION['user'])){
         header('Location: .');
         die();
@@ -139,38 +128,51 @@ function landProperly(){
     
 }
 
-function deconnection(){
+function deconnexion(){
     session_destroy();
-    header('Location: .?page=home');
+    header('Location: .');
     die();
 }
 
-//Traitement erreurs
+//Traitement erreurs & succès
 
-function errors_accounts($error){
+function errors_accounts(){
     
-    $err = htmlspecialchars($error);
-    if ($err == 'success') {
-            echo '<div class="alert alert-success">';
-    } else {
-        echo '<div class="alert alert-danger">';
+    if (isset($_GET['acc_err'])){
+        $err = htmlspecialchars($_GET['acc_err']);
+        switch($err) {
+            //pour les connexions
+            case 'password': echo '<div class="alert"><p><strong>Erreur</strong>, mot de passe incorrect</p></div>'; break;
+            case 'notExisting': echo'<div class="alert"><p><strong>Erreur</strong>, le compte n\'existe pas</p></div>'; break;
+            //pour l'inscription
+            case 'passwordCorresponding': echo'<div class="alert"><p><strong>Erreur</strong>, les mots de passe ne correspondent pas</p></div>'; break;
+            case 'emailValidity': echo'<div class="alert"><p><strong>Erreur</strong>, l\'email n\'est pas valide</p></div>'; break;
+            case 'email_length': echo'<div class="alert"><p><strong>Erreur</strong>, l\'email est trop long</p></div>'; break;
+            case 'pseudo_length': echo'<div class="alert"><p><strong>Erreur</strong>, le pseudo est trop long</p></div>'; break;
+            case 'already': echo'<div class="alert"><p><strong>Erreur</strong>, adresse email déjà utilisée</p></div>';
+        }
     }
-    switch($err) {
-        //pour les connexions
-        case 'password': echo '<strong>Erreur</strong>, mot de passe incorrect';
-        case 'email': echo'<strong>Erreur</strong>, email incorrect';
-        case 'notExisting': echo'<strong>Erreur</strong>, le compte n\'existe pas';
-        //pour l'inscription
-        case 'success': echo'<strong>Erreur</strong>, les mots de passe ne correspondent pas';
-        case 'passwordCorresponding': echo'<strong>Erreur</strong>, les mots de passe ne correspondent pas';
-        case 'emailValidity': echo'<strong>Erreur</strong>, l\'email n\'est pas valide';
-        case 'email_length': echo'<strong>Erreur</strong>, l\'email est trop long';
-        case 'pseudo_length': echo'<strong>Erreur</strong>, le pseudo est trop long';
-        case 'already': echo'<strong>Erreur</strong>, adresse email déjà utilisée';
-    }
-    echo '</div>';
 }
 
 //-----------------------------------------------------------------
+
+function add_watches($user, $brand, $materiaux, $name, $prix, $buy){
+
+    global $bdd;
+    $sql = "INSERT INTO watches(user, marque, materiaux, name, prix, buy, image_token)
+    VALUES (:user, :marque, :materiaux, :name, :prix, :buy, :imagetoken)";
+    $stmt = $bdd->prepare($sql);
+    $stmt->execute(array(
+        'user' => $user,
+        'marque' => $brand,
+        'materiaux' => $materiaux,
+        'name' => $name,
+        'prix' => $prix,
+        'buy' => $buy,
+        'imagetoken' => bin2hex(openssl_random_pseudo_bytes(64))
+    ));
+    header('Location: .?page=search');
+    
+}
 
 ?>

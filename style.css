@@ -1,11 +1,15 @@
+html {
+    height:100%;
+}
 body {
   margin:0px;
+  position: relative;
+  min-height:100%;
 }
 
 #container {
   min-height: 100vh;
-  padding-left: 8%;
-  padding-right: 8%;
+  padding:0px;
 }
 
 #navbar{
@@ -15,9 +19,9 @@ body {
 }
 
 #logo{
-  width: 100px;
+  width: 20vh;
   cursor: pointer;
-  margin: 30px 0; 
+  margin: 10px 0px 10px; 
 }
 
 nav{
@@ -46,6 +50,8 @@ nav ul li a:hover{
   justify-content: space-between;
   align-items: center;
   margin: 100px 0;
+  padding-left: 8%;
+  padding-right: 8%;
 }
 .col-1{
   flex-basis: 40%;
@@ -84,26 +90,38 @@ nav ul li a:hover{
 #batman{
   width: 100%;
 }
+p {
+    margin:0px;
+}
+#copyright {
+  position: relative; 
+  bottom: 0; 
+  left: 0; 
+  right: 0;
+  width: 100%;
+  padding:0px;
+  margin:0px;
+}
 
 
+/* Rajout Mathis Button*/
+.buttond {
+  align-content: center;
+}
 #button nav{
   text-align: left;
 }
-
 #button a {
   text-decoration: none;
   font-size: 30px;
-  color:#2c6e49;
+  color:white;
 }
-
 #button img {
   position: relative;
 }
-
 #buttona:visited {
-  color:#2c6e49;
+  color:white;
 }
-
 #button ul {
   display: flex;
   justify-content: space-around;
@@ -112,46 +130,20 @@ nav ul li a:hover{
   margin:0px;
   padding-top: 5vh;
 }
-
 #button li {
-  background-color: white;
-  padding:2px;
-  display: block;
   width:100%;
   text-align:center;
-  border: #2c6e49 solid 3px;
-  border-radius: 30px;
-  font-size: 30px;
+  border: black solid 3px;
+  border-collapse: collapse;
+  line-height: 25vh;
+  margin: 0px;
 }
-
-#button li:hover{
-  background-color: #2c6e49;
-  color:white;
-  transition: all 0.5s ease-in;
-  animation: lihov 1s ease 0s 1 normal forwards;
-}
-
-@keyframes lihov {
-  0% {
-    transform: scale(1);
-  }
-  
-  100% {
-    transform: scale(1.05);
-  }
-}
-
-#button li:hover a {
-  transition: all 0.5s ease-in;
-  color:white;
-}
-
 #achatban a {
   font-size: 35px;
   padding:2px;
   min-height: 25vh;
   display: block;
-  background: url("banniererolexgauche.png") center center no-repeat;
+  background: url("images/banniererolexgauche.png") center center no-repeat;
   background-size: cover;
 }
 
@@ -160,19 +152,39 @@ nav ul li a:hover{
   padding:2px;
   min-height: 25vh;
   display: block;
-  background: url("banniy10.png") center center no-repeat;
+  background: url("images/banniy10.png") center center no-repeat;
   background-size: cover;
 }
+/* Rajout Mathis Button*/
 
-#sous{
-  display:none;
-  box-shadow: 0px 1px 2px #CCC;
-  background-color:white;
+/* Rajout Mathis menu déroulant*/
+#menuderoulant > a::after {
+  content:" ▼";
 }
-
-nav > ul li:hover .sous {
+#sousmenu{
+  display:none;
+  width:100%;
+  z-index: 1000;
+}
+#sousmenu li {
+  float:none;
+  width:100%;
+  text-align: right;
+}
+#sousmenu a {
+  padding:20px;
+  font-size: 14px;
+}
+#sousmenu a:hover {
+  border-bottom: none;
+  background-color: RGBa(255,255,255,0.1);
+}
+nav > ul li:hover #sousmenu {
   display:block;
 }
+
+/* Rajout Mathis menu déroulant*/
+
 
 /* Dev by Octavocado */
 #search_bar button {
@@ -204,15 +216,14 @@ nav > ul li:hover .sous {
 }
 
 .login-form h2 {
-  margin: 0 0 15px;
+  margin: 0 15px;
   text-align: center;
 }
 
 .form-control, .btn {
   min-height: 38px;
-  border-radius: 2px;
   margin-bottom: 5px;
-  border-radius: 10px;
+  border-radius: 5px;
   text-align: center;
 }
 
