@@ -4,6 +4,7 @@ function display_watch(){
     
 }
 
+include "config.php";
 //----------------- Fonctions pour la gestion de comptes ------------------- 
 
 function inscription($pseudo1, $mail2, $password3, $retypedPassword4){
@@ -18,6 +19,8 @@ function inscription($pseudo1, $mail2, $password3, $retypedPassword4){
         $password_retype = htmlspecialchars($retypedPassword4);
 
         // On vérifie si l'utilisateur existe
+        // $database_instance = new database;
+        // $database_instance->users_connect();
         $check = $bdd->prepare('SELECT pseudo, email, password FROM utilisateurs WHERE email = ?');
         $check->execute(array($email));
         $data = $check->fetch();
@@ -109,8 +112,8 @@ function connexion($mail1, $password2){
 
 function landProperly(){
 
-
-   // si on arrive ici sans être connecté on redirige
+    global $bdd;
+    // si on arrive ici sans être connecté on redirige
     if(!isset($_SESSION['user'])){
         header('Location: .');
         die();
