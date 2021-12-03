@@ -1,8 +1,14 @@
 <?php
 
-function get_watches_sort($sort1){
+function get_watches_sort($sort1, $sens){
     global $bdd;
-    return $bdd->prepare('SELECT * FROM watches ORDER BY ? DESC')->execute([$sort1])->fetchAll(PDO::FETCH_ASSOC);
+    if ($sens = 'croissant'){
+        $check = $bdd->prepare('SELECT * FROM watches ORDER BY ? ASC');
+    } else {
+        $check = $bdd->prepare('SELECT * FROM watches ORDER BY ? DESC');
+    }
+    $check->execute([$sort1]);
+    return $check->fetchAll(PDO::FETCH_ASSOC);
     // return $bdd->query('SELECT * FROM watches ORDER BY ' . $sort1 . ' DESC')->fetchAll(PDO::FETCH_ASSOC);
 }
 

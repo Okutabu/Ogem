@@ -32,6 +32,9 @@ if (isset($_POST["action"])){
     if ($_POST["action"] == "add_watches"){
         add_watches($_POST['user'], $_POST['brand'], $_POST['materiaux'], $_POST['name'], $_POST['price'], $_POST['buy']);
     }
+    if ($_POST["action"] == "search"){
+        display_watch();
+    }
 
 }
 
