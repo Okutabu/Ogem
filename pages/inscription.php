@@ -1,5 +1,6 @@
 <main class="login-form">
     <h2 class="text-center">Inscription</h2>
+    <?php errors_accounts(); ?>
     <form action="." method="post">
         <input type="hidden" name="action" value="inscription">
         <input type="text" name="pseudo" class="form-control" placeholder="Pseudo" required="required" autocomplete="off">

@@ -6,7 +6,7 @@ function display_watch(){
 
 //----------------- Fonctions pour la gestion de comptes ------------------- 
 
-function insciption($pseudo1, $mail2, $password3, $retypedPassword4){
+function inscription($pseudo1, $mail2, $password3, $retypedPassword4){
     global $bdd;
     // Si les variables existent et qu'elles ne sont pas vides
     if(!empty($pseudo1) && !empty($mail2) && !empty($password3) && !empty($retypedPassword4))
@@ -49,22 +49,23 @@ function insciption($pseudo1, $mail2, $password3, $retypedPassword4){
                                 'token' => bin2hex(openssl_random_pseudo_bytes(64))
                             ));
                             // On redirige avec le message de succès
-                            header('Location: .?page=home&amp;acc_err=success');
+                            echo "<script>alert('Inscription effectuée !')</script>";
+                            header('Refresh:0; url=.?page=connect');
                             die();
                         } else{ 
-                            header('Location: .?page=inscription&amp;acc_err=passwordCorresponding'); 
+                            header('Location: .?page=inscription&acc_err=passwordCorresponding'); 
                             die();}
                     } else{ 
-                        header('Location: .?page=inscription&amp;acc_err=emailValidity'); 
+                        header('Location: .?page=inscription&acc_err=emailValidity'); 
                         die();}
                 } else{ 
-                    header('Location: .?page=inscription&amp;acc_err=email_length'); 
+                    header('Location: .?page=inscription&acc_err=email_length'); 
                     die();}
             } else{ 
-                header('Location: .?page=inscription&amp;acc_err=pseudo_length'); 
+                header('Location: .?page=inscription&acc_err=pseudo_length'); 
                 die();}
         } else{ 
-            header('Location:.?page=inscription&amp;acc_err=already'); 
+            header('Location:.?page=inscription&acc_err=already'); 
             die();}
     }
 }
@@ -100,9 +101,9 @@ function connexion($mail1, $password2){
                 header('Location: .?page=landing');
                 die();
             } else { 
-                header('Location: .?acc_err=password'); die(); }
+                header('Location: .?page=connect&acc_err=password'); die(); }
         } else { 
-            header('Location: .?acc_err=notExisting'); die(); }
+            header('Location: .?page=connect&acc_err=notExisting'); die(); }
     }
 }
 
@@ -130,25 +131,24 @@ function deconnexion(){
     die();
 }
 
-//Traitement erreurs
+//Traitement erreurs & succès
 
-function errors_accounts($error){
+function errors_accounts(){
     
-    $err = htmlspecialchars($error);
-    echo '<div class="alert alert-danger">';
-    switch($err) {
-        //pour les connexions
-        case 'password': echo '<strong>Erreur</strong>, mot de passe incorrect'; echo '</div>'; break;
-        case 'notExisting': echo'<strong>Erreur</strong>, le compte n\'existe pas'; echo '</div>'; break;
-        //pour l'inscription
-        case 'success': echo'<strong>Inscription enregistrée</strong>'; echo '</div>'; break;
-        case 'passwordCorresponding': echo'<strong>Erreur</strong>, les mots de passe ne correspondent pas'; echo '</div>'; break;
-        case 'emailValidity': echo'<strong>Erreur</strong>, l\'email n\'est pas valide'; echo '</div>'; break;
-        case 'email_length': echo'<strong>Erreur</strong>, l\'email est trop long'; echo '</div>'; break;
-        case 'pseudo_length': echo'<strong>Erreur</strong>, le pseudo est trop long'; echo '</div>'; break;
-        case 'already': echo'<strong>Erreur</strong>, adresse email déjà utilisée'; echo '</div>';
+    if (isset($_GET['acc_err'])){
+        $err = htmlspecialchars($_GET['acc_err']);
+        switch($err) {
+            //pour les connexions
+            case 'password': echo '<div class="alert"><p><strong>Erreur</strong>, mot de passe incorrect</p></div>'; break;
+            case 'notExisting': echo'<div class="alert"><p><strong>Erreur</strong>, le compte n\'existe pas</p></div>'; break;
+            //pour l'inscription
+            case 'passwordCorresponding': echo'<div class="alert"><p><strong>Erreur</strong>, les mots de passe ne correspondent pas</p></div>'; break;
+            case 'emailValidity': echo'<div class="alert"><p><strong>Erreur</strong>, l\'email n\'est pas valide</p></div>'; break;
+            case 'email_length': echo'<div class="alert"><p><strong>Erreur</strong>, l\'email est trop long</p></div>'; break;
+            case 'pseudo_length': echo'<div class="alert"><p><strong>Erreur</strong>, le pseudo est trop long</p></div>'; break;
+            case 'already': echo'<div class="alert"><p><strong>Erreur</strong>, adresse email déjà utilisée</p></div>';
+        }
     }
-    echo "<script>alert('Erreur')</script>";
 }
 
 //-----------------------------------------------------------------

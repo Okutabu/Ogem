@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
     <title>OGEM</title>
-    <link rel="icon" href="images/logo.ico" type="image/x-icon">
+    <link rel="icon" href="images/logolito.png" type="image/x-icon">
 </head>
 <body>
     <?php

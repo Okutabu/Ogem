@@ -28,11 +28,5 @@ if (isset($_POST["action"])){
     }
 }
 
-// Erreurs
-
-if (isset($_GET['acc_err'])){
-	errors_accounts($_GET['acc_err']);
-}
-
 
 ?>

@@ -1,4 +1,5 @@
 <main class="login-form">
+    <?php errors_accounts(); ?>
     <h2 class="text-center">Connectez-vous</h2>
     <form action="." method="post">
         <input type="hidden" name="action" value="connexion">
