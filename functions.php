@@ -1,11 +1,16 @@
 <?php
 
-function display_watch(){
+function get_watches_sort($sort1){
     global $bdd;
-    $req = $bdd->prepare('SELECT token, marque, materiaux, prix, date, buy,  FROM watches');
-    $req->execute(array($watches));
-    $data = $req->fetch();
+    return $bdd->prepare('SELECT * FROM watches ORDER BY ? DESC')->execute([$sort1])->fetchAll(PDO::FETCH_ASSOC);
+    // return $bdd->query('SELECT * FROM watches ORDER BY ' . $sort1 . ' DESC')->fetchAll(PDO::FETCH_ASSOC);
+}
 
+function display_watch(){
+    $sortBy = 'views';
+    $watches = get_watches_sort($sortBy);
+    // $watches = $bdd->query('SELECT * FROM watches')->fetchAll(PDO::FETCH_ASSOC); // avec le PDO::FETCH_ASSOC nous précisons que nous voulons un tableau associatif (le fetchAll va bien si le nombre de montres n'est pas trop important, sinon il y aura beaucoup de latences)
+    
 }
 
 //----------------- Fonctions pour la gestion de comptes ------------------- 
@@ -156,7 +161,7 @@ function errors_accounts(){
 function profil_connected(){
     if(isset($_SESSION['user'])){
         $data = $_SESSION['user'];
-        echo '<img src="images/' . $data['picture'] . '" alt="profil picture" id="profilePic">';
+        echo '<img src="images/profilePics/' . $data['picture'] . '" alt="profil picture" id="profilePic">';
     } else {
         echo '<p>Profil</p>';
     }
