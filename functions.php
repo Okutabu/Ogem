@@ -1,6 +1,6 @@
 <?php
 
-function get_watches_sort($sort1, $sens){
+function get_watches_sorted($sort1 = 'views', $sens = 'decroissant'){
     global $bdd;
     if ($sens = 'croissant'){
         $check = $bdd->prepare('SELECT * FROM watches ORDER BY ? ASC');
@@ -8,14 +8,35 @@ function get_watches_sort($sort1, $sens){
         $check = $bdd->prepare('SELECT * FROM watches ORDER BY ? DESC');
     }
     $check->execute([$sort1]);
-    return $check->fetchAll(PDO::FETCH_ASSOC);
-    // return $bdd->query('SELECT * FROM watches ORDER BY ' . $sort1 . ' DESC')->fetchAll(PDO::FETCH_ASSOC);
+    $_SESSION['watches'] = $check->fetchAll(PDO::FETCH_ASSOC); // avec le PDO::FETCH_ASSOC nous précisons que nous voulons un tableau associatif (le fetchAll va bien si le nombre de montres n'est pas trop important, sinon il y aura beaucoup de latence)
+    //On met le resultat dans une variable de session pour eviter de devoir refaire des requetes sql a chaque fois
+}
+
+function filter_watches(){
+    null;
 }
 
 function display_watch(){
-    $sortBy = 'views';
-    $watches = get_watches_sort($sortBy);
-    // $watches = $bdd->query('SELECT * FROM watches')->fetchAll(PDO::FETCH_ASSOC); // avec le PDO::FETCH_ASSOC nous précisons que nous voulons un tableau associatif (le fetchAll va bien si le nombre de montres n'est pas trop important, sinon il y aura beaucoup de latences)
+    $watches = $_SESSION['watches'];
+    echo "<main>";
+    foreach($watches as $watch){
+        echo "<article>";
+        echo "<h1>" . $watch['name'] . "</h1>";
+        echo "<img src='images/watchesPics/" . $watch['image_token'] . ".jpg' alt='Image Montre'>";
+        echo "<p>" . $watch['marque'] . "</p>";
+        echo "<p>" . $watch['likes'] . "</p>";
+        echo "<button name='likes' class='heart'></button>";
+        echo "<h2>" . $watch['prix'] . " €</h2>";
+        if ($watch['buy']){
+            echo "";
+        } else {
+            echo "";
+        }
+        
+        echo "</article>";
+    }
+    echo "</main>";
+    
     
 }
 
@@ -133,7 +154,7 @@ function connexion($mail1, $password2){
 
 function welcome(){
     $data = $_SESSION['user'];
-    echo '<img src="images/' . $data['picture'] . '" alt="profil picture" id="landimg">';
+    echo '<img src="images/profilePics/' . $data['picture'] . '" alt="profil picture" id="landimg">';
     echo('<h1>Bonjour '.$data['pseudo'].', vous êtes bien connecté !</h1>');
 }
 

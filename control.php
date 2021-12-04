@@ -7,17 +7,22 @@ if (isset($_GET["page"])){
 	$page = $_GET["page"];
 }
 	
-$pages = ["home", "inscription", "sell", "search", "profile", "messages", "cart", "connect", "landing", "deco"];
+$pages = ["home", "inscription", "sell", "search", "profile", "messages", "likes", "connect", "landing", "deco", "watch"];
 
 if (array_search($page, $pages) === FALSE){
 	$page = "404";
 }
 
-
+//Gestion des accès
 if (($page == "sell" || $page == "profile" || $page == "messages" || $page == "landing") && (!isset($_SESSION['user']))){ //on interdit l'accès a certaines pages aux utilisateurs non connectés
     echo "<script>alert('Accès refusé, veuillez vous connecter');</script>";
     header("Refresh:0.1; url=.?page=home");
     die();
+} 
+
+//Affichage des montres par défaut lorsque l'on entre sur la page search.php
+elseif ($page == "search" && !isset($_SESSION['watches'])){
+    get_watches_sorted();
 }
 
 // traitement formulaires inscription / connexion
@@ -33,7 +38,7 @@ if (isset($_POST["action"])){
         add_watches($_POST['user'], $_POST['brand'], $_POST['materiaux'], $_POST['name'], $_POST['price'], $_POST['buy']);
     }
     if ($_POST["action"] == "search"){
-        display_watch();
+        get_watches();
     }
 
 }

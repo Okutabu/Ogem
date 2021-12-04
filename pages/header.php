@@ -11,7 +11,7 @@
             <ul id="sousmenu">
                 <li><a href=".?page=inscription">Inscription</a></li>
                 <li><a href=".?page=connect">Connexion</a></li>
-                <li><a href=".?page=cart">Panier</a></li>
+                <li><a href=".?page=likes">Coups de coeur</a></li>
                 <li><a href=".?page=deco">Déconnexion</a></li>
             </ul>
         </li>
