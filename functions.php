@@ -140,8 +140,13 @@ function connexion($mail1, $password2){
                 $req->execute(array($data['token']));
                 $_SESSION['user'] = $req->fetch();
                 
-                // On redirige sur landing.php
-                header('Location: .?page=landing');
+                //si l'on vient de la page de vente sans y etre connecté par exemple, on y est redirigé ensuite
+                if (isset($_SESSION['redirect'])){
+                    header('Location: .?page=' . $_SESSION['redirect']);
+                } else {
+                    header('Location: .?page=landing');
+                }
+                
                 die();
             } else { 
                 $_SESSION['flash'] = 'password';
@@ -185,13 +190,38 @@ function errors_accounts(){
     }
 }
 
+function forbidden_access(){
+    echo "<script>alert('Accès refusé, veuillez vous connecter');</script>";
+    header("Refresh:0.1; url=.?page=home");
+    die();
+}
+
+function redirection(){
+    $_SESSION['redirect'] = 'sell';
+    header("Location: .?page=connect");
+    die();
+}
+
+//Affichage du menu de naviguation en fonction de si l'utilisateur est connecté
 function profil_connected(){
     if(isset($_SESSION['user'])){
-        $data = $_SESSION['user'];
-        echo '<img src="images/profilePics/' . $data['picture'] . '" alt="profil picture" id="profilePic">';
+        $picture = $_SESSION['user']['picture'];
+        echo "<li><a href='.?page=sell'>Vendre</a></li>";
+        echo "<li id='menuderoulant'>";
+        echo '<img src="images/profilePics/' . $picture . '" alt="profil picture" id="profilePic">';
+        echo "<ul id='sousmenu'>";
+        echo "<li><a href='.?page=profile'>Profil</a></li>";
+        echo "<li><a href='.?page=likes'>Coups de coeur</a></li>";
+        echo "<li><a href='.?page=deco'>Déconnexion</a></li>";
     } else {
+        echo "<li><a href='.?page=connect'>Connexion/Inscription</a></li>";
+        echo "<li id='menuderoulant'>";
         echo '<p>Profil</p>';
+        echo "<ul id='sousmenu'>";
+        echo "<li><a href='.?page=connect'>Connexion</a></li>";
+        echo "<li><a href='.?page=inscription'>Inscription</a></li>";
     }
+    echo "</ul></li>";
 }
 
 //-----------------------------------------------------------------

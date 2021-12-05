@@ -5,15 +5,6 @@
     <ul>
         <li><a href=".?page=home">Accueil</a></li>
         <li><a href=".?page=search">Acheter</a></li>
-        <li><a href=".?page=sell">Vendre</a></li>
-        <li><a href=".?page=connect">Connexion/Inscription</a></li>
-        <li id="menuderoulant"><?php profil_connected(); ?>
-            <ul id="sousmenu">
-                <li><a href=".?page=inscription">Inscription</a></li>
-                <li><a href=".?page=connect">Connexion</a></li>
-                <li><a href=".?page=likes">Coups de coeur</a></li>
-                <li><a href=".?page=deco">Déconnexion</a></li>
-            </ul>
-        </li>
+        <?php profil_connected(); ?>
     </ul>
 </nav>

@@ -14,10 +14,14 @@ if (array_search($page, $pages) === FALSE){
 }
 
 //Gestion des accès
-if (($page == "sell" || $page == "profile" || $page == "messages" || $page == "landing") && (!isset($_SESSION['user']))){ //on interdit l'accès a certaines pages aux utilisateurs non connectés
-    echo "<script>alert('Accès refusé, veuillez vous connecter');</script>";
-    header("Refresh:0.1; url=.?page=home");
-    die();
+if (($page == "profile" || $page == "messages" || $page == "landing") && (!isset($_SESSION['user']))){ //on interdit l'accès a certaines pages aux utilisateurs non connectés
+    forbidden_access();
+} 
+
+//Gestion des redirections
+
+if ($page == "sell" && !isset($_SESSION['user'])){
+    redirection();
 } 
 
 //Affichage des montres par défaut lorsque l'on entre sur la page search.php
