@@ -237,7 +237,6 @@ footer{
 }
 
 #landdiv a{
-<<<<<<< Updated upstream
   outline: none;
   text-decoration: none;
   display: inline-block;
@@ -324,8 +323,9 @@ footer{
     font-size: 2.5rem;
   }
 }
-=======
-    outline: none;
+
+#tr{
+  outline: none;
     text-decoration: none;
     display: inline-block;
     width:170px;
@@ -336,5 +336,3 @@ footer{
     color: black;
     background: linear-gradient(#4c956c, #2c6e49);
 }
-
->>>>>>> Stashed changes
