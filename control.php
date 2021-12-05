@@ -21,7 +21,7 @@ if (($page == "profile" || $page == "messages" || $page == "landing") && (!isset
 //Gestion des redirections
 
 if ($page == "sell" && !isset($_SESSION['user'])){
-    redirection();
+    redirection_sell();
 } 
 
 //Affichage des montres par défaut lorsque l'on entre sur la page search.php

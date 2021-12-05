@@ -18,10 +18,18 @@ function filter_watches(){
     null;
 }
 
+function display_prices(){
+    global $bdd;
+    $priceMin = $bdd->query('SELECT MIN(price) FROM watches')->fetch(PDO::FETCH_ASSOC);
+    $priceMax = $bdd->query('SELECT MAX(price) FROM watches')->fetch(PDO::FETCH_ASSOC);
+    echo "<label>Prix min.</label>";
+    echo "<input type='number' name='priceMin' class='priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMin . "'>";
+    echo "<label>Prix max.</label>";
+    echo "<input type='number' name='priceMax=' class='priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMax . "'>";
+}
 
 function display_watch(){
     $watches = $_SESSION['watches'];
-    echo "<main>";
     foreach($watches as $watch){
         echo "<article>";
         echo "<h1>" . $watch['name'] . "</h1>";
@@ -32,9 +40,9 @@ function display_watch(){
         
         if ($watch['buy']){ //Si le vendeur a décidé de vendre la montre de suite et pas aux enchères
             echo "<h2>" . $watch['prix'] . " €</h2>";
-            echo "<button name='buy' id='buy'></button>";
+            echo "<button name='buy' id='buy'>Acheter</button>";
         } else {
-            echo "<h2>Meilleure enchère :" . $watch['enchere'] . " €</h2>";
+            echo "<h2>Meilleure enchère : " . $watch['enchere'] . " €</h2>";
             echo "<form action='.' method='post'><input type='hidden' name='action' value='enchere'>";
             echo "<label>Enchère rapide :</label><input type='number' name='bid' placeholder='" . $watch['enchere'] + 1 . "' required='required' autocomplete='off' min='" . $watch['enchere'] + 1 . "'>";
             echo "<input type='submit' class='btn' value='Confirmer'></form>";
@@ -42,9 +50,6 @@ function display_watch(){
         
         echo "</article>";
     }
-    echo "</main>";
-    
-    
 }
 
 //----------------- FIN Partie recherche montres ------------------- 
@@ -150,10 +155,12 @@ function connexion($mail1, $password2){
                 $_SESSION['user'] = $req->fetch();
                 
                 //si l'on vient de la page de vente sans y etre connecté par exemple, on y est redirigé ensuite
-                if (isset($_SESSION['redirect'])){
-                    header('Location: .?page=' . $_SESSION['redirect']);
+                if (isset($_GET['redirect'])){
+                    header('Location: .?page=' . $_GET['redirect']);
+                    die();
                 } else {
                     header('Location: .?page=landing');
+                    die();
                 }
                 
                 die();
@@ -205,10 +212,17 @@ function forbidden_access(){
     die();
 }
 
-function redirection(){
-    $_SESSION['redirect'] = 'sell';
-    header("Location: .?page=connect");
+function redirection_sell(){
+    header("Location: .?page=connect&redirect=sell");
     die();
+}
+
+function apply_redirect(){
+    if (isset($_GET['redirect'])){
+        echo "<form action='.?redirect=" . $_GET['redirect'] . "' method='post'>";
+    } else {
+        echo "<form action='.' method='post'>";
+    }
 }
 
 //Affichage du menu de naviguation en fonction de si l'utilisateur est connecté
@@ -221,6 +235,7 @@ function profil_connected(){
         echo "<ul id='sousmenu'>";
         echo "<li><a href='.?page=profile'>Profil</a></li>";
         echo "<li><a href='.?page=likes'>Coups de coeur</a></li>";
+        echo "<li><a href='.?page=messages'>Messages</a></li>";
         echo "<li><a href='.?page=deco'>Déconnexion</a></li>";
     } else {
         echo "<li><a href='.?page=connect'>Connexion/Inscription</a></li>";
