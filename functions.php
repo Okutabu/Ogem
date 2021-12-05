@@ -21,9 +21,9 @@ function filter_watches(){
 function display_prices(){
     global $bdd;
     $priceMin = $bdd->query('SELECT MIN(prix) FROM watches')->fetch(PDO::FETCH_ASSOC);
-    $priceMin = $priceMin['prix'];
+    $priceMin = $priceMin['MIN(prix)'];
     $priceMax = $bdd->query('SELECT MAX(prix) FROM watches')->fetch(PDO::FETCH_ASSOC);
-    $priceMax = $priceMax['prix'];
+    $priceMax = $priceMax['MAX(prix)'];
     echo "<label>Prix min.</label>";
     echo "<input type='number' name='priceMin' class='priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMin . "'>";
     echo "<label>Prix max.</label>";
@@ -44,9 +44,9 @@ function display_watch(){
             echo "<h2>" . $watch['prix'] . " €</h2>";
             echo "<button name='buy' id='buy'>Acheter</button>";
         } else {
-            echo "<h2>Meilleure enchère : " . $watch['enchere'] . " €</h2>";
+            echo "<h2>Meilleure enchère : " . $watch['prix'] . " €</h2>";
             echo "<form action='.' method='post'><input type='hidden' name='action' value='enchere'>";
-            echo "<label>Enchère rapide :</label><input type='number' name='bid' placeholder='" . $watch['enchere'] + 1 . "' required='required' autocomplete='off' min='" . $watch['enchere'] + 1 . "'>";
+            echo "<label>Enchère rapide :</label><input type='number' name='bid' placeholder='" . $watch['prix'] + 1 . "' required='required' autocomplete='off' min='" . $watch['prix'] + 1 . "'>";
             echo "<input type='submit' class='btn' value='Confirmer'></form>";
         }
         

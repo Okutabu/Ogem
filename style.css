@@ -182,6 +182,7 @@ p {
 }
 nav > ul li:hover #sousmenu {
   display:block;
+  float: right;
 }
 
 /* Rajout Mathis menu déroulant*/
