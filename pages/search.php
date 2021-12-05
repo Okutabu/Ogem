@@ -19,9 +19,7 @@ if (heart.classList.contains("liked")) {
             <input type="text" name="password_retype" class="form-control" placeholder="">
             <label>Type de vente : </label>
             <input type="text" name="password_retype" class="form-control" placeholder="">
-            <label></label>
-            <input type="text" name="password_retype" class="form-control" placeholder="">
-            <input type="submit" class="btn" value="Inscription">
+            <input type="submit" class="btn" value="Confirmer">
         </form>
         <form action="." method="post">
             <input type="hidden" name="action" value="trier">
