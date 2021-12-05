@@ -7,7 +7,7 @@ if (isset($_GET["page"])){
 	$page = $_GET["page"];
 }
 	
-$pages = ["home", "inscription", "sell", "search", "profile", "messages", "likes", "connect", "landing", "deco", "watch"];
+$pages = ["home", "inscription", "sell", "search", "profile", "messages", "likes", "connect", "landing", "deco", "watch", "enchere"];
 
 if (array_search($page, $pages) === FALSE){
 	$page = "404";

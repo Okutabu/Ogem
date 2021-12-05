@@ -1,5 +1,7 @@
 <?php
 
+//----------------- Partie recherche montres ------------------- 
+
 function get_watches_sorted($sort1 = 'views', $sens = 'decroissant'){
     global $bdd;
     if ($sens = 'croissant'){
@@ -16,6 +18,7 @@ function filter_watches(){
     null;
 }
 
+
 function display_watch(){
     $watches = $_SESSION['watches'];
     echo "<main>";
@@ -26,11 +29,15 @@ function display_watch(){
         echo "<p>" . $watch['marque'] . "</p>";
         echo "<p>" . $watch['likes'] . "</p>";
         echo "<button name='likes' class='heart'></button>";
-        echo "<h2>" . $watch['prix'] . " €</h2>";
-        if ($watch['buy']){
-            echo "";
+        
+        if ($watch['buy']){ //Si le vendeur a décidé de vendre la montre de suite et pas aux enchères
+            echo "<h2>" . $watch['prix'] . " €</h2>";
+            echo "<button name='buy' id='buy'></button>";
         } else {
-            echo "";
+            echo "<h2>Meilleure enchère :" . $watch['enchere'] . " €</h2>";
+            echo "<form action='.' method='post'><input type='hidden' name='action' value='enchere'>";
+            echo "<label>Enchère rapide :</label><input type='number' name='bid' placeholder='" . $watch['enchere'] + 1 . "' required='required' autocomplete='off' min='" . $watch['enchere'] + 1 . "'>";
+            echo "<input type='submit' class='btn' value='Confirmer'></form>";
         }
         
         echo "</article>";
@@ -39,6 +46,8 @@ function display_watch(){
     
     
 }
+
+//----------------- FIN Partie recherche montres ------------------- 
 
 //----------------- Fonctions pour la gestion de comptes ------------------- 
 
