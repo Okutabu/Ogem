@@ -1,0 +1,64 @@
+/* Dev by Octavocado */
+#search_bar button {
+  padding: 14px;
+}
+
+#search_bar button:hover {
+  background: #ccc;
+}
+
+.red {
+  background-color: red;
+  height: 100vh;
+}
+
+section.form .text {
+  padding-right: 12px;
+}
+
+section.form .text #champ1, section.form .text #champ2, section.form .text #champ3, section.form .text #champ4, section.form .text #champ5 {
+  padding: 10px 0 10px 0;
+}
+
+section.form form {
+  margin-top: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+section.form form div, section.form form button {
+  margin-right: 40px;
+}
+
+section.form form div.file-area {
+  border: 4px dotted #4c956c;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+section.form form div.file-area input[type=file] {
+  width: 100%;
+}
+
+section.form form button {
+  color: #fff;
+  background: #4c956c;
+  border: none;
+  width: 35px;
+  height: 300px;
+  border-radius: 4px;
+  border-bottom: 4px solid #2c6e49;
+  outline: none;
+}
+
+section.form form .data {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+/*# sourceMappingURL=octavcss.css.map */

@@ -187,19 +187,7 @@ nav > ul li:hover #sousmenu {
 /* Rajout Mathis menu déroulant*/
 
 
-/* Dev by Octavocado */
-#search_bar button {
-  padding: 14px;
-}
 
-#search_bar button:hover {
-  background: #ccc;
-}
-
-.red {
-  background-color: red;
-  height: 100vh;
-}
 
 /* pour la page inscription */
 .login-form {
@@ -248,6 +236,7 @@ footer{
 }
 
 #landdiv a{
+<<<<<<< Updated upstream
   outline: none;
   text-decoration: none;
   display: inline-block;
@@ -334,3 +323,17 @@ footer{
     font-size: 2.5rem;
   }
 }
+=======
+    outline: none;
+    text-decoration: none;
+    display: inline-block;
+    width:170px;
+    margin-top: 20px;
+    margin-right: 0.625%;
+    text-align: center;
+    line-height: 3;
+    color: black;
+    background: linear-gradient(#4c956c, #2c6e49);
+}
+
+>>>>>>> Stashed changes
