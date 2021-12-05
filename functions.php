@@ -20,8 +20,10 @@ function filter_watches(){
 
 function display_prices(){
     global $bdd;
-    $priceMin = $bdd->query('SELECT MIN(price) FROM watches')->fetch(PDO::FETCH_ASSOC);
-    $priceMax = $bdd->query('SELECT MAX(price) FROM watches')->fetch(PDO::FETCH_ASSOC);
+    $priceMin = $bdd->query('SELECT MIN(prix) FROM watches')->fetch(PDO::FETCH_ASSOC);
+    $priceMin = $priceMin['prix'];
+    $priceMax = $bdd->query('SELECT MAX(prix) FROM watches')->fetch(PDO::FETCH_ASSOC);
+    $priceMax = $priceMax['prix'];
     echo "<label>Prix min.</label>";
     echo "<input type='number' name='priceMin' class='priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMin . "'>";
     echo "<label>Prix max.</label>";
