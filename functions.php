@@ -1,5 +1,7 @@
 <?php
 
+$data = ['materiaux' => ["Acier", "Argent", "Céramique","Diamant","Or","Platine","Tungstène","Autres"], 'marque' => ["Audemars Piguet", "Breitling", "Grand Seiko", "Hublot", "IWC", "Jaeger-LeCoultre", "Longines", "Omega", "Patek Philippe", "Richard Mille", "Rolex", "Tag Heuer", "Tissot", "Tudor", "Vacheron Constantin", "Autres"]];
+
 //----------------- Partie recherche montres ------------------- 
 
 function get_watches_sorted($sort1 = 'views', $sens = 'decroissant'){
@@ -18,16 +20,23 @@ function filter_watches(){
     null;
 }
 
-function display_prices(){
+function display_filters(){
     global $bdd;
     $priceMin = $bdd->query('SELECT MIN(prix) FROM watches')->fetch(PDO::FETCH_ASSOC);
     $priceMin = $priceMin['MIN(prix)'];
     $priceMax = $bdd->query('SELECT MAX(prix) FROM watches')->fetch(PDO::FETCH_ASSOC);
     $priceMax = $priceMax['MAX(prix)'];
     echo "<label>Prix min.</label>";
-    echo "<input type='number' name='priceMin' class='priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMin . "'>";
+    echo "<input type='number' name='priceMin' class='filter priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMin . "'>";
     echo "<label>Prix max.</label>";
-    echo "<input type='number' name='priceMax=' class='priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMax . "'>";
+    echo "<input type='number' name='priceMax=' class='filter priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMax . "'>";
+    echo "<label>Marque : </label>";
+    echo "<input type='checkbox' name='marque' class='filter marquefilter' placeholder=''>";
+    echo "<label>Matériau : </label>";
+    echo "<input type='checkbox' name='materiaux' class='filter marquefilter' placeholder=''>";
+            
+            
+            
 }
 
 function display_watch(){
