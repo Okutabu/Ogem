@@ -240,7 +240,6 @@ function profil_connected(){
         echo "<li><a href='.?page=messages'>Messages</a></li>";
         echo "<li><a href='.?page=deco'>Déconnexion</a></li>";
     } else {
-        echo "<li><a href='.?page=connect'>Connexion/Inscription</a></li>";
         echo "<li id='menuderoulant'>";
         echo '<p>Profil</p>';
         echo "<ul id='sousmenu'>";

@@ -1,12 +1,4 @@
-<script>const heart = document.querySelector(".heart");
 
-heart.addEventListener("click", () => {
-if (heart.classList.contains("liked")) {
-    heart.classList.remove("liked");
-} else {
-    heart.classList.add("liked");
-}
-});</script>
 <main>
     <h1>Montres d'occasion</h1>
     <article>
@@ -29,5 +21,14 @@ if (heart.classList.contains("liked")) {
     <?php
         display_watch()
     ?>  
+    <script>const heart = document.querySelector(".heart");
+
+    heart.addEventListener("click", () => {
+    if (heart.classList.contains("liked")) {
+        heart.classList.remove("liked");
+    } else {
+        heart.classList.add("liked");
+    }
+    });</script>
 </main>
 
