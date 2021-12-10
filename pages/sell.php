@@ -10,16 +10,36 @@
                 <input type="text" name="name" ><br></div>
 
                 <div id="champ2"><label>Marque</label><br>
-                <input type="text" name="brand" ><br></div>
+                <select name="brand" id="brand-select">
+                    <option value="">Choisir une marque</option>
+                    <?php
+                    foreach ($data["marque"] as $marque){
+                    echo "<option value=".$marque.">".$marque."</option>"; } ?>
+                </select></div>
 
                 <div id="champ3"><label>Prix</label><br>
                 <input type="text" name="price" ><br></div>
 
                 <div id="champ4"><label>Type de vente</label><br>
-                <input type="text" name="buy" ><br></div>
+                <select name="buy" id="type_vente-select">
+                    <option value="buynowtrue">Achat immédiat</option>
+                    <option value="buynowfalse">Enchere</option>
+                </select></div>
 
                 <div id="champ5"><label>Materiaux</label><br>
-                <input type="text" name="materiaux" ><br></div>
+                <select name="materiaux" id="materiaux-select">
+                    <option value="">Choisir un matériau</option>
+                    <?php
+                    foreach ($data["materiaux"] as $materiau){
+                    echo "<option value=".$materiau.">".$materiau."</option>"; } ?>
+                </select></div>
+                
+                <div id="champ6"><label>Etat</label><br>
+                    <select name="etat" id="etat-select">
+                    <option value="neuf">Neuf</option>
+                    <option value="occasion">Occasion</option>
+                </select>
+                    </div>
                 
 
             </div>
@@ -29,7 +49,8 @@
         </div>
     </div>
   </div>
-  <button type="submit" value="Envoyer">
+  <input type="submit" value="Envoyer" style="display:none;" id="submit">
+  <input type="image" alt="Submit" src="images/arrow.png" width="300px" onclick="postform()">
     </form>
     
     
