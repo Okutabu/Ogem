@@ -7,7 +7,7 @@ if (isset($_GET["page"])){
 	$page = $_GET["page"];
 }
 	
-$pages = ["home", "inscription", "sell", "search", "profile", "messages", "likes", "connect", "landing", "deco", "watch", "enchere"];
+$pages = ["home", "inscription", "sell", "search", "profile", "likes", "connect", "landing", "deco", "watch", "enchere"];
 
 if (array_search($page, $pages) === FALSE){
 	$page = "404";
@@ -39,7 +39,7 @@ if (isset($_POST["action"])){
         inscription($_POST['pseudo'], $_POST['email'], $_POST['password'], $_POST['password_retype']);
     }
     if ($_POST["action"] == "add_watches"){
-        add_watches($_POST['user'], $_POST['brand'], $_POST['materiaux'], $_POST['name'], $_POST['price'], $_POST['buy']);
+        add_watches($_SESSION['user'], $_POST['brand'], $_POST['materiaux'], $_POST['name'], $_POST['price'], $_POST['buy'], $_POST['etat']);
     }
     if ($_POST["action"] == "search"){
         get_watches();

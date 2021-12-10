@@ -1,7 +1,5 @@
 <?php
-
 $data = ['materiaux' => ["Acier", "Argent", "Céramique","Diamant","Or","Platine","Tungstène","Autres"], 'marque' => ["Audemars Piguet", "Breitling", "Grand Seiko", "Hublot", "IWC", "Jaeger-LeCoultre", "Longines", "Omega", "Patek Philippe", "Richard Mille", "Rolex", "Tag Heuer", "Tissot", "Tudor", "Vacheron Constantin", "Autres"]];
-
 //----------------- Partie recherche montres ------------------- 
 
 function get_watches_sorted($sort1 = 'views', $sens = 'decroissant'){
@@ -27,16 +25,13 @@ function display_filters(){
     $priceMax = $bdd->query('SELECT MAX(prix) FROM watches')->fetch(PDO::FETCH_ASSOC);
     $priceMax = $priceMax['MAX(prix)'];
     echo "<label>Prix min.</label>";
-    echo "<input type='number' name='priceMin' class='filter priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMin . "'>";
+    echo "<input type='number' name='priceMin' class='priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMin . "'>";
     echo "<label>Prix max.</label>";
     echo "<input type='number' name='priceMax=' class='filter priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMax . "'>";
     echo "<label>Marque : </label>";
     echo "<input type='checkbox' name='marque' class='filter marquefilter' placeholder=''>";
     echo "<label>Matériau : </label>";
     echo "<input type='checkbox' name='materiaux' class='filter marquefilter' placeholder=''>";
-            
-            
-            
 }
 
 function display_watch(){
@@ -260,11 +255,17 @@ function profil_connected(){
 
 //-----------------------------------------------------------------
 
-function add_watches($user, $brand, $materiaux, $name, $prix, $buy){
+function add_watches($user, $brand, $materiaux, $name, $prix, $buy, $etat){
 
+    if($buy == buynowtrue){
+        $buy = 1;
+    }
+    else{
+        $buy = 0;
+    }
     global $bdd;
-    $sql = "INSERT INTO watches(user, marque, materiaux, name, prix, buy, image_token)
-    VALUES (:user, :marque, :materiaux, :name, :prix, :buy, :imagetoken)";
+    $sql = "INSERT INTO watches(user, marque, materiaux, name, prix, buy, image_token, etat)
+    VALUES (:user, :marque, :materiaux, :name, :prix, :buy, :imagetoken, :etat)";
     $stmt = $bdd->prepare($sql);
     $stmt->execute(array(
         'user' => $user,
@@ -273,7 +274,8 @@ function add_watches($user, $brand, $materiaux, $name, $prix, $buy){
         'name' => $name,
         'prix' => $prix,
         'buy' => $buy,
-        'imagetoken' => bin2hex(openssl_random_pseudo_bytes(64))
+        'imagetoken' => bin2hex(openssl_random_pseudo_bytes(64)),
+        'etat' => $etat
     ));
     header('Location: .?page=search');
     

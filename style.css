@@ -103,7 +103,9 @@ p {
   padding:0px;
   margin:0px;
 }
-
+.form_control {
+    width:200px;
+}
 
 /* Rajout Mathis Button*/
 .buttond {
@@ -158,7 +160,28 @@ p {
 }
 /* Rajout Mathis Button*/
 
+/* Message d'erreur*/
+
+.alert {
+    border:solid red 2px;
+}
+
+.alert p::before {
+    content:"X ";
+    color:red;
+    font-size:20px;
+}
+
+/* Message d'erreur*/
+
 /* Rajout Mathis menu déroulant*/
+header nav {
+  height:86px;
+}
+#menuderoulant {
+  width:60px;
+}
+
 #menuderoulant > a::after {
   content:" ▼";
 }
@@ -186,9 +209,16 @@ nav > ul li:hover #sousmenu {
 }
 
 /* Rajout Mathis menu déroulant*/
-
-
-
+/* Page de vente */
+.watchtosell {
+    display: inline-block;
+	background-color: lightgrey;
+	color:  black;
+	padding: 20px;
+    margin:  40px;
+    height: 250px;
+    width:280px;
+}
 
 /* pour la page inscription */
 .login-form {
@@ -209,6 +239,9 @@ nav > ul li:hover #sousmenu {
   margin: 0 15px;
   text-align: center;
 }
+.form-control {
+      width:200px;
+}
 
 .form-control, .btn {
   min-height: 38px;
@@ -223,6 +256,7 @@ nav > ul li:hover #sousmenu {
   padding-right: 17px;
   background: linear-gradient(#4c956c, #2c6e49);
   border: none;
+  margin-top:10px;
 }
 
 #landdiv{
