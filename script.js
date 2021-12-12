@@ -6,11 +6,10 @@ function postform(){
     document.getElementById("submit").click();
 }
 
-const heart = document.getElementsByClassName("heart");
-heart.addEventListener("click", () => {
+function coeur(heart){
     if (heart.classList.contains("liked")) {
         heart.classList.remove("liked");
     } else {
         heart.classList.add("liked");
     }
-});
+}

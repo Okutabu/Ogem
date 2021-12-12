@@ -217,7 +217,7 @@ nav > ul li:hover #sousmenu {
 	padding: 20px;
     margin:  40px;
     height: 250px;
-    width:280px;
+    width: 330px;
     border: solid black 2px;
     border-radius: 20px;
 }
@@ -225,15 +225,17 @@ nav > ul li:hover #sousmenu {
     text-align:center;
 }
 .buy {
-    width:280px;
+    width: 125px;
     margin-bottom:10px;
     border-radius: 20px;
     background:#23a15c;
     color:white;
     border:solid black 2px;
+    margin-left: 18px;
 }
+
 .buy:hover{
-    animation: buttonbuy 2s ease 0s 1 normal forwards;
+    animation: buttonbuy 1s ease 0s 1 normal forwards;
     background:#4c956c;
     transition: 1s ease;
     color:white;
@@ -248,11 +250,15 @@ nav > ul li:hover #sousmenu {
   }
 }
 
+.bid{
+    width: 60px;
+}
+
 /* pour la page inscription */
 .login-form {
-  width: 340px;
-  margin: 50px auto;
-  text-align: center;
+    width: 340px;
+    margin: 50px auto;
+    text-align: center;
 }
 
 .login-form form {
@@ -327,18 +333,18 @@ footer{
 
 .heart {
   position: relative;
-  width: 160px;  /*160px*/
-  height: 130px; /*130px*/
+  border: none;
+  background-color: white;
 }
 .heart:before {
   position: absolute;
   top: 0;
-  left: 80px;
+  left: 16px;
   transform: rotate(-45deg);
   transform-origin: 0 100%;
-  width: 80px;   /*80px*/
-  height: 125px;   /*125px*/
-  border-radius: 40px 40px 0 0;
+  width: 16px;  
+  height: 25px;  
+  border-radius: 8px 8px 0 0;
   background-color: #574136;
   content: "";
   cursor: pointer;
@@ -350,9 +356,9 @@ footer{
   left: 0;
   transform: rotate(45deg);
   transform-origin :100% 100%;
-  width: 80px;    /*80px*/
-  height: 125px;   /*125px*/
-  border-radius: 40px 40px 0 0;
+  width: 16px;   
+  height: 25px;   
+  border-radius: 8px 8px 0 0;
   background-color: #574136;
   content: "";
   cursor: pointer;

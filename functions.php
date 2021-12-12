@@ -1,5 +1,5 @@
 <?php
-$data = ['materiaux' => ["Acier", "Argent", "Céramique","Diamant","Or","Platine","Tungstène","Autres"], 'marque' => ["Audemars Piguet", "Breitling", "Grand Seiko", "Hublot", "IWC", "Jaeger-LeCoultre", "Longines", "Omega", "Patek Philippe", "Richard Mille", "Rolex", "Tag Heuer", "Tissot", "Tudor", "Vacheron Constantin", "Autres"]];
+$data = ['materiaux' => ["Acier", "Argent", "Céramique","Diamant","Or","Platine","Tungstène","Autre"], 'marque' => ["Audemars Piguet", "Breitling", "Grand Seiko", "Hublot", "IWC", "Jaeger-LeCoultre", "Longines", "Omega", "Patek Philippe", "Richard Mille", "Rolex", "Tag Heuer", "Tissot", "Tudor", "Vacheron Constantin", "Autre"]];
 //----------------- Partie recherche montres ------------------- 
 
 function get_watches_sorted($sort1 = 'views', $sens = 'decroissant'){
@@ -36,13 +36,14 @@ function display_filters(){
 
 function display_watch(){
     $watches = $_SESSION['watches'];
+    $idheart = 0;
     foreach($watches as $watch){
         echo "<article class='watchtosell'>";
         echo "<h1>" . $watch['name'] . "</h1>";
         echo "<img src='images/watchesPics/" . $watch['image_token'] . ".jpg' alt='Image Montre'>";
         echo "<p>" . $watch['marque'] . "</p>";
         echo "<p>" . $watch['likes'] . "</p>";
-        echo "<button name='" . $watch['token'] . "' class='heart'></button>";
+        echo "<button name='" . $watch['token'] . "' class='heart' id='heart" . $idheart . "' onclick='coeur(heart" . $idheart . ")'></button>";
         
         if ($watch['buy']){ //Si le vendeur a décidé de vendre la montre de suite et pas aux enchères
             echo "<h2>" . $watch['prix'] . " €</h2>";
@@ -50,11 +51,11 @@ function display_watch(){
         } else {
             echo "<h2>Meilleure enchère : " . $watch['prix'] . " €</h2>";
             echo "<form action='.' method='post'><input type='hidden' name='action' value='enchere'>";
-            echo "<label>Enchère rapide :</label><input type='number' name='bid' placeholder='" . $watch['prix'] + 1 . "' required='required' autocomplete='off' min='" . $watch['prix'] + 1 . "'>";
-            echo "<input type='submit' class='btn' value='Confirmer'></form>";
+            echo "<div><label>Enchère rapide : </label><input type='number' class='bid' name='bid' placeholder='" . $watch['prix'] + 1 . "' required='required' autocomplete='off' min='" . $watch['prix'] + 1 . "'>";
+            echo "<input type='submit' class='buy' value='Confirmer'></form></div>";
         }
-        
         echo "</article>";
+        $idheart = $idheart + 1;
     }
 }
 
