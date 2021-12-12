@@ -16,14 +16,5 @@
     <?php
         display_watch()
     ?>  
-    <script>const heart = document.getElementsByClassName("heart");
-        heart.addEventListener("click", () => {
-            if (heart.classList.contains("liked")) {
-                heart.classList.remove("liked");
-            } else {
-                heart.classList.add("liked");
-            }
-        });
-    </script>
 </main>
 

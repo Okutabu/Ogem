@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="octavcss.css">
-    <script src="javoct.js"></script>
     <title>OGEM</title>
     <link rel="icon" href="images/logolito.png" type="image/x-icon">
 </head>
@@ -21,4 +20,5 @@
     ?>
 
 </body>
+<script src="../script.js"></script>
 </html>

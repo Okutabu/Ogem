@@ -42,7 +42,7 @@ function display_watch(){
         echo "<img src='images/watchesPics/" . $watch['image_token'] . ".jpg' alt='Image Montre'>";
         echo "<p>" . $watch['marque'] . "</p>";
         echo "<p>" . $watch['likes'] . "</p>";
-        echo "<button name='likes' class='heart'></button>";
+        echo "<button name='" . $watch['token'] . "' class='heart'></button>";
         
         if ($watch['buy']){ //Si le vendeur a décidé de vendre la montre de suite et pas aux enchères
             echo "<h2>" . $watch['prix'] . " €</h2>";
