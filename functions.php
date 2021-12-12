@@ -37,7 +37,7 @@ function display_filters(){
 function display_watch(){
     $watches = $_SESSION['watches'];
     foreach($watches as $watch){
-        echo "<article>";
+        echo "<article class='watchtosell'>";
         echo "<h1>" . $watch['name'] . "</h1>";
         echo "<img src='images/watchesPics/" . $watch['image_token'] . ".jpg' alt='Image Montre'>";
         echo "<p>" . $watch['marque'] . "</p>";
@@ -46,7 +46,7 @@ function display_watch(){
         
         if ($watch['buy']){ //Si le vendeur a décidé de vendre la montre de suite et pas aux enchères
             echo "<h2>" . $watch['prix'] . " €</h2>";
-            echo "<button name='buy' id='buy'>Acheter</button>";
+            echo "<button name='buy' class='buy'>Acheter</button>";
         } else {
             echo "<h2>Meilleure enchère : " . $watch['prix'] . " €</h2>";
             echo "<form action='.' method='post'><input type='hidden' name='action' value='enchere'>";

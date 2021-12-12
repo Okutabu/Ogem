@@ -209,15 +209,43 @@ nav > ul li:hover #sousmenu {
 }
 
 /* Rajout Mathis menu déroulant*/
-/* Page de vente */
+/* Page d'achat */
 .watchtosell {
     display: inline-block;
-	background-color: lightgrey;
+	background: white;
 	color:  black;
 	padding: 20px;
     margin:  40px;
     height: 250px;
     width:280px;
+    border: solid black 2px;
+    border-radius: 20px;
+}
+.watchtosell h2 {
+    text-align:center;
+}
+.buy {
+    width:280px;
+    margin-bottom:10px;
+    border-radius: 20px;
+    background:#23a15c;
+    color:white;
+    border:solid black 2px;
+}
+.buy:hover{
+    animation: buttonbuy 2s ease 0s 1 normal forwards;
+    background:#4c956c;
+    transition: 1s ease;
+    color:white;
+}
+@keyframes buttonbuy {
+  0% {
+    transform: scale(1);
+  }
+  
+  100% {
+    transform: scale(1.1);
+  }
 }
 
 /* pour la page inscription */
@@ -299,8 +327,8 @@ footer{
 
 .heart {
   position: relative;
-  width: 160px;
-  height: 130px;
+  width: 160px;  /*160px*/
+  height: 130px; /*130px*/
 }
 .heart:before {
   position: absolute;
@@ -308,8 +336,8 @@ footer{
   left: 80px;
   transform: rotate(-45deg);
   transform-origin: 0 100%;
-  width: 80px;
-  height: 125px;
+  width: 80px;   /*80px*/
+  height: 125px;   /*125px*/
   border-radius: 40px 40px 0 0;
   background-color: #574136;
   content: "";
@@ -322,8 +350,8 @@ footer{
   left: 0;
   transform: rotate(45deg);
   transform-origin :100% 100%;
-  width: 80px;
-  height: 125px;
+  width: 80px;    /*80px*/
+  height: 125px;   /*125px*/
   border-radius: 40px 40px 0 0;
   background-color: #574136;
   content: "";
