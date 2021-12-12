@@ -23,7 +23,7 @@
                 <div id="champ4"><label>Type de vente</label><br>
                 <select name="buy" id="type_vente-select">
                     <option value="buynowtrue">Achat immédiat</option>
-                    <option value="buynowfalse">Enchere</option>
+                    <option value="buynowfalse">Enchère</option>
                 </select></div>
 
                 <div id="champ5"><label>Materiaux</label><br>
@@ -36,10 +36,12 @@
                 
                 <div id="champ6"><label>Etat</label><br>
                     <select name="etat" id="etat-select">
-                    <option value="neuf">Neuf</option>
-                    <option value="occasion">Occasion</option>
-                </select>
-                    </div>
+                        <option value="neuf">Neuf</option>
+                        <option value="tres bon etat">Très bon état</option>
+                        <option value="bon etat">Bon état</option>
+                        <option value="moyen">Moyen</option>
+                    </select>
+                </div>
                 
 
             </div>
