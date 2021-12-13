@@ -216,7 +216,7 @@ nav > ul li:hover #sousmenu {
 	color:  black;
 	padding: 20px;
     margin:  40px;
-    height: 250px;
+    height: 400px;
     width: 330px;
     border: solid black 2px;
     border-radius: 20px;
@@ -232,6 +232,10 @@ nav > ul li:hover #sousmenu {
     color:white;
     border:solid black 2px;
     margin-left: 18px;
+}
+
+.buy2{
+    margin: 5px 0 10px 102px;
 }
 
 .buy:hover{
@@ -254,6 +258,28 @@ nav > ul li:hover #sousmenu {
     width: 60px;
 }
 
+.bandeau{
+    display: flex;
+    margin-right: 16px;
+    justify-content: space-between;
+}
+
+.likes{
+    display: flex;
+}
+
+#filtres{
+    margin: 50px 60px 0 60px;
+    display: flex;
+    justify-content:space-evenly;
+    
+}
+
+.priceFilter{
+    width: 80px;
+}
+
+
 /* pour la page inscription */
 .login-form {
     width: 340px;
@@ -262,59 +288,59 @@ nav > ul li:hover #sousmenu {
 }
 
 .login-form form {
-  margin-bottom: 15px;
-  background: #f8f9fa;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  padding: 30px;
-  border-radius: 10px;
+    margin-bottom: 15px;
+    background: #f8f9fa;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    border-radius: 10px;
 }
 
 .login-form h2 {
-  margin: 0 15px;
-  text-align: center;
+    margin: 0 15px;
+    text-align: center;
 }
 .form-control {
-      width:200px;
+    width:200px;
 }
 
 .form-control, .btn {
-  min-height: 38px;
-  margin-bottom: 5px;
-  border-radius: 5px;
-  text-align: center;
+    min-height: 38px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    text-align: center;
 }
 
 .btn {        
-  font-size: 20px;
-  padding-left: 17px;
-  padding-right: 17px;
-  background: linear-gradient(#4c956c, #2c6e49);
-  border: none;
-  margin-top:10px;
+    font-size: 20px;
+    padding-left: 17px;
+    padding-right: 17px;
+    background: linear-gradient(#4c956c, #2c6e49);
+    border: none;
+    margin-top:10px;
 }
 
 #landdiv{
-  text-align: center;
-  margin-top: 5%;
+    text-align: center;
+    margin-top: 5%;
 }
 
 footer{
-  bottom: 20px;
-  margin-left: 2vw;
-  position: absolute;
+    bottom: 20px;
+    margin-left: 2vw;
+    position: absolute;
 }
 
 #landdiv a{
-  outline: none;
-  text-decoration: none;
-  display: inline-block;
-  width:170px;
-  margin-top: 20px;
-  margin-right: 0.625%;
-  text-align: center;
-  line-height: 3;
-  color: black;
-  background: linear-gradient(#4c956c, #2c6e49);
+    outline: none;
+    text-decoration: none;
+    display: inline-block;
+    width:170px;
+    margin-top: 20px;
+    margin-right: 0.625%;
+    text-align: center;
+    line-height: 3;
+    color: black;
+    background: linear-gradient(#4c956c, #2c6e49);
 }
 
 /*pour le style du profil en haut a gauche dans le menu*/
@@ -335,6 +361,7 @@ footer{
   position: relative;
   border: none;
   background-color: white;
+  margin-left: 6px;
 }
 .heart:before {
   position: absolute;
