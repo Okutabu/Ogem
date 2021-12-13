@@ -258,7 +258,7 @@ function profil_connected(){
 
 function add_watches($user, $brand, $materiaux, $name, $prix, $buy, $etat){
 
-    if($buy == buynowtrue){
+    if($buy == "buynowtrue"){
         $buy = 1;
     }
     else{
