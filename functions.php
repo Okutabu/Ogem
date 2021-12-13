@@ -15,13 +15,11 @@ function get_watches_sorted($sort1 = 'views', $sens = 'decroissant')
     //On met le resultat dans une variable de session pour eviter de devoir refaire des requetes sql a chaque fois
 }
 
-function filter_watches()
-{
+function filter_watches(){
     null;
 }
 
-function display_prices()
-{
+function display_prices(){
     global $bdd;
     $priceMin = $bdd->query('SELECT MIN(prix) FROM watches')->fetch(PDO::FETCH_ASSOC);
     $priceMin = $priceMin['MIN(prix)'];

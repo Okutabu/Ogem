@@ -4,19 +4,19 @@
         <form id="filtres" method="get">
             <input type="hidden" name="action" value="filtrer">
             <?php display_prices(); ?>
-            <div>
+            <div class="multiple">
                 <label>Marque : </label>
                 <div class="multipleFilters">
                     <?php display_multiple_filters("marque"); ?>
                 </div>
             </div>
-            <div>
+            <div class="multiple">
                 <label>Matériau : </label>
                 <div class="multipleFilters">
                     <?php display_multiple_filters("materiaux"); ?>
                 </div>
             </div>
-            <div>
+            <div class="multiple">
                 <label>État : </label>
                 <div class="multipleFilters">
                     <?php display_multiple_filters("etat"); ?>

@@ -303,7 +303,11 @@ nav>ul li:hover #sousmenu {
     margin: 50px 60px 0 60px;
     display: flex;
     justify-content: space-evenly;
-    font-size: 20px;
+}
+
+#filtres select {
+    border: 2px solid #aaa;
+    height: 27px;
 }
 
 #filtres label {
@@ -316,10 +320,13 @@ nav>ul li:hover #sousmenu {
 
 #search {}
 
+.multiple {
+    display: flex;
+}
+
 .multipleFilters {
-    border: 2px solid #ccc;
-    width: 300px;
-    height: 100px;
+    border: 2px solid #aaa;
+    height: 23px;
     overflow-y: scroll;
 }
 
