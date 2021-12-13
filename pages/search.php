@@ -3,6 +3,7 @@
     <article>
         <form id="filtres" method="get">
             <input type="hidden" name="action" value="filtrer">
+            <input type="hidden" name="page" value="search">
             <?php display_prices(); ?>
             <div class="multiple">
                 <label>Marque : </label>
