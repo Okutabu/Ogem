@@ -16,12 +16,15 @@ function coeur(heart) {
 
 function loadFile(event) {
     var output = document.getElementById('output');
+    var toDelete = document.getElementById('placeholding');
     output.src = URL.createObjectURL(event.target.files[0]);
+    output.style.width = 300;
+    toDelete.style.display = "none";
     output.onload = function() {
       URL.revokeObjectURL(output.src) // free memory
     }
   };
-  
+
 function show_filters(filterToShow) {
     var filter = document.getElementById(filterToShow);
     var display = filter.style.display;

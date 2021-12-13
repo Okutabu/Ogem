@@ -45,14 +45,14 @@
             </div>
             <div class="file-area" onclick="openfile()">
                 <input type="file" multiple id="mySelector" name="toUpload" accept="image/*" onchange="loadFile(event)" style="display:none;">  
-                <img id="output" width="300px;" />
-                <p>Click here to upload image</p>
+                <img id="output" />
+                <p id="placeholding">Click here to upload image</p>
             </div>
             
         </div>
         </div>
         <input type="submit" value="Envoyer" style="display:none;" id="submit">
-        <input type="image" alt="Submit" src="images/arrow.png" width="300px" onclick="postform()">
+        <input type="image" alt="Submit" src="images/arrow.svg" width="300px" height="300px" onclick="postform()">
     </form>
 
     
