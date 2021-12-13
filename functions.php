@@ -1,10 +1,11 @@
 <?php
-$data = ['etat' => ["Neuf", "Très bon état", "Bon état", "Moyen"], 'materiaux' => ["Acier", "Argent", "Céramique","Diamant","Or","Platine","Tungstène","Autre"], 'marque' => ["Audemars Piguet", "Breitling", "Grand Seiko", "Hublot", "IWC", "Jaeger-LeCoultre", "Longines", "Omega", "Patek Philippe", "Richard Mille", "Rolex", "Tag Heuer", "Tissot", "Tudor", "Vacheron Constantin", "Autre"]];
+$data = ['etat' => ["Neuf", "Très bon état", "Bon état", "Moyen"], 'materiaux' => ["Acier", "Argent", "Céramique", "Diamant", "Or", "Platine", "Tungstène", "Autre"], 'marque' => ["Audemars Piguet", "Breitling", "Grand Seiko", "Hublot", "IWC", "Jaeger-LeCoultre", "Longines", "Omega", "Patek Philippe", "Richard Mille", "Rolex", "Tag Heuer", "Tissot", "Tudor", "Vacheron Constantin", "Autre"]];
 //----------------- Partie recherche montres ------------------- 
 
-function get_watches_sorted($sort1 = 'views', $sens = 'decroissant'){
+function get_watches_sorted($sort1 = 'views', $sens = 'decroissant')
+{
     global $bdd;
-    if ($sens = 'croissant'){
+    if ($sens = 'croissant') {
         $check = $bdd->prepare('SELECT * FROM watches ORDER BY ? ASC');
     } else {
         $check = $bdd->prepare('SELECT * FROM watches ORDER BY ? DESC');
@@ -14,11 +15,13 @@ function get_watches_sorted($sort1 = 'views', $sens = 'decroissant'){
     //On met le resultat dans une variable de session pour eviter de devoir refaire des requetes sql a chaque fois
 }
 
-function filter_watches(){
+function filter_watches()
+{
     null;
 }
 
-function display_filters(){
+function display_prices()
+{
     global $bdd;
     $priceMin = $bdd->query('SELECT MIN(prix) FROM watches')->fetch(PDO::FETCH_ASSOC);
     $priceMin = $priceMin['MIN(prix)'];
@@ -28,24 +31,21 @@ function display_filters(){
     echo "<input type='number' name='priceMin' class='priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMin . "'></div>";
     echo "<div><label>Prix max. </label>";
     echo "<input type='number' name='priceMax=' class='filter priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMax . "'></div>";
-    echo "<div><label>Marque : </label>";
-    echo "<input type='checkbox' name='marque' class='filter marquefilter' placeholder=''></div>";
-    echo "<div><label>Matériau : </label>";
-    echo "<input type='checkbox' name='materiaux' class='filter marquefilter' placeholder=''></div>";
 }
 
-function display_watch(){
+function display_watch()
+{
     $watches = $_SESSION['watches'];
     $idheart = 0;
-    foreach($watches as $watch){
+    foreach ($watches as $watch) {
         echo "<article class='watchtosell'>";
         echo "<h1>" . $watch['name'] . "</h1>";
         echo "<img src='images/watchesPics/" . $watch['image_token'] . ".jpg' alt='Image Montre'>";
         echo "<div class='bandeau'><p>" . $watch['marque'] . "</p>";
         echo "<div class ='likes'><p>" . $watch['likes'] . "</p>";
         echo "<button name='" . $watch['token'] . "' class='heart' id='heart" . $idheart . "' onclick='coeur(heart" . $idheart . ")'></button></div></div>";
-        
-        if ($watch['buy']){ //Si le vendeur a décidé de vendre la montre de suite et pas aux enchères
+
+        if ($watch['buy']) { //Si le vendeur a décidé de vendre la montre de suite et pas aux enchères
             echo "<h2>" . $watch['prix'] . " €</h2>";
             echo "<button name='buy' class='buy buy2'>Acheter</button>";
         } else {
@@ -63,11 +63,11 @@ function display_watch(){
 
 //----------------- Fonctions pour la gestion de comptes ------------------- 
 
-function inscription($pseudo1, $mail2, $password3, $retypedPassword4){
+function inscription($pseudo1, $mail2, $password3, $retypedPassword4)
+{
     global $bdd;
     // Si les variables existent et qu'elles ne sont pas vides
-    if(!empty($pseudo1) && !empty($mail2) && !empty($password3) && !empty($retypedPassword4))
-    {
+    if (!empty($pseudo1) && !empty($mail2) && !empty($password3) && !empty($retypedPassword4)) {
         // Patch XSS
         $pseudo = htmlspecialchars($pseudo1);
         $email = htmlspecialchars($mail2);
@@ -79,24 +79,24 @@ function inscription($pseudo1, $mail2, $password3, $retypedPassword4){
         // $database_instance->users_connect();
         $check = $bdd->prepare('SELECT pseudo, email, password FROM utilisateurs WHERE email = ?');
         $check->execute(array($email));
-        $data = $check->fetch();
+        $check->fetch();
         $row = $check->rowCount();
 
         $email = strtolower($email); // on transforme toute les lettres majuscule en minuscule pour éviter que Foo@gmail.com et foo@gmail.com soient deux compte différents 
-        
+
         // Si la requete renvoie un 0 alors l'utilisateur n'existe pas 
-        if($row == 0){ 
-            if(strlen($pseudo) <= 100){ // On verifie que la longueur du pseudo <= 100
-                if(strlen($email) <= 100){ // On verifie que la longueur du mail <= 100
-                    if(filter_var($email, FILTER_VALIDATE_EMAIL)){ // Si l'email est de la bonne forme
-                        if($password === $password_retype){ // si les deux mdp saisis sont bon
+        if ($row == 0) {
+            if (strlen($pseudo) <= 100) { // On verifie que la longueur du pseudo <= 100
+                if (strlen($email) <= 100) { // On verifie que la longueur du mail <= 100
+                    if (filter_var($email, FILTER_VALIDATE_EMAIL)) { // Si l'email est de la bonne forme
+                        if ($password === $password_retype) { // si les deux mdp saisis sont bon
 
                             // On hash le mot de passe avec Bcrypt, via un coût de 12
                             $cost = ['cost' => 12];
                             $password = password_hash($password, PASSWORD_BCRYPT, $cost);
-                            
+
                             // On stock l'adresse IP
-                            $ip = $_SERVER['REMOTE_ADDR']; 
+                            $ip = $_SERVER['REMOTE_ADDR'];
 
                             // On insère dans la base de données
                             $insert = $bdd->prepare('INSERT INTO utilisateurs(pseudo, email, password, ip, token) VALUES(:pseudo, :email, :password, :ip, :token)');
@@ -111,39 +111,45 @@ function inscription($pseudo1, $mail2, $password3, $retypedPassword4){
                             $_SESSION['flash'] = 'success';
                             header('Location: .?page=connect');
                             die();
-                        } else{ 
+                        } else {
                             $_SESSION['flash'] = 'passwordCorresponding';
-                            header('Location: .?page=inscription'); 
-                            die();}
-                    } else{ 
+                            header('Location: .?page=inscription');
+                            die();
+                        }
+                    } else {
                         $_SESSION['flash'] = 'emailValidity';
-                        header('Location: .?page=inscription'); 
-                        die();}
-                } else{ 
+                        header('Location: .?page=inscription');
+                        die();
+                    }
+                } else {
                     $_SESSION['flash'] = 'email_length';
-                    header('Location: .?page=inscription'); 
-                    die();}
-            } else{ 
+                    header('Location: .?page=inscription');
+                    die();
+                }
+            } else {
                 $_SESSION['flash'] = 'pseudo_length';
-                header('Location: .?page=inscription'); 
-                die();}
-        } else{ 
+                header('Location: .?page=inscription');
+                die();
+            }
+        } else {
             $_SESSION['flash'] = 'already';
-            header('Location:.?page=inscription'); 
-            die();}
+            header('Location:.?page=inscription');
+            die();
+        }
     }
 }
 
-function connexion($mail1, $password2){
-    
+function connexion($mail1, $password2)
+{
+
     global $bdd;
-    if(!empty($mail1) && !empty($password2)) // Si il existe les champs email, password et qu'ils ne sont pas vides
+    if (!empty($mail1) && !empty($password2)) // Si il existe les champs email, password et qu'ils ne sont pas vides
     {
 
         // Patch XSS
-        $email = htmlspecialchars($mail1); 
+        $email = htmlspecialchars($mail1);
         $password = htmlspecialchars($password2);
-            
+
         $email = strtolower($email); // email transformé en minuscule
 
         // On regarde si l'utilisateur est inscrit dans la table utilisateurs
@@ -153,40 +159,46 @@ function connexion($mail1, $password2){
         $row = $check->rowCount();
 
         // Si > à 0 alors l'utilisateur existe
-        if($row > 0) {
+        if ($row > 0) {
             // Si le mot de passe est le bon
-            if(password_verify($password, $data['password'])) {
+            if (password_verify($password, $data['password'])) {
                 // On crée la session 
                 $req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
                 $req->execute(array($data['token']));
                 $_SESSION['user'] = $req->fetch();
-                
+
                 //si l'on vient de la page de vente sans y etre connecté par exemple, on y est redirigé ensuite
-                if (isset($_GET['redirect'])){
+                if (isset($_GET['redirect'])) {
                     header('Location: .?page=' . $_GET['redirect']);
                     die();
                 } else {
                     header('Location: .?page=landing');
                     die();
                 }
-                
+
                 die();
-            } else { 
+            } else {
                 $_SESSION['flash'] = 'password';
-                header('Location: .?page=connect'); die(); }
-        } else { 
+                header('Location: .?page=connect');
+                die();
+            }
+        } else {
             $_SESSION['flash'] = 'notExisting';
-            header('Location: .?page=connect'); die(); }
+            header('Location: .?page=connect');
+            die();
+        }
     }
 }
 
-function welcome(){
+function welcome()
+{
     $data = $_SESSION['user'];
     echo '<img src="images/profilePics/' . $data['picture'] . '" alt="profil picture" id="landimg">';
-    echo '<h1>Bonjour '.$data['pseudo'].', vous êtes bien connecté !</h1>';
+    echo '<h1>Bonjour ' . $data['pseudo'] . ', vous êtes bien connecté !</h1>';
 }
 
-function deconnexion(){
+function deconnexion()
+{
     unset($_SESSION['user']); //on efface tout ce qui concerne l'utilisateur dans la variable superglobale $_SESSION
     header('Location: .');
     die;
@@ -194,38 +206,58 @@ function deconnexion(){
 
 //Traitement erreurs & succès
 
-function errors_accounts(){
-    if (isset($_SESSION['flash'])){
+function errors_accounts()
+{
+    if (isset($_SESSION['flash'])) {
         $err = htmlspecialchars($_SESSION['flash']);
         unset($_SESSION['flash']);
-        switch($err) {
-            //pour les connexions
-            case 'password': echo '<div class="alert"><p><strong>Erreur</strong>, mot de passe incorrect</p></div>'; break;
-            case 'notExisting': echo'<div class="alert"><p><strong>Erreur</strong>, le compte n\'existe pas</p></div>'; break;
-            //pour l'inscription
-            case 'success': echo'<div id="success"><h1>Inscription effectuée avec succès !</h1></div>'; break;
-            case 'passwordCorresponding': echo'<div class="alert"><p><strong>Erreur</strong>, les mots de passe ne correspondent pas</p></div>'; break;
-            case 'emailValidity': echo'<div class="alert"><p><strong>Erreur</strong>, l\'email n\'est pas valide</p></div>'; break;
-            case 'email_length': echo'<div class="alert"><p><strong>Erreur</strong>, l\'email est trop long</p></div>'; break;
-            case 'pseudo_length': echo'<div class="alert"><p><strong>Erreur</strong>, le pseudo est trop long</p></div>'; break;
-            case 'already': echo'<div class="alert"><p><strong>Erreur</strong>, adresse email déjà utilisée</p></div>'; break;
+        switch ($err) {
+                //pour les connexions
+            case 'password':
+                echo '<div class="alert"><p><strong>Erreur</strong>, mot de passe incorrect</p></div>';
+                break;
+            case 'notExisting':
+                echo '<div class="alert"><p><strong>Erreur</strong>, le compte n\'existe pas</p></div>';
+                break;
+                //pour l'inscription
+            case 'success':
+                echo '<div id="success"><h1>Inscription effectuée avec succès !</h1></div>';
+                break;
+            case 'passwordCorresponding':
+                echo '<div class="alert"><p><strong>Erreur</strong>, les mots de passe ne correspondent pas</p></div>';
+                break;
+            case 'emailValidity':
+                echo '<div class="alert"><p><strong>Erreur</strong>, l\'email n\'est pas valide</p></div>';
+                break;
+            case 'email_length':
+                echo '<div class="alert"><p><strong>Erreur</strong>, l\'email est trop long</p></div>';
+                break;
+            case 'pseudo_length':
+                echo '<div class="alert"><p><strong>Erreur</strong>, le pseudo est trop long</p></div>';
+                break;
+            case 'already':
+                echo '<div class="alert"><p><strong>Erreur</strong>, adresse email déjà utilisée</p></div>';
+                break;
         }
     }
 }
 
-function forbidden_access(){
+function forbidden_access()
+{
     echo "<script>alert('Accès refusé, veuillez vous connecter');</script>";
     header("Refresh:0.1; url=.?page=home");
     die();
 }
 
-function redirection_sell(){
+function redirection_sell()
+{
     header("Location: .?page=connect&redirect=sell");
     die();
 }
 
-function apply_redirect(){
-    if (isset($_GET['redirect'])){
+function apply_redirect()
+{
+    if (isset($_GET['redirect'])) {
         echo "<form action='.?redirect=" . $_GET['redirect'] . "' method='post'>";
     } else {
         echo "<form action='.' method='post'>";
@@ -233,8 +265,9 @@ function apply_redirect(){
 }
 
 //Affichage du menu de naviguation en fonction de si l'utilisateur est connecté
-function profil_connected(){
-    if(isset($_SESSION['user'])){
+function profil_connected()
+{
+    if (isset($_SESSION['user'])) {
         $picture = $_SESSION['user']['picture'];
         echo "<li><a href='.?page=sell'>Vendre</a></li>";
         echo "<li id='menuderoulant'>";
@@ -256,12 +289,12 @@ function profil_connected(){
 
 //-----------------------------------------------------------------
 
-function add_watches($user, $brand, $materiaux, $name, $prix, $buy, $etat){
+function add_watches($user, $brand, $materiaux, $name, $prix, $buy, $etat)
+{
 
-    if($buy == "buynowtrue"){
+    if ($buy == "buynowtrue") {
         $buy = 1;
-    }
-    else{
+    } else {
         $buy = 0;
     }
     global $bdd;
@@ -281,10 +314,10 @@ function add_watches($user, $brand, $materiaux, $name, $prix, $buy, $etat){
     header('Location: .?page=search');
 }
 
-function display_choices($choice){
+function display_choices($choice)
+{
     global $data;
-    foreach ($data[$choice] as $value){
-    echo "<option value=".$value.">".$value."</option>"; }
+    foreach ($data[$choice] as $value) {
+        echo "<option value=" . $value . ">" . $value . "</option>";
+    }
 }
-
-?>

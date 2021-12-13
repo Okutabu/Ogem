@@ -314,6 +314,12 @@ nav>ul li:hover #sousmenu {
     width: 80px;
 }
 
+#search {}
+
+.multipleChoices {
+    max-height: 22px;
+}
+
 
 /* pour la page inscription */
 
