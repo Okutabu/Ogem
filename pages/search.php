@@ -3,20 +3,35 @@
     <article>
         <form id="filtres" method="get">
             <input type="hidden" name="action" value="filtrer">
+            <input type="hidden" name="page" value="search">
             <?php display_prices(); ?>
-            <div>
+            <div class="multiple">
                 <label>Marque : </label>
-
+                <div class="multipleFilters" >
+                    <p onclick="show_filters('filter1');">Choisir un filtre</p>
+                    <div id="filter1">
+                        <?php display_multiple_filters("marque"); ?>
+                    </div>
+                </div>
             </div>
-            <div>
+            <div class="multiple">
                 <label>Matériau : </label>
-                <input type='checkbox' name='materiaux' class='filter marquefilter' placeholder=''>
+                <div class="multipleFilters" >
+                    <p onclick="show_filters('filter2');">Choisir un filtre</p>
+                    <div id="filter2">
+                        <?php display_multiple_filters("materiaux"); ?>
+                    </div>
+                </div>
             </div>
-            <div>
+            <div class="multiple">
                 <label>État : </label>
-                <select name="etat" class="multipleChoices" multiple>
-                    <?php display_choices('etat'); ?>
-                </select>
+                <div class="multipleFilters" >
+                    <p onclick="show_filters('filter3');">Choisir un filtre</p>
+                    <div id="filter3">
+                        <?php display_multiple_filters("etat"); ?>
+                    </div>
+                </div>
+
             </div>
             <div>
                 <label>Type de vente : </label>
@@ -28,11 +43,11 @@
             </div>
             <div>
                 <label>Trier par : </label>
-                <select name="filter">
+                <select name="sort">
                     <option value="views">Populaire</option>
                     <option value="date">Le plus récent</option>
-                    <option value="prix croissant">Prix : Croissant</option>
-                    <option value="prix decroissant">Prix : Décroissant</option>
+                    <option value="prixcroissant">Prix : Croissant</option>
+                    <option value="prixdecroissant">Prix : Décroissant</option>
                     <option value="fin_enchere">Enchère : Fin proche</option>
                 </select>
             </div>
@@ -45,6 +60,6 @@
 
     </article>
     <?php
-    display_watch()
+    display_watch(); filter_watches();
     ?>
 </main>

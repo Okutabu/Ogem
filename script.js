@@ -21,3 +21,20 @@ function loadFile(event) {
       URL.revokeObjectURL(output.src) // free memory
     }
   };
+  
+function show_filters(filterToShow) {
+    var filter = document.getElementById(filterToShow);
+    var display = filter.style.display;
+
+    if (display == "initial") {
+        display = "none";
+    } else {
+        display = "initial";
+    }
+
+    document.addEventListener("click", {
+
+    });
+
+    filter.style.display = display;
+}

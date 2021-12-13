@@ -2,12 +2,19 @@
 $data = ['etat' => ["Neuf", "Très bon état", "Bon état", "Moyen"], 'materiaux' => ["Acier", "Argent", "Céramique", "Diamant", "Or", "Platine", "Tungstène", "Autre"], 'marque' => ["Audemars Piguet", "Breitling", "Grand Seiko", "Hublot", "IWC", "Jaeger-LeCoultre", "Longines", "Omega", "Patek Philippe", "Richard Mille", "Rolex", "Tag Heuer", "Tissot", "Tudor", "Vacheron Constantin", "Autre"]];
 //----------------- Partie recherche montres ------------------- 
 
-function get_watches_sorted($sort1 = 'views', $sens = 'decroissant')
+function get_watches_sorted($sort1)
 {
     global $bdd;
-    if ($sens = 'croissant') {
+    
+    if ($sort1 == 'date' || $sort1 == 'prixcroissant') {
+        if ($sort1 == 'prixcroissant') {
+            $sort1 = 'prix';
+        }
         $check = $bdd->prepare('SELECT * FROM watches ORDER BY ? ASC');
     } else {
+        if ($sort1 == 'prixdecroissant') {
+            $sort1 = 'prix';
+        }
         $check = $bdd->prepare('SELECT * FROM watches ORDER BY ? DESC');
     }
     $check->execute([$sort1]);
@@ -15,13 +22,20 @@ function get_watches_sorted($sort1 = 'views', $sens = 'decroissant')
     //On met le resultat dans une variable de session pour eviter de devoir refaire des requetes sql a chaque fois
 }
 
-function filter_watches()
-{
-    null;
+function filter_watches(){
+
+    $watches = $_SESSION['watches'];
+
+    foreach ($_GET as $key => $value) {
+        if ($key != "action" && $key != "page" && $key != "search" && $value != ""){
+            $newFilters[$key] = $value;
+        }
+    }
+    var_dump($newFilters);
+
 }
 
-function display_prices()
-{
+function display_prices(){
     global $bdd;
     $priceMin = $bdd->query('SELECT MIN(prix) FROM watches')->fetch(PDO::FETCH_ASSOC);
     $priceMin = $priceMin['MIN(prix)'];
@@ -30,7 +44,15 @@ function display_prices()
     echo "<div><label>Prix min. </label>";
     echo "<input type='number' name='priceMin' class='priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMin . "'></div>";
     echo "<div><label>Prix max. </label>";
-    echo "<input type='number' name='priceMax=' class='filter priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMax . "'></div>";
+    echo "<input type='number' name='priceMax' class='filter priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMax . "'></div>";
+}
+
+function display_multiple_filters($choice){
+    global $data;
+    foreach ($data[$choice] as $value) {
+        echo "<input type='checkbox' name='" . $value . "'/>" . $value . "<br/>";
+    }
+    
 }
 
 function display_watch()
@@ -275,7 +297,6 @@ function profil_connected()
         echo "<ul id='sousmenu'>";
         echo "<li><a href='.?page=profile'>Profil</a></li>";
         echo "<li><a href='.?page=likes'>Coups de coeur</a></li>";
-        echo "<li><a href='.?page=messages'>Messages</a></li>";
         echo "<li><a href='.?page=deco'>Déconnexion</a></li>";
     } else {
         echo "<li id='menuderoulant'>";
