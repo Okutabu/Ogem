@@ -60,6 +60,6 @@
 
     </article>
     <?php
-    display_watch()
+    display_watch(); filter_watches();
     ?>
 </main>

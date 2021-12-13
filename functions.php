@@ -23,7 +23,16 @@ function get_watches_sorted($sort1)
 }
 
 function filter_watches(){
-    null;
+
+    $watches = $_SESSION['watches'];
+
+    foreach ($_GET as $key => $value) {
+        if ($key != "action" && $key != "page" && $key != "search" && $value != ""){
+            $newFilters[$key] = $value;
+        }
+    }
+    var_dump($newFilters);
+
 }
 
 function display_prices(){
@@ -35,7 +44,7 @@ function display_prices(){
     echo "<div><label>Prix min. </label>";
     echo "<input type='number' name='priceMin' class='priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMin . "'></div>";
     echo "<div><label>Prix max. </label>";
-    echo "<input type='number' name='priceMax=' class='filter priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMax . "'></div>";
+    echo "<input type='number' name='priceMax' class='filter priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMax . "'></div>";
 }
 
 function display_multiple_filters($choice){
