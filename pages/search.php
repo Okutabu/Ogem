@@ -43,11 +43,11 @@
             </div>
             <div>
                 <label>Trier par : </label>
-                <select name="filter">
+                <select name="sort">
                     <option value="views">Populaire</option>
                     <option value="date">Le plus récent</option>
-                    <option value="prix croissant">Prix : Croissant</option>
-                    <option value="prix decroissant">Prix : Décroissant</option>
+                    <option value="prixcroissant">Prix : Croissant</option>
+                    <option value="prixdecroissant">Prix : Décroissant</option>
                     <option value="fin_enchere">Enchère : Fin proche</option>
                 </select>
             </div>

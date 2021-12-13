@@ -26,7 +26,7 @@ if ($page == "sell" && !isset($_SESSION['user'])){
 
 //Affichage des montres par défaut lorsque l'on entre sur la page search.php
 elseif ($page == "search" && !isset($_SESSION['watches'])){
-    get_watches_sorted();
+    get_watches_sorted("views");
 }
 
 // traitement formulaires
@@ -39,10 +39,11 @@ if (isset($_POST["action"])){
         inscription($_POST['pseudo'], $_POST['email'], $_POST['password'], $_POST['password_retype']);
     }
     if ($_POST["action"] == "add_watches"){
-        add_watches($_SESSION['user'], $_POST['brand'], $_POST['materiaux'], $_POST['name'], $_POST['price'], $_POST['buy'], $_POST['etat']);
+        add_watches($_SESSION['user']['token'], $_POST['brand'], $_POST['materiaux'], $_POST['name'], $_POST['price'], $_POST['buy'], $_POST['etat']);
     }
-    if ($_POST["action"] == "search"){
-        get_watches_sorted();
+    if ($_POST["action"] == "filtrer"){
+        get_watches_sorted($_GET["sort"]);
+        filter_watches();
     }
 
 }

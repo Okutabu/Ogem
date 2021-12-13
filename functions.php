@@ -2,12 +2,19 @@
 $data = ['etat' => ["Neuf", "Très bon état", "Bon état", "Moyen"], 'materiaux' => ["Acier", "Argent", "Céramique", "Diamant", "Or", "Platine", "Tungstène", "Autre"], 'marque' => ["Audemars Piguet", "Breitling", "Grand Seiko", "Hublot", "IWC", "Jaeger-LeCoultre", "Longines", "Omega", "Patek Philippe", "Richard Mille", "Rolex", "Tag Heuer", "Tissot", "Tudor", "Vacheron Constantin", "Autre"]];
 //----------------- Partie recherche montres ------------------- 
 
-function get_watches_sorted($sort1 = 'views', $sens = 'decroissant')
+function get_watches_sorted($sort1)
 {
     global $bdd;
-    if ($sens == 'croissant') {
+    
+    if ($sort1 == 'date' || $sort1 == 'prixcroissant') {
+        if ($sort1 == 'prixcroissant') {
+            $sort1 = 'prix';
+        }
         $check = $bdd->prepare('SELECT * FROM watches ORDER BY ? ASC');
     } else {
+        if ($sort1 == 'prixdecroissant') {
+            $sort1 = 'prix';
+        }
         $check = $bdd->prepare('SELECT * FROM watches ORDER BY ? DESC');
     }
     $check->execute([$sort1]);
@@ -281,7 +288,6 @@ function profil_connected()
         echo "<ul id='sousmenu'>";
         echo "<li><a href='.?page=profile'>Profil</a></li>";
         echo "<li><a href='.?page=likes'>Coups de coeur</a></li>";
-        echo "<li><a href='.?page=messages'>Messages</a></li>";
         echo "<li><a href='.?page=deco'>Déconnexion</a></li>";
     } else {
         echo "<li id='menuderoulant'>";
