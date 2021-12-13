@@ -24,15 +24,35 @@ function get_watches_sorted($sort1)
 
 function filter_watches(){
     //on recupere les valeurs dans les get
+    $filters = [];
     foreach ($_GET as $key => $value) {
         if ($key != "action" && $key != "page" && $value != ""){
-            $filters[$key] = $value;
+            if (in_array($key, $filters)){
+                $filters[$key] = [$filters[$key], $value];
+            } else {
+                $filters[$key] = $value;
+            }
         }
     }
-    //on regarde les nouveaux filtres et changent les resultats de recherche en fonction
+    //on regarde les nouveaux filtres et change les resultats de recherche en fonction
     $oldFilters = $_SESSION['filters'];
+    $_SESSION['filters'] = $filters; //on actualise la variable filtre
+    //on regarde quels sont les filtres qui ont changés par rapport a la derniere fois pour eviter de refaire des recherches inutiles
     $newFilters = array_diff($oldFilters, $filters); 
-
+    $reload = false;
+    foreach ($newFilters as $key => $value) {
+        if ($value == 'on'){
+            if (in_array($key, $oldFilters)){ //si la clé est dans les vieux filtres alors l'utilisateur a enlevé un filtre, il faut donc recharger le tableau
+                $reload = true;
+                unset($newFilters[$key]);
+            }
+        } else {
+            if (in_array($value, $oldFilters)){
+                $reload = true;
+                unset($newFilters[$key]);
+            }
+        }
+    }
     $watches = $_SESSION['watches'];
 
 
