@@ -41,7 +41,12 @@ if (isset($_POST["action"])){
     }
     if ($_POST["action"] == "add_watches"){
         $imgToken = register_image($_FILES);
-        add_watches($_SESSION['user']['token'], $_POST['brand'], $_POST['materiaux'], $_POST['name'], $_POST['price'], $_POST['buy'], $_POST['etat'], $imgToken);
+        if (approvePost($_POST)){
+            add_watches($_SESSION['user']['token'], $_POST['brand'], $_POST['materiaux'], $_POST['name'], $_POST['price'], $_POST['buy'], $_POST['etat'], $imgToken);
+        }else
+        {
+            echo "something went wrong";
+        }
         
     }
     if ($_POST["action"] == "filtrer"){

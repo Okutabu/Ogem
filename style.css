@@ -266,7 +266,7 @@ nav>ul li:hover #sousmenu {
 }
 
 .buy2 {
-    margin: 5px 0 10px 102px;
+    /* margin: 5px 0 10px 102px; */
 }
 
 .buy:hover {
@@ -620,6 +620,12 @@ section.form form .data {
 .sous-menu li{text-decoration: none;
 }
 
+article.watchtosell{
+    display: inline-grid;
+    justify-content: center;
+}
 
-
+div.bandeau{
+    margin: 0;
+}
 /* dev by Avocado */

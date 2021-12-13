@@ -84,9 +84,9 @@ function display_watch()
     $idheart = 0;
     foreach ($watches as $watch) {
         echo "<article class='watchtosell'>";
-        echo "<h1>" . $watch['name'] . "</h1>";
         echo "<img src='images/watchesPics/" . $watch['image_token']."' alt='Image Montre'  width='150px' height='150px'>";
         echo "<div class='bandeau'><p>" . $watch['marque'] . "</p>";
+        echo "<h1>" . $watch['name'] . "</h1>";
         echo "<div class ='likes'><p>" . $watch['likes'] . "</p>";
         echo "<button name='" . $watch['token'] . "' class='heart' id='heart" . $idheart . "' onclick='coeur(heart" . $idheart . ")'></button></div></div>";
 
@@ -396,4 +396,16 @@ function register_image($files){
     
     
 
+}
+
+function approvePost($table){
+    $res = True;
+    foreach($table as $string){
+        if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=+¬-]/', $string))
+            {
+                $res = false;
+                
+            }
+    }
+    return $res;
 }
