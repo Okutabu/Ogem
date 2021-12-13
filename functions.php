@@ -5,7 +5,7 @@ $data = ['etat' => ["Neuf", "Très bon état", "Bon état", "Moyen"], 'materiaux
 function get_watches_sorted($sort1 = 'views', $sens = 'decroissant')
 {
     global $bdd;
-    if ($sens = 'croissant') {
+    if ($sens == 'croissant') {
         $check = $bdd->prepare('SELECT * FROM watches ORDER BY ? ASC');
     } else {
         $check = $bdd->prepare('SELECT * FROM watches ORDER BY ? DESC');
