@@ -42,9 +42,7 @@ if (isset($_POST["action"])){
         add_watches($_SESSION['user'], $_POST['brand'], $_POST['materiaux'], $_POST['name'], $_POST['price'], $_POST['buy'], $_POST['etat']);
     }
     if ($_POST["action"] == "search"){
-        get_watches();
+        get_watches_sorted();
     }
 
 }
-
-?>

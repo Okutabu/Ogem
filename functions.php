@@ -1,5 +1,5 @@
 <?php
-$data = ['materiaux' => ["Acier", "Argent", "Céramique","Diamant","Or","Platine","Tungstène","Autre"], 'marque' => ["Audemars Piguet", "Breitling", "Grand Seiko", "Hublot", "IWC", "Jaeger-LeCoultre", "Longines", "Omega", "Patek Philippe", "Richard Mille", "Rolex", "Tag Heuer", "Tissot", "Tudor", "Vacheron Constantin", "Autre"]];
+$data = ['etat' => ["Neuf", "Très bon état", "Bon état", "Moyen"], 'materiaux' => ["Acier", "Argent", "Céramique","Diamant","Or","Platine","Tungstène","Autre"], 'marque' => ["Audemars Piguet", "Breitling", "Grand Seiko", "Hublot", "IWC", "Jaeger-LeCoultre", "Longines", "Omega", "Patek Philippe", "Richard Mille", "Rolex", "Tag Heuer", "Tissot", "Tudor", "Vacheron Constantin", "Autre"]];
 //----------------- Partie recherche montres ------------------- 
 
 function get_watches_sorted($sort1 = 'views', $sens = 'decroissant'){
@@ -183,7 +183,7 @@ function connexion($mail1, $password2){
 function welcome(){
     $data = $_SESSION['user'];
     echo '<img src="images/profilePics/' . $data['picture'] . '" alt="profil picture" id="landimg">';
-    echo('<h1>Bonjour '.$data['pseudo'].', vous êtes bien connecté !</h1>');
+    echo '<h1>Bonjour '.$data['pseudo'].', vous êtes bien connecté !</h1>';
 }
 
 function deconnexion(){
@@ -279,7 +279,12 @@ function add_watches($user, $brand, $materiaux, $name, $prix, $buy, $etat){
         'etat' => $etat
     ));
     header('Location: .?page=search');
-    
+}
+
+function display_choices($choice){
+    global $data;
+    foreach ($data[$choice] as $value){
+    echo "<option value=".$value.">".$value."</option>"; }
 }
 
 ?>

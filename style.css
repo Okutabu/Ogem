@@ -1,286 +1,322 @@
 html {
-  height:100%;
+    height: 100%;
 }
 
 body {
-  margin:0px;
-  position: relative;
-  min-height:100%;
+    margin: 0px;
+    position: relative;
+    min-height: 100%;
 }
 
 #container {
-  min-height: 100vh;
-  padding:0px;
+    min-height: 100vh;
+    padding: 0px;
 }
 
-#navbar{
-  width: 100%;
-  display: flex;
-  align-items: center;
+#navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
 }
 
-#logo{
-  width: 20vh;
-  cursor: pointer;
-  margin: 10px 0px 10px; 
+#logo {
+    width: 20vh;
+    cursor: pointer;
+    margin: 10px 0px 10px;
 }
 
-nav{
-  flex: 1;
-  text-align: right;
+nav {
+    flex: 1;
+    text-align: right;
 }
 
-nav ul li{
-  list-style: none;
-  display: inline-block;
-  margin-right: 30px;
+nav ul li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 30px;
 }
 
-nav ul li a{
-  text-decoration: none;
-  color: #000;
-  font-size: 14px;
+nav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
 }
 
-nav ul li a:hover{
-  color: #2c6e49;
+nav ul li a:hover {
+    color: #2c6e49;
 }
 
-.row{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 100px 0;
-  padding-left: 8%;
-  padding-right: 8%;
-}
-.col-1{
-  flex-basis: 40%;
-  position: relative;
-  margin-left: 50px;
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 100px 0;
+    padding-left: 8%;
+    padding-right: 8%;
 }
 
-.col-1 h2{
-  font-size: 54px;
+.col-1 {
+    flex-basis: 40%;
+    position: relative;
+    margin-left: 50px;
 }
 
-.col-1 h3{
-  font-size: 30px;
-  color: #707070;
-  font-weight: 100;
-  margin: 20px 0 10px;
+.col-1 h2 {
+    font-size: 54px;
 }
 
-.col-1::after{
-  content: '';
-  width: 10px;
-  height: 85%;
-  background: linear-gradient(#4c956c, #2c6e49);
-  position: absolute;
-  left: -40px;
-  top: 8px;
+.col-1 h3 {
+    font-size: 30px;
+    color: #707070;
+    font-weight: 100;
+    margin: 20px 0 10px;
 }
 
-.col-2{
-  position: relative;
-  flex-basis: 60%;
-  display: flex;
-  align-items: center;
+.col-1::after {
+    content: '';
+    width: 10px;
+    height: 85%;
+    background: linear-gradient(#4c956c, #2c6e49);
+    position: absolute;
+    left: -40px;
+    top: 8px;
 }
 
-#batman{
-  width: 100%;
+.col-2 {
+    position: relative;
+    flex-basis: 60%;
+    display: flex;
+    align-items: center;
 }
+
+#batman {
+    width: 100%;
+}
+
 p {
-    margin:0px;
+    margin: 0px;
 }
+
 #copyright {
-  position: relative; 
-  bottom: 0; 
-  left: 0; 
-  right: 0;
-  width: 100%;
-  padding:0px;
-  margin:0px;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
 }
+
 .form_control {
-    width:200px;
+    width: 200px;
 }
+
 
 /* Rajout Mathis Button*/
+
 .buttond {
-  align-content: center;
+    align-content: center;
 }
-#button nav{
-  text-align: left;
+
+#button nav {
+    text-align: left;
 }
+
 #button a {
-  text-decoration: none;
-  font-size: 30px;
-  color:white;
+    text-decoration: none;
+    font-size: 30px;
+    color: white;
 }
+
 #button img {
-  position: relative;
+    position: relative;
 }
+
 #buttona:visited {
-  color:white;
+    color: white;
 }
+
 #button ul {
-  display: flex;
-  justify-content: space-around;
-  list-style: none;
-  padding:0px;
-  margin:0px;
-  padding-top: 5vh;
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    padding-top: 5vh;
 }
+
 #button li {
-  width:100%;
-  text-align:center;
-  border: black solid 3px;
-  border-collapse: collapse;
-  line-height: 25vh;
-  margin: 0px;
+    width: 100%;
+    text-align: center;
+    border: black solid 3px;
+    border-collapse: collapse;
+    line-height: 25vh;
+    margin: 0px;
 }
+
 #achatban a {
-  font-size: 35px;
-  padding:2px;
-  min-height: 25vh;
-  display: block;
-  background: url("images/banniererolexgauche.png") center center no-repeat;
-  background-size: cover;
+    font-size: 35px;
+    padding: 2px;
+    min-height: 25vh;
+    display: block;
+    background: url("images/banniererolexgauche.png") center center no-repeat;
+    background-size: cover;
 }
 
 #venteban a {
-  font-size: 35px;
-  padding:2px;
-  min-height: 25vh;
-  display: block;
-  background: url("images/banniy10.png") center center no-repeat;
-  background-size: cover;
+    font-size: 35px;
+    padding: 2px;
+    min-height: 25vh;
+    display: block;
+    background: url("images/banniy10.png") center center no-repeat;
+    background-size: cover;
 }
+
+
 /* Rajout Mathis Button*/
+
 
 /* Message d'erreur*/
 
 .alert {
-    border:solid red 2px;
+    border: solid red 2px;
 }
 
 .alert p::before {
-    content:"X ";
-    color:red;
-    font-size:20px;
+    content: "X ";
+    color: red;
+    font-size: 20px;
 }
+
 
 /* Message d'erreur*/
 
+
 /* Rajout Mathis menu déroulant*/
+
 header nav {
-  height:86px;
-}
-#menuderoulant {
-  width:60px;
+    height: 86px;
 }
 
-#menuderoulant > a::after {
-  content:" ▼";
+#menuderoulant {
+    width: 60px;
 }
-#sousmenu{
-  display:none;
-  width:100%;
-  z-index: 1000;
+
+#menuderoulant>a::after {
+    content: " ▼";
 }
+
+#sousmenu {
+    display: none;
+    width: 100%;
+    z-index: 1000;
+}
+
 #sousmenu li {
-  float:none;
-  width:100%;
-  text-align: right;
+    float: none;
+    width: 100%;
+    text-align: right;
 }
+
 #sousmenu a {
-  padding:20px;
-  font-size: 14px;
+    padding: 20px;
+    font-size: 14px;
 }
+
 #sousmenu a:hover {
-  border-bottom: none;
-  background-color: RGBa(255,255,255,0.1);
+    border-bottom: none;
+    background-color: RGBa(255, 255, 255, 0.1);
 }
-nav > ul li:hover #sousmenu {
-  display:block;
-  float: right;
+
+nav>ul li:hover #sousmenu {
+    display: block;
+    float: right;
 }
+
 
 /* Rajout Mathis menu déroulant*/
+
+
 /* Page d'achat */
+
 .watchtosell {
     display: inline-block;
-	background: white;
-	color:  black;
-	padding: 20px;
-    margin:  40px;
+    background: white;
+    color: black;
+    padding: 20px;
+    margin: 40px;
     height: 400px;
     width: 330px;
     border: solid black 2px;
     border-radius: 20px;
 }
+
 .watchtosell h2 {
-    text-align:center;
+    text-align: center;
 }
+
 .buy {
     width: 125px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
     border-radius: 20px;
-    background:#23a15c;
-    color:white;
-    border:solid black 2px;
+    background: #23a15c;
+    color: white;
+    border: solid black 2px;
     margin-left: 18px;
 }
 
-.buy2{
+.buy2 {
     margin: 5px 0 10px 102px;
 }
 
-.buy:hover{
+.buy:hover {
     animation: buttonbuy 1s ease 0s 1 normal forwards;
-    background:#4c956c;
+    background: #4c956c;
     transition: 1s ease;
-    color:white;
-}
-@keyframes buttonbuy {
-  0% {
-    transform: scale(1);
-  }
-  
-  100% {
-    transform: scale(1.1);
-  }
+    color: white;
 }
 
-.bid{
+@keyframes buttonbuy {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+.bid {
     width: 60px;
 }
 
-.bandeau{
+.bandeau {
     display: flex;
     margin-right: 16px;
     justify-content: space-between;
 }
 
-.likes{
+.likes {
     display: flex;
 }
 
-#filtres{
+#filtres {
     margin: 50px 60px 0 60px;
     display: flex;
-    justify-content:space-evenly;
-    
+    justify-content: space-evenly;
+    font-size: 20px;
 }
 
-.priceFilter{
+#filtres label {
+    margin-right: 10px;
+}
+
+.priceFilter {
     width: 80px;
 }
 
 
 /* pour la page inscription */
+
 .login-form {
     width: 340px;
     margin: 50px auto;
@@ -299,42 +335,44 @@ nav > ul li:hover #sousmenu {
     margin: 0 15px;
     text-align: center;
 }
+
 .form-control {
-    width:200px;
+    width: 200px;
 }
 
-.form-control, .btn {
+.form-control,
+.btn {
     min-height: 38px;
     margin-bottom: 5px;
     border-radius: 5px;
     text-align: center;
 }
 
-.btn {        
+.btn {
     font-size: 20px;
     padding-left: 17px;
     padding-right: 17px;
     background: linear-gradient(#4c956c, #2c6e49);
     border: none;
-    margin-top:10px;
+    margin-top: 10px;
 }
 
-#landdiv{
+#landdiv {
     text-align: center;
     margin-top: 5%;
 }
 
-footer{
+footer {
     bottom: 20px;
     margin-left: 2vw;
     position: absolute;
 }
 
-#landdiv a{
+#landdiv a {
     outline: none;
     text-decoration: none;
     display: inline-block;
-    width:170px;
+    width: 170px;
     margin-top: 20px;
     margin-right: 0.625%;
     text-align: center;
@@ -343,87 +381,95 @@ footer{
     background: linear-gradient(#4c956c, #2c6e49);
 }
 
+
 /*pour le style du profil en haut a gauche dans le menu*/
 
-#profilePic{
-  height: 50px;
+#profilePic {
+    height: 50px;
 }
+
 
 /* Landing */
 
-#landimg{
-  height: 150px;
+#landimg {
+    height: 150px;
 }
+
 
 /*Boutton like*/
 
 .heart {
-  position: relative;
-  border: none;
-  background-color: white;
-  margin-left: 6px;
+    position: relative;
+    border: none;
+    background-color: white;
+    margin-left: 6px;
 }
+
 .heart:before {
-  position: absolute;
-  top: 0;
-  left: 16px;
-  transform: rotate(-45deg);
-  transform-origin: 0 100%;
-  width: 16px;  
-  height: 25px;  
-  border-radius: 8px 8px 0 0;
-  background-color: #574136;
-  content: "";
-  cursor: pointer;
-  transition: background .4s;
+    position: absolute;
+    top: 0;
+    left: 16px;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+    width: 16px;
+    height: 25px;
+    border-radius: 8px 8px 0 0;
+    background-color: #574136;
+    content: "";
+    cursor: pointer;
+    transition: background .4s;
 }
+
 .heart:after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: rotate(45deg);
-  transform-origin :100% 100%;
-  width: 16px;   
-  height: 25px;   
-  border-radius: 8px 8px 0 0;
-  background-color: #574136;
-  content: "";
-  cursor: pointer;
-  transition: background .4s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+    width: 16px;
+    height: 25px;
+    border-radius: 8px 8px 0 0;
+    background-color: #574136;
+    content: "";
+    cursor: pointer;
+    transition: background .4s;
 }
 
 .heart.liked::before,
 .heart.liked::after {
-  background-color: #d65076;
-}
-.heart.liked {
-  animation: liked .4s ease;
-}
-@keyframes liked {
-  0% {
-    transform: scale(.8);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-@media screen and (max-width: 480px) {
-  #container {
-    height: auto;
-  }
-  h1 {
-    font-size: 2.5rem;
-  }
+    background-color: #d65076;
 }
 
-#tr{
-  outline: none;
+.heart.liked {
+    animation: liked .4s ease;
+}
+
+@keyframes liked {
+    0% {
+        transform: scale(.8);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #container {
+        height: auto;
+    }
+    h1 {
+        font-size: 2.5rem;
+    }
+}
+
+#tr {
+    outline: none;
     text-decoration: none;
     display: inline-block;
-    width:170px;
+    width: 170px;
     margin-top: 20px;
     margin-right: 0.625%;
     text-align: center;

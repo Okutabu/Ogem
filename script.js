@@ -1,12 +1,12 @@
-function openfile(){
+function openfile() {
     document.getElementById("mySelector").click();
 }
 
-function postform(){
+function postform() {
     document.getElementById("submit").click();
 }
 
-function coeur(heart){
+function coeur(heart) {
     if (heart.classList.contains("liked")) {
         heart.classList.remove("liked");
     } else {
