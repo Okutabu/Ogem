@@ -318,7 +318,11 @@ nav>ul li:hover #sousmenu {
     width: 80px;
 }
 
-#search {}
+#search {
+    border: none;
+    background-color: #23a15c;
+    padding: 3px 20px;
+}
 
 .multiple {
     display: flex;
@@ -327,7 +331,36 @@ nav>ul li:hover #sousmenu {
 .multipleFilters {
     border: 2px solid #aaa;
     height: 23px;
+    padding: 1px 10px;
+    cursor: pointer;
+    width: 111px;
+}
+
+.multipleFilters {
+    min-width: 108px;
+}
+
+.multipleFilters #filter1,
+#filter2,
+#filter3 {
+    margin-top: 10px;
+    background-color: white;
+    height: 88px;
+    width: 145px;
+    float: left;
+    display: none;
     overflow-y: scroll;
+    border: solid 2px black;
+    border-radius: 4px;
+}
+
+.multipleFilters #filter1 {
+    width: 195px;
+}
+
+.multipleFilters #filter2,
+#filter3 {
+    width: 145px;
 }
 
 

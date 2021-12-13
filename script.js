@@ -13,3 +13,16 @@ function coeur(heart) {
         heart.classList.add("liked");
     }
 }
+
+function show_filters(filterToShow) {
+    var filter = document.getElementById(filterToShow);
+    var display = filter.style.display;
+
+    if (display == "none") {
+        display = "initial";
+    } else {
+        display = "none";
+    }
+
+    filter.style.display = display;
+}
