@@ -24,14 +24,14 @@ function display_filters(){
     $priceMin = $priceMin['MIN(prix)'];
     $priceMax = $bdd->query('SELECT MAX(prix) FROM watches')->fetch(PDO::FETCH_ASSOC);
     $priceMax = $priceMax['MAX(prix)'];
-    echo "<label>Prix min.</label>";
-    echo "<input type='number' name='priceMin' class='priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMin . "'>";
-    echo "<label>Prix max.</label>";
-    echo "<input type='number' name='priceMax=' class='filter priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMax . "'>";
-    echo "<label>Marque : </label>";
-    echo "<input type='checkbox' name='marque' class='filter marquefilter' placeholder=''>";
-    echo "<label>Matériau : </label>";
-    echo "<input type='checkbox' name='materiaux' class='filter marquefilter' placeholder=''>";
+    echo "<div><label>Prix min. </label>";
+    echo "<input type='number' name='priceMin' class='priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMin . "'></div>";
+    echo "<div><label>Prix max. </label>";
+    echo "<input type='number' name='priceMax=' class='filter priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMax . "'></div>";
+    echo "<div><label>Marque : </label>";
+    echo "<input type='checkbox' name='marque' class='filter marquefilter' placeholder=''></div>";
+    echo "<div><label>Matériau : </label>";
+    echo "<input type='checkbox' name='materiaux' class='filter marquefilter' placeholder=''></div>";
 }
 
 function display_watch(){
@@ -41,13 +41,13 @@ function display_watch(){
         echo "<article class='watchtosell'>";
         echo "<h1>" . $watch['name'] . "</h1>";
         echo "<img src='images/watchesPics/" . $watch['image_token'] . ".jpg' alt='Image Montre'>";
-        echo "<p>" . $watch['marque'] . "</p>";
-        echo "<p>" . $watch['likes'] . "</p>";
-        echo "<button name='" . $watch['token'] . "' class='heart' id='heart" . $idheart . "' onclick='coeur(heart" . $idheart . ")'></button>";
+        echo "<div class='bandeau'><p>" . $watch['marque'] . "</p>";
+        echo "<div class ='likes'><p>" . $watch['likes'] . "</p>";
+        echo "<button name='" . $watch['token'] . "' class='heart' id='heart" . $idheart . "' onclick='coeur(heart" . $idheart . ")'></button></div></div>";
         
         if ($watch['buy']){ //Si le vendeur a décidé de vendre la montre de suite et pas aux enchères
             echo "<h2>" . $watch['prix'] . " €</h2>";
-            echo "<button name='buy' class='buy'>Acheter</button>";
+            echo "<button name='buy' class='buy buy2'>Acheter</button>";
         } else {
             echo "<h2>Meilleure enchère : " . $watch['prix'] . " €</h2>";
             echo "<form action='.' method='post'><input type='hidden' name='action' value='enchere'>";

@@ -29,7 +29,7 @@ elseif ($page == "search" && !isset($_SESSION['watches'])){
     get_watches_sorted();
 }
 
-// traitement formulaires inscription / connexion
+// traitement formulaires
 
 if (isset($_POST["action"])){
     if ($_POST["action"] == "connexion"){

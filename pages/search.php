@@ -1,11 +1,11 @@
 <main>
     <h1>Montres d'occasion</h1>
     <article>
-        <form method="get">
+        <form id="filtres" method="get">
             <input type="hidden" name="action" value="filtrer">
             <?php display_filters(); ?>
-            <label>Type de vente : </label>
-            <input type="text" name="buy" class="form-control" placeholder="">
+            <div><label>Type de vente : </label>
+            <input type="text" name="buy" class="form-control" placeholder=""></div>
             <input type="submit" class="btn" value="Confirmer">
         </form>
         <form action="." method="post">
