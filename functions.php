@@ -24,14 +24,15 @@ function get_watches_sorted($sort1)
 
 function filter_watches(){
 
-    $watches = $_SESSION['watches'];
-
     foreach ($_GET as $key => $value) {
-        if ($key != "action" && $key != "page" && $key != "search" && $value != ""){
-            $newFilters[$key] = $value;
+        if ($key != "action" && $key != "page" && $value != ""){
+            $filters[$key] = $value;
         }
     }
-    var_dump($newFilters);
+    $oldFilters = $_SESSION['filters'];
+    $newFilters = array_diff($oldFilters, $filters); //Ceci sert a ne pas retrier le tableau a chaque fois avec les memes filtres : optimisation
+    $watches = $_SESSION['watches'];
+
 
 }
 
