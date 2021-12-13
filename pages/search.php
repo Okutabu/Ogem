@@ -6,17 +6,22 @@
             <?php display_prices(); ?>
             <div>
                 <label>Marque : </label>
-
+                <div class="multipleFilters">
+                    <?php display_multiple_filters("marque"); ?>
+                </div>
             </div>
             <div>
                 <label>Matériau : </label>
-                <input type='checkbox' name='materiaux' class='filter marquefilter' placeholder=''>
+                <div class="multipleFilters">
+                    <?php display_multiple_filters("materiaux"); ?>
+                </div>
             </div>
             <div>
                 <label>État : </label>
-                <select name="etat" class="multipleChoices" multiple>
-                    <?php display_choices('etat'); ?>
-                </select>
+                <div class="multipleFilters">
+                    <?php display_multiple_filters("etat"); ?>
+                </div>
+
             </div>
             <div>
                 <label>Type de vente : </label>

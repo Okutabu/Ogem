@@ -33,6 +33,14 @@ function display_prices()
     echo "<input type='number' name='priceMax=' class='filter priceFilter' min='" . $priceMin . "' max='" . $priceMax . "' placeholder='" . $priceMax . "'></div>";
 }
 
+function display_multiple_filters($choice){
+    global $data;
+    foreach ($data[$choice] as $value) {
+        echo "<input type='checkbox' name='" . $value . "'/>" . $value . "<br/>";
+    }
+    
+}
+
 function display_watch()
 {
     $watches = $_SESSION['watches'];

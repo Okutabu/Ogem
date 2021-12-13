@@ -316,8 +316,11 @@ nav>ul li:hover #sousmenu {
 
 #search {}
 
-.multipleChoices {
-    max-height: 22px;
+.multipleFilters {
+    border: 2px solid #ccc;
+    width: 300px;
+    height: 100px;
+    overflow-y: scroll;
 }
 
 
