@@ -1,5 +1,5 @@
 <?php
-
+unset($_SESSION['watches']);
 //Traitement des pages pour structure MVC
 
 $page = "home";
@@ -39,7 +39,10 @@ if (isset($_POST["action"])){
         inscription($_POST['pseudo'], $_POST['email'], $_POST['password'], $_POST['password_retype']);
     }
     if ($_POST["action"] == "add_watches"){
-        add_watches($_SESSION['user'], $_POST['brand'], $_POST['materiaux'], $_POST['name'], $_POST['price'], $_POST['buy'], $_POST['etat']);
+        var_dump($_FILES);
+        $imgToken = register_image($_FILES);
+        add_watches($_SESSION['user'], $_POST['brand'], $_POST['materiaux'], $_POST['name'], $_POST['price'], $_POST['buy'], $_POST['etat'], $imgToken);
+        
     }
     if ($_POST["action"] == "search"){
         get_watches_sorted();

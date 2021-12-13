@@ -40,7 +40,7 @@ function display_watch()
     foreach ($watches as $watch) {
         echo "<article class='watchtosell'>";
         echo "<h1>" . $watch['name'] . "</h1>";
-        echo "<img src='images/watchesPics/" . $watch['image_token'] . ".jpg' alt='Image Montre'>";
+        echo "<img src='images/watchesPics/" . $watch['image_token']."' alt='Image Montre'  width='150px' height='150px'>";
         echo "<div class='bandeau'><p>" . $watch['marque'] . "</p>";
         echo "<div class ='likes'><p>" . $watch['likes'] . "</p>";
         echo "<button name='" . $watch['token'] . "' class='heart' id='heart" . $idheart . "' onclick='coeur(heart" . $idheart . ")'></button></div></div>";
@@ -289,7 +289,7 @@ function profil_connected()
 
 //-----------------------------------------------------------------
 
-function add_watches($user, $brand, $materiaux, $name, $prix, $buy, $etat)
+function add_watches($user, $brand, $materiaux, $name, $prix, $buy, $etat, $tokenForImage)
 {
 
     if ($buy == "buynowtrue") {
@@ -298,8 +298,8 @@ function add_watches($user, $brand, $materiaux, $name, $prix, $buy, $etat)
         $buy = 0;
     }
     global $bdd;
-    $sql = "INSERT INTO watches(user, marque, materiaux, name, prix, buy, image_token, etat)
-    VALUES (:user, :marque, :materiaux, :name, :prix, :buy, :imagetoken, :etat)";
+    $sql = "INSERT INTO watches(user, marque, materiaux, name, prix, buy, image_token, token, etat)
+    VALUES (:user, :marque, :materiaux, :name, :prix, :buy, :imagetoken, :token, :etat)";
     $stmt = $bdd->prepare($sql);
     $stmt->execute(array(
         'user' => $user,
@@ -308,7 +308,8 @@ function add_watches($user, $brand, $materiaux, $name, $prix, $buy, $etat)
         'name' => $name,
         'prix' => $prix,
         'buy' => $buy,
-        'imagetoken' => bin2hex(openssl_random_pseudo_bytes(64)),
+        'token' => bin2hex(openssl_random_pseudo_bytes(64)),
+        'imagetoken' => $tokenForImage,
         'etat' => $etat
     ));
     header('Location: .?page=search');
@@ -320,4 +321,35 @@ function display_choices($choice)
     foreach ($data[$choice] as $value) {
         echo "<option value=" . $value . ">" . $value . "</option>";
     }
+}
+
+function register_image($files){
+
+    $maxSize = 100000;
+    $validExt = array(".jpeg", ".png", ".jpg");
+    $fileSize = $files['toUpload']['size'];
+    $fileName = $files['toUpload']['name'];
+    $fileExt = ".". strtolower(substr(strrchr($fileName, '.'), 1));
+    $tmpName = $files['toUpload']['tmp_name'];
+    $imageTokenAndExt = bin2hex(openssl_random_pseudo_bytes(64)).$fileExt;
+    $uniqName = "./images/watchesPics/".$imageTokenAndExt;
+
+    // if ($fileSize > $maxSize){
+    //     echo "fichier trop lourd";
+            // die;
+    // }
+    // if (!in_array($fileExt, $validExt)){
+    //     echo "Le fichier n'est une image adaptée";
+    //     die;
+    // }
+
+    $resultat = move_uploaded_file($tmpName, $uniqName);
+
+    if ($resultat){
+        echo "transfert terminé";
+        return $imageTokenAndExt;
+    }
+    
+    
+
 }
