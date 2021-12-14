@@ -27,7 +27,7 @@ if ($page == "sell" && !isset($_SESSION['user'])){
 //Affichage des montres par défaut lorsque l'on entre sur la page search.php
 elseif ($page == "search" && !isset($_SESSION['watches'])){
     get_watches_sorted("views");
-    $_SESSION['filters']['sort'] = 'views';
+    $_SESSION['sort'] = 'views';
 }
 
 // traitement formulaires

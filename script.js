@@ -21,9 +21,9 @@ function loadFile(event) {
     output.style.width = 300;
     toDelete.style.display = "none";
     output.onload = function() {
-      URL.revokeObjectURL(output.src) // free memory
+        URL.revokeObjectURL(output.src) // free memory
     }
-  };
+};
 
 function show_filters(filterToShow) {
     var filter = document.getElementById(filterToShow);
@@ -34,10 +34,6 @@ function show_filters(filterToShow) {
     } else {
         display = "initial";
     }
-
-    document.addEventListener("click", {
-
-    });
 
     filter.style.display = display;
 }

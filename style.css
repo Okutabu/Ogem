@@ -243,9 +243,9 @@ nav>ul li:hover #sousmenu {
     display: inline-block;
     background: white;
     color: black;
-    padding: 20px;
+    padding: 10px 20px 20px 20px;
     margin: 40px;
-    height: 400px;
+    height: 450px;
     width: 351px;
     border: solid black 2px;
     border-radius: 20px;
@@ -253,6 +253,16 @@ nav>ul li:hover #sousmenu {
 
 .watchtosell h2 {
     text-align: center;
+}
+
+.watchtosell h1 {
+    margin: 5px 0;
+}
+
+.watchtosell img {
+    height: 250px;
+    width: 350px;
+    margin: 7px 0;
 }
 
 .buy {
@@ -266,7 +276,7 @@ nav>ul li:hover #sousmenu {
 }
 
 .buy2 {
-    /* margin: 5px 0 10px 102px; */
+    margin: 5px 0 10px 115px;
 }
 
 .buy:hover {
@@ -527,105 +537,122 @@ footer {
     background: linear-gradient(#4c956c, #2c6e49);
 }
 
+
 /* Dev by Octavocado */
 
-*{font-family: 'Manrope', sans-serif;}
+* {
+    font-family: 'Manrope', sans-serif;
+}
 
 #search_bar button {
-  padding: 14px;
+    padding: 14px;
 }
 
 #search_bar button:hover {
-  background: #ccc;
+    background: #ccc;
 }
 
 h1 {
-  text-align: center;}
+    text-align: center;
+}
 
-section.form .text div{display:flex; justify-content: space-around;}
+section.form .text div {
+    display: flex;
+    justify-content: space-around;
+}
+
+
 /**/
-section.form .text #champ1, section.form .text #champ2, section.form .text #champ3, section.form .text #champ4, section.form .text #champ5, section.form .text #champ6 {
-  padding: 10px 0 10px 0;
-  border-radius : 4px;
-  display: inline-grid;
-  text-align: center;
+
+section.form .text #champ1,
+section.form .text #champ2,
+section.form .text #champ3,
+section.form .text #champ4,
+section.form .text #champ5,
+section.form .text #champ6 {
+    padding: 10px 0 10px 0;
+    border-radius: 4px;
+    display: inline-grid;
+    text-align: center;
 }
-section.form .text * label{
+
+section.form .text * label {
     color: hsl(120, 100%, 95%);
-  background: rgb(46,117,95);
-  background: linear-gradient(0deg, rgba(46,117,95,1) 0%, rgba(6,6,42,1) 22%, rgba(2,0,36,1) 31%); 
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  width:100%;
+    background: rgb(46, 117, 95);
+    background: linear-gradient(0deg, rgba(46, 117, 95, 1) 0%, rgba(6, 6, 42, 1) 22%, rgba(2, 0, 36, 1) 31%);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    width: 100%;
 }
-section.form .text #champ1 * input{
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
+
+section.form .text #champ1 * input {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 
 section.form form {
-  margin-top: 60px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+    margin-top: 60px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
 
-section.form form div.data{
-  margin-right: 40px;
+section.form form div.data {
+    margin-right: 40px;
 }
 
 section.form form div.file-area {
-  border-width: 4px;
-  border-style: solid;
-  border-image: linear-gradient(to bottom, black, rgba(0, 0, 0, 0)) 1 100%;
-  -webkit-box-pack: center;
-        -ms-flex-pack: center;
-          justify-content: center;
-  display: flex;
-  justify-content: center;
+    border-width: 4px;
+    border-style: solid;
+    border-image: linear-gradient(to bottom, black, rgba(0, 0, 0, 0)) 1 100%;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 section.form form div.file-area input[type=file] {
-  width: 100%;
-  text-align: center;
-}
-section.form form div.file-area p{
-  text-align: center;
-}
-section.form form div.file-area {
-  height:100%;
+    width: 100%;
+    text-align: center;
 }
 
+section.form form div.file-area p {
+    text-align: center;
+}
+
+section.form form div.file-area {
+    height: 100%;
+}
 
 section.form form button {
-  color: #fff;
-  background: #89d681;
-  border: none;
-  width: 35px;
-  height: 300px;
-  border-radius: 4px;
-  border-bottom: 4px solid #2c6e49;
-  outline: none;
+    color: #fff;
+    background: #89d681;
+    border: none;
+    width: 35px;
+    height: 300px;
+    border-radius: 4px;
+    border-bottom: 4px solid #2c6e49;
+    outline: none;
 }
 
 section.form form .data {
     display: inline-grid;
     justify-content: center;
 }
-.sous-menu{margin:0;padding:0;list-style:none;
-}
-.sous-menu li{text-decoration: none;
-}
 
-article.watchtosell{
-    display: inline-grid;
-    justify-content: center;
-}
-
-div.bandeau{
+.sous-menu {
     margin: 0;
+    padding: 0;
+    list-style: none;
 }
+
+.sous-menu li {
+    text-decoration: none;
+}
+
+
 /* dev by Avocado */
