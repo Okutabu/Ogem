@@ -19,7 +19,7 @@
                 </div>
 
                 <div id="champ3"><label>Prix</label><br/>
-                    <input type="text" name="price"><br/>
+                    <input type="number" name="price"><br/>
                 </div>
 
                 <div id="champ4"><label>Type de vente</label><br/>
