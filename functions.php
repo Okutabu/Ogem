@@ -6,16 +6,13 @@ function get_watches_sorted($sort1)
 {
     global $bdd;
     
-    if ($sort1 == 'date' || $sort1 == 'prixcroissant') {
-        if ($sort1 == 'prixcroissant') {
-            $sort1 = 'prix';
-        }
+    if ($sort1 == 'prixcroissant') {
         $check = $bdd->prepare('SELECT * FROM watches ORDER BY ? ASC');
     } else {
-        if ($sort1 == 'prixdecroissant') {
-            $sort1 = 'prix';
-        }
         $check = $bdd->prepare('SELECT * FROM watches ORDER BY ? DESC');
+    }
+    if ($sort1 == 'prixdecroissant' || $sort1 == 'prixcroissant') {
+        $sort1 = 'prix';
     }
     $check->execute([$sort1]);
     $_SESSION['watches'] = $check->fetchAll(PDO::FETCH_ASSOC); // avec le PDO::FETCH_ASSOC nous précisons que nous voulons un tableau associatif (le fetchAll va bien si le nombre de montres n'est pas trop important, sinon il y aura beaucoup de latence)
@@ -65,6 +62,7 @@ function filter_watches(){
     //on rapelle cette fonction pour que ca refasse une requete dans la base de données a chaque fois, si jamais une montre a été ajoutée ou supprimée en temps reel
     get_watches_sorted($currentSort);
     $watches = $_SESSION['watches'];
+    var_dump($watches);
     //remplace tous les tirets du bas par des espaces dans les clés du tableau
     foreach ($filters as $key => $value){
         unset($filters[$key]);
