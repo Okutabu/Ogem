@@ -22,8 +22,18 @@ function get_watches_sorted($sort1)
     //On met le resultat dans une variable de session pour eviter de devoir refaire des requetes sql a chaque fois
 }
 
-function filtre(){
+function filtre($filtres, $filtre, $autre, $montres){
+    $montresfiltrees = [];
+    if ($autre){
 
+    } else {
+        foreach($montres as $montre){
+            if (in_array($montre[$filtre], $filtres)){
+                $montresfiltrees[] = $montre;
+            }
+        }
+    }
+    return $montresfiltrees;
 }
 
 function filter_watches(){
@@ -101,10 +111,8 @@ function filter_watches(){
             $nonMarques = array_diff($data['marque'], $marques);
             $autremarque = true;
         } 
-        foreach ($watches as $watch){
-            //on passe la montre dans des filtres successifs
-            $watchesfilter = filtre($etats, );
-        }
+        //on passe la montre dans des filtres successifs
+        $watches = filtre($etats, $watches);
     }
     $_SESSION['watches'] = $watches;
 }
