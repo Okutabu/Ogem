@@ -43,7 +43,7 @@
 
                 <div id="champ7"><label>Date de fin de l'enchere</label><br/>
                     <input <?php $_today = getdate();
-                    echo "type='date' name='date' min='" ?>><br/>    
+                    echo "type='date' name='date' min='".date("Y-m-d")?>><br/>    
                 </div>
 
 

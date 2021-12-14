@@ -420,16 +420,21 @@ function profil_connected()
 
 //-----------------------------------------------------------------
 
-function add_watches($user, $brand, $materiaux, $name, $prix, $buy, $etat, $tokenForImage) {
+function add_watches($user, $brand, $materiaux, $name, $prix, $buy, $etat, $tokenForImage, $dateFinEnchere)
+{
 
     if ($buy == "buynowtrue") {
         $buy = 1;
     } else {
         $buy = 0;
     }
+    $date = date("Y-m-d");
+    if(empty($dateFinEnchere)){
+        $dateFinEnchere = date('Y-m-d', strtotime($date. ' + 5 days'));
+    }
     global $bdd;
-    $sql = "INSERT INTO watches(user, marque, materiaux, name, prix, buy, image_token, token, etat)
-    VALUES (:user, :marque, :materiaux, :name, :prix, :buy, :imagetoken, :token, :etat)";
+    $sql = "INSERT INTO watches(user, marque, materiaux, name, prix, buy, image_token, token, etat, fin_enchere)
+    VALUES (:user, :marque, :materiaux, :name, :prix, :buy, :imagetoken, :token, :etat, :date)";
     $stmt = $bdd->prepare($sql);
     $stmt->execute(array(
         'user' => $user,
@@ -440,7 +445,8 @@ function add_watches($user, $brand, $materiaux, $name, $prix, $buy, $etat, $toke
         'buy' => $buy,
         'token' => bin2hex(openssl_random_pseudo_bytes(64)),
         'imagetoken' => $tokenForImage,
-        'etat' => $etat
+        'etat' => $etat,
+        'date' => $dateFinEnchere
     ));
     header('Location: .?page=search');
 }
@@ -563,3 +569,9 @@ function likepage(){
             echo "</article>";
     }
 }
+
+// function whatever(){
+//     $date = date("Y-m-d");
+//     $watches = $bdd->prepare('SELECT * FROM watches where USER )
+//     if ()
+// }

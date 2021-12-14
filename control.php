@@ -48,7 +48,7 @@ if (isset($_POST["action"])){
         
         
         if (approvePost($_POST)){
-            add_watches($_SESSION['user']['token'], $_POST['brand'], $_POST['materiaux'], $_POST['name'], $_POST['price'], $_POST['buy'], $_POST['etat'], $imgToken);
+            add_watches($_SESSION['user']['token'], $_POST['brand'], $_POST['materiaux'], $_POST['name'], $_POST['price'], $_POST['buy'], $_POST['etat'], $imgToken, $_POST['date']);
             
         }else
         {    
@@ -61,8 +61,7 @@ if (isset($_POST["action"])){
     }
 }
 
-if (isset($_GET["action"])){
-    if ($_GET["action"] == "filtrer"){
+if (isset($_GET["action"]) && $_GET["action"] == "filtrer"){
         filter_watches();
     }
-}
+
