@@ -67,8 +67,15 @@ function filter_watches(){
                     }
                 }
             }
+            $watches = $watchesfilter;
+            unset($watchesfilter);
         }
     }
+    foreach ($watches as $watch){
+        null;
+    }
+    $_SESSION['watches'] = $watches;
+
 }
 
 function display_prices(){
