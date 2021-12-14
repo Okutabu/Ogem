@@ -429,6 +429,8 @@ function del($tok){
     global $bdd;
     $deletewatch = $bdd->prepare('DELETE FROM watches WHERE token =?');
     $deletewatch->execute(array($tok));
+    header('Location: .?page=profile');
+    
 }
 //----------------- FIN Partie achat -------------------
 //----------------- debut Partie profil montres ------------------- 
