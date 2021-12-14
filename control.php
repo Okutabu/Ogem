@@ -39,18 +39,20 @@ if (isset($_POST["action"])){
         inscription($_POST['pseudo'], $_POST['email'], $_POST['password'], $_POST['password_retype']);
     }
     if ($_POST["action"] == "add_watches"){
-        if ($_FILES != null){
-            $imgToken = register_image($_FILES);
-        }
-        else{
+        var_dump($_FILES);
+        $imgToken = register_image($_FILES);
+            
+        if (!$imgToken){
             $imgToken = "watch.png";
         }
         
+        
         if (approvePost($_POST)){
             add_watches($_SESSION['user']['token'], $_POST['brand'], $_POST['materiaux'], $_POST['name'], $_POST['price'], $_POST['buy'], $_POST['etat'], $imgToken);
+            
         }else
-        {
-            echo "something went wrong";
+        {    
+            watchFormIncorrect();
         }
         
     }

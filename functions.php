@@ -478,13 +478,17 @@ function approvePost($table){
                 
             }
     }
-    if(!is_int($table['price'])){
-        $res = false;
-    }
+    if (!preg_match('/[0-9]/', $table['price'])) // making sure price is a number;
+        {
+            $res = false;
+            
+        }
     
     return $res;
 }
 
-function watchFormIncorrect(){
-    null;
+function watchFormIncorrect(){ // incomplete 
+    header("Location: .?page=sell");
+    
 }
+
