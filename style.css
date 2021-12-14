@@ -627,7 +627,8 @@ section.form .text #champ2,
 section.form .text #champ3,
 section.form .text #champ4,
 section.form .text #champ5,
-section.form .text #champ6 {
+section.form .text #champ6,
+section.form .text #champ7 {
     padding: 10px 0 10px 0;
     border-radius: 4px;
     display: inline-grid;

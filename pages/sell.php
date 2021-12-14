@@ -18,11 +18,11 @@
                 </div>
 
                 <div id="champ3"><label>Prix</label><br/>
-                    <input required="required" type="number" name="price"><br/>
+                    <input required="required" type="number" name="price" min="0"><br/>
                 </div>
 
                 <div id="champ4"><label>Type de vente</label><br/>
-                    <select name="buy" id="type_vente-select">
+                    <select name="buy" id="type_vente-select" onchange="updateField('champ7')">
                         <option value="buynowtrue">Achat immédiat</option>
                         <option value="buynowfalse">Enchère</option>
                     </select>
@@ -39,6 +39,11 @@
                     <select name="etat" id="etat-select">
                         <?php display_choices('etat'); ?>
                     </select>
+                </div>
+
+                <div id="champ7"><label>Date de fin de l'enchere</label><br/>
+                    <input <?php $_today = getdate();
+                    echo "type='date' name='date' min='" ?>><br/>    
                 </div>
 
 
