@@ -25,35 +25,24 @@ function get_watches_sorted($sort1)
 function filter_watches(){
     //on recupere les valeurs dans les get
     $filters = [];
+    $currentSort = '';
     foreach ($_GET as $key => $value) {
         if ($key != "action" && $key != "page" && $value != ""){
-            if (in_array($key, $filters)){
-                $filters[$key] = [$filters[$key], $value];
-            } else {
-                $filters[$key] = $value;
-            }
+            $filters[$key] = $value;
+        }
+        if ($key == "sort"){
+            $currentSort = $value;
         }
     }
-    //on regarde les nouveaux filtres et change les resultats de recherche en fonction
-    $oldFilters = $_SESSION['filters'];
-    $_SESSION['filters'] = $filters; //on actualise la variable filtre
-    //on regarde quels sont les filtres qui ont changés par rapport a la derniere fois pour eviter de refaire des recherches inutiles
-    $newFilters = array_diff($oldFilters, $filters); 
-    $reload = false;
-    foreach ($newFilters as $key => $value) {
-        if ($value == 'on'){
-            if (in_array($key, $oldFilters)){ //si la clé est dans les vieux filtres alors l'utilisateur a enlevé un filtre, il faut donc recharger le tableau
-                $reload = true;
-                unset($newFilters[$key]);
-            }
-        } else {
-            if (in_array($value, $oldFilters)){
-                $reload = true;
-                unset($newFilters[$key]);
-            }
-        }
+    //si ce n'est pas dans le meme ordre qu'avant alors on retrie
+    if ($_SESSION['sort'] != $currentSort){
+        get_watches_sorted($currentSort);
     }
     $watches = $_SESSION['watches'];
+    $_SESSION['sort'] = $currentSort; //on actualise la variable session
+    
+    
+    
 
 
 }
@@ -84,9 +73,9 @@ function display_watch()
     $idheart = 0;
     foreach ($watches as $watch) {
         echo "<article class='watchtosell'>";
+        echo "<h1>" . $watch['name'] . "</h1>";
         echo "<img src='images/watchesPics/" . $watch['image_token']."' alt='Image Montre'  width='150px' height='150px'>";
         echo "<div class='bandeau'><p>" . $watch['marque'] . "</p>";
-        echo "<h1>" . $watch['name'] . "</h1>";
         echo "<div class ='likes'><p>" . $watch['likes'] . "</p>";
         echo "<button name='" . $watch['token'] . "' class='heart' id='heart" . $idheart . "' onclick='coeur(heart" . $idheart . ")'></button></div></div>";
 
