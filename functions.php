@@ -413,15 +413,51 @@ function register_image($files){
     
 
 }
+//----------------- Debut Partie achat -------------------
+function del($tok){
+    global $bdd;
+    $deletewatch = $bdd->prepare('DELETE FROM watches WHERE token =?');
+    $deletewatch->execute(array($tok));
+}
+//----------------- FIN Partie achat -------------------
+//----------------- debut Partie profil montres ------------------- 
+
+
+
+function personal_watches(){
+    global $bdd;
+    $me = $_SESSION['user']['pseudo'];
+    $prswatche = $bdd->prepare('SELECT * FROM watches WHERE user = ?');
+    $prswatche->execute(array($me));
+
+    foreach($prswatche as $watch){
+        echo "<article class='personal_watches'>";
+        echo "<h1>" . $watch['name'] . "</h1>";
+        echo "<img src='images/watchesPics/" . $watch['image_token'] . ".jpg' alt='Image Montre'>";
+        echo "<div class='bandeau'><p>" . $watch['marque'] . "</p>";
+        echo "<div class ='likes'><p>" . "Likes " .$watch['likes'] . "</p>";
+        echo "</article>";
+    }
+}
+//----------------- FIN Partie profil montres -------------------
+
 
 function approvePost($table){
     $res = True;
     foreach($table as $string){
-        if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=+¬-]/', $string))
+        if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=+¬-]/', $string) or empty($string))
             {
                 $res = false;
                 
             }
     }
+    if(!is_int($table['price'])){
+        $res = false;
+    }
+    
     return $res;
+}
+
+function watchFormIncorrect(){
+    
 }
