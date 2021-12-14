@@ -441,10 +441,10 @@ function register_image($files){
 //----------------- Debut Partie achat -------------------
 function del($tok){
     global $bdd;
-    $deletewatch = $bdd->prepare('DELETE FROM watches WHERE token =?');
+    $deletewatch = $bdd->prepare('DELETE FROM watches WHERE token = ?');
     $deletewatch->execute(array($tok));
     header('Location: .?page=profile');
-    
+    die();
 }
 //----------------- FIN Partie achat -------------------
 //----------------- debut Partie profil montres ------------------- 
@@ -486,5 +486,5 @@ function approvePost($table){
 }
 
 function watchFormIncorrect(){
-    
+    null;
 }
