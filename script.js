@@ -57,3 +57,16 @@ window.onclick = function(event) {
     }
   }
 }
+function updateField($fieldID){
+    var champ = document.getElementById($fieldID);
+    var dependance = document.getElementById('type_vente-select');
+    var value = dependance.options[dependance.selectedIndex].value;
+    if (value == "buynowtrue"){
+        champ.style.display = "none";
+    }
+    else
+    {
+        champ.style.display = "inline-grid";
+    }
+    console.log("whatsiup");
+}

@@ -557,3 +557,4 @@ function likepage(){
                 echo"<input type='button' name='token' value='" . $watch["token"] . "'>";
             echo "</article>";
     }
+}
