@@ -112,19 +112,11 @@ function display_watch()
 
         if ($watch['buy']) { //Si le vendeur a décidé de vendre la montre de suite et pas aux enchères
             echo "<h2>" . $watch['prix'] . " €</h2>";
-<<<<<<< HEAD
             // echo "<form class='buy' method='get'>"; à Mathis
             // echo"<input type='hidden' name='action' value='suppr'>";
             // echo"<input type='button' name='token' value='" . $watch["token"] . "'>";
             // echo"</form>";
             echo "<button name='buy' class='buy buy2'>Acheter</button>";
-=======
-            echo "<form class='buy buy2' method='post' action='.'>";
-            echo" <input type='hidden' name='action' value='suppr'>";
-            echo" <input type='button' name='token' value='" . $watch['token'] . "'>";
-            echo" </form>";
-            // echo "<button name='buy' class='buy buy2'>Acheter</button>";
->>>>>>> f6895943bdd4976c759e1fb2f33eb0295f3219a5
         } else {
             echo "<h2>Meilleure enchère : " . $watch['prix'] . " €</h2>";
             echo "<form action='.' method='post'><input type='hidden' name='action' value='enchere'>";
