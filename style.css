@@ -317,6 +317,10 @@ nav>ul li:hover #sousmenu {
     justify-content: space-evenly;
 }
 
+#filtres div{
+    margin: 0 10px;
+}
+
 #filtres select {
     border: 2px solid #aaa;
     height: 27px;
