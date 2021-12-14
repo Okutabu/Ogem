@@ -112,11 +112,11 @@ function display_watch()
 
         if ($watch['buy']) { //Si le vendeur a décidé de vendre la montre de suite et pas aux enchères
             echo "<h2>" . $watch['prix'] . " €</h2>";
-            // echo "<form class='buy' method='get'>"; à Mathis
-            // echo"<input type='hidden' name='action' value='suppr'>";
-            // echo"<input type='button' name='token' value='" . $watch["token"] . "'>";
-            // echo"</form>";
-            echo "<button name='buy' class='buy buy2'>Acheter</button>";
+            echo "<form method='post' action='.'>";
+            echo" <input type='hidden' name='action' value='suppr'>";
+            echo" <input type='hidden' name='token' value='" . $watch['token'] . "'>";
+            echo" <input type='submit' class='buy buy2' value='Acheter'>";
+            echo" </form>";
         } else {
             echo "<h2>Meilleure enchère : " . $watch['prix'] . " €</h2>";
             echo "<form action='.' method='post'><input type='hidden' name='action' value='enchere'>";
@@ -429,6 +429,8 @@ function del($tok){
     global $bdd;
     $deletewatch = $bdd->prepare('DELETE FROM watches WHERE token =?');
     $deletewatch->execute(array($tok));
+    header('Location: .?page=profile');
+    
 }
 //----------------- FIN Partie achat -------------------
 //----------------- debut Partie profil montres ------------------- 
