@@ -1,6 +1,7 @@
 <section class="form">
     <div class="introduction">
         <h1>Veuillez indiquer les caractéristiques de la montre que vous souhaitez vendre</h1>
+        <h2>Format d'image recommandé 4:3</h2>
     </div>
     <form action="." method="post" class="container" enctype="multipart/form-data">
         <input type="hidden" name="action" value="add_watches" >

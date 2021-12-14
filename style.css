@@ -565,7 +565,7 @@ footer {
     background: #ccc;
 }
 
-h1 {
+h1,h2 {
     text-align: center;
 }
 
@@ -666,6 +666,7 @@ section.form form .data {
 .sous-menu li {
     text-decoration: none;
 }
+
 
 
 /* dev by Avocado */

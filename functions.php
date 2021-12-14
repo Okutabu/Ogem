@@ -444,7 +444,7 @@ function display_choices($choice)
 
 function register_image($files){
 
-    $maxSize = 100000;
+    $maxSize = 1000000;
     $validExt = array(".jpeg", ".png", ".jpg");
     $fileSize = $files['toUpload']['size'];
     $fileName = $files['toUpload']['name'];
@@ -453,14 +453,14 @@ function register_image($files){
     $imageTokenAndExt = bin2hex(openssl_random_pseudo_bytes(64)).$fileExt;
     $uniqName = "./images/watchesPics/".$imageTokenAndExt;
 
-    // if ($fileSize > $maxSize){
-    //     echo "fichier trop lourd";
-            // die;
-    // }
-    // if (!in_array($fileExt, $validExt)){
-    //     echo "Le fichier n'est une image adaptée";
-    //     die;
-    // }
+    if ($fileSize > $maxSize){
+        echo "fichier trop lourd";
+            die;
+    }
+    if (!in_array($fileExt, $validExt)){
+        echo "Le fichier n'est une image adaptée";
+        die;
+    }
 
     $resultat = move_uploaded_file($tmpName, $uniqName);
 
