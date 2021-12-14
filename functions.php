@@ -537,3 +537,23 @@ function watchFormIncorrect(){ // incomplete
     header("Location: .?page=sell");
     
 }
+
+function likepage(){
+    global $bdd;
+    $mlikes = $_SESSION['user']['likes'];
+    $tablikes = explode("¦",$mlikes);
+    foreach($tablikes as $value){
+        $prslikes = $bdd->prepare('SELECT * FROM `watches` WHERE token = ?');
+        $prslikes->execute(array($value));
+        $watch =$prslikes->fetch();
+
+            echo "<article class='personal_watches'>";
+            echo "<h1>" . $watch['name'] . "</h1>";
+            echo "<img src='images/watchesPics/" . $watch['image_token'] . ".jpg' alt='Image Montre'>";
+            echo "<div class='bandeau'><p>" . $watch['marque'] . "</p>";
+                echo "<h2>" . $watch['prix'] . " €</h2>";
+                echo "<form class='buy' method='get'>";
+                echo"<input type='hidden' name='action' value='suppr'>";
+                echo"<input type='button' name='token' value='" . $watch["token"] . "'>";
+            echo "</article>";
+    }
