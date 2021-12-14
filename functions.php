@@ -22,6 +22,10 @@ function get_watches_sorted($sort1)
     //On met le resultat dans une variable de session pour eviter de devoir refaire des requetes sql a chaque fois
 }
 
+function filtre(){
+
+}
+
 function filter_watches(){
     global $data;
     //on recupere les valeurs dans les get
@@ -81,11 +85,25 @@ function filter_watches(){
             $watchesfilter = [];
         }
     }
-    unset($watchesfilter);
     //on traite les filtres multiples sauf si le tableau est vide
-    if (!$stop){
+    if (!$stop){ 
+        
+        //d'abord on crée des variables dans lesquels il ne faut pas que les montres soient s'il y a un parametre "autres" de coché par l'utilisateur
+        $autremat = false;
+        $autremarque = false;
+        $nonMarques = [];
+        $nonMateriaux = [];
+        if (in_array("Autres matériaux", $materiaux)){
+            $nonMateriaux = array_diff($data['materiaux'], $materiaux);
+            $autremat = true;
+        }
+        if (in_array("Autres marques", $marques)){
+            $nonMarques = array_diff($data['marque'], $marques);
+            $autremarque = true;
+        } 
         foreach ($watches as $watch){
-            null;
+            //on passe la montre dans des filtres successifs
+            $watchesfilter = filtre($etats, );
         }
     }
     $_SESSION['watches'] = $watches;
