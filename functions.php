@@ -39,7 +39,6 @@ function filter_watches(){
             $currentSort = $value;
         }
     }
-    var_dump($filters);
     //on rapelle cette fonction pour que ca refasse une requete dans la base de données a chaque fois, si jamais une montre a été ajoutée ou supprimée en temps reel
     get_watches_sorted($currentSort);
     $watches = $_SESSION['watches'];
@@ -59,7 +58,7 @@ function filter_watches(){
                 $materiaux[] = $value;
             }
             //on traite les filtres uniques
-        } elseif (!$stop) {
+        } else {
             foreach ($watches as $watch){
                 if ($key == "buy"){
                     if($watch["buy"] == $value){
@@ -77,16 +76,17 @@ function filter_watches(){
             }
             if ($watchesfilter == []){
                 $stop = true;
-            } else {
-                $watches = $watchesfilter;
-                $watchesfilter = [];
-            }
-            
+            } 
+            $watches = $watchesfilter;
+            $watchesfilter = [];
         }
     }
     unset($watchesfilter);
-    foreach ($watches as $watch){
-        null;
+    //on traite les filtres multiples sauf si le tableau est vide
+    if (!$stop){
+        foreach ($watches as $watch){
+            null;
+        }
     }
     $_SESSION['watches'] = $watches;
 }
