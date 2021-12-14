@@ -324,6 +324,7 @@ nav>ul li:hover #sousmenu {
 
 #filtres label {
     margin-right: 10px;
+    white-space: nowrap;
 }
 
 .priceFilter {

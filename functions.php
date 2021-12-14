@@ -22,14 +22,20 @@ function get_watches_sorted($sort1)
     //On met le resultat dans une variable de session pour eviter de devoir refaire des requetes sql a chaque fois
 }
 
-function filtre($filtres, $filtre, $autre, $montres){
+function filtre($filtres, $nonfiltres, $filtre, $autre, $montres){
     $montresfiltrees = [];
-    if ($autre){
-
-    } else {
-        foreach($montres as $montre){
-            if (in_array($montre[$filtre], $filtres)){
-                $montresfiltrees[] = $montre;
+    if ($montres != []){
+        if ($autre){
+            foreach($montres as $montre){
+                if (!in_array($montre[$filtre], $nonfiltres)){
+                    $montresfiltrees[] = $montre;
+                }
+            }
+        } else {
+            foreach($montres as $montre){
+                if (in_array($montre[$filtre], $filtres)){
+                    $montresfiltrees[] = $montre;
+                }
             }
         }
     }
@@ -112,7 +118,9 @@ function filter_watches(){
             $autremarque = true;
         } 
         //on passe la montre dans des filtres successifs
-        $watches = filtre($etats, $watches);
+        $watches = filtre($etats, [], "etat", false, $watches);
+        $watches = filtre($marques, $nonMarques, "marque", $autremarque, $watches);
+        $watches = filtre($materiaux, $nonMateriaux, "materiaux", $autremat, $watches);
     }
     $_SESSION['watches'] = $watches;
 }
@@ -147,7 +155,7 @@ function display_watch()
         foreach ($watches as $watch) {
             echo "<article class='watchtosell'>";
             echo "<h1>" . $watch['name'] . "</h1>";
-            echo "<img src='images/watchesPics/" . $watch['image_token']."' alt='Image Montre'  width='150px' height='150px'>";
+            echo "<img src='images/watchesPics/" . $watch['image_token']."' alt='Image Montre'";
             echo "<div class='bandeau'><p>" . $watch['marque'] . "</p>";
             echo "<div class ='likes'><p>" . $watch['likes'] . "</p>";
             echo "<button name='" . $watch['token'] . "' class='heart' id='heart" . $idheart . "' onclick='coeur(heart" . $idheart . ")'></button></div></div>";
