@@ -409,7 +409,7 @@ function profil_connected()
         echo "</div></div>";
     } else {
         echo "<div class='dropdown'>";
-        echo "<button onclick='menuderou()' class='dropbtn'>Profil</button>";
+        echo "<button id='profiltxt' onclick='menuderou()' class='dropbtn'>Profil</button>";
         echo "<div id='myDropdown' class='dropdown-content'>";
         echo "<a href='.?page=connect'>Connexion</a>";
         echo "<a href='.?page=inscription'>Inscription</a>";
@@ -420,8 +420,7 @@ function profil_connected()
 
 //-----------------------------------------------------------------
 
-function add_watches($user, $brand, $materiaux, $name, $prix, $buy, $etat, $tokenForImage)
-{
+function add_watches($user, $brand, $materiaux, $name, $prix, $buy, $etat, $tokenForImage) {
 
     if ($buy == "buynowtrue") {
         $buy = 1;
@@ -487,10 +486,16 @@ function register_image($files){
 //----------------- Debut Partie achat -------------------
 function del($tok){
     global $bdd;
-    $deletewatch = $bdd->prepare('DELETE FROM watches WHERE token = ?');
-    $deletewatch->execute(array($tok));
-    header('Location: .?page=profile');
-    die();
+    if (isset($_SESSION['user'])) {
+        $deletewatch = $bdd->prepare('DELETE FROM watches WHERE token = ?');
+        $deletewatch->execute(array($tok));
+        header('Location: .?page=profile');
+        die();
+    }
+    else {
+        header('Location: .?page=connect');
+        die();
+    }
 }
 //----------------- FIN Partie achat -------------------
 //----------------- debut Partie profil montres ------------------- 
