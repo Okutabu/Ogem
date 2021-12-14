@@ -54,6 +54,9 @@ if (isset($_POST["action"])){
         }
         
     }
+    if ($_POST["action"] == "suppr"){
+        del($_POST['token']);
+    }
 }
 
 if (isset($_GET["action"])){

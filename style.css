@@ -266,6 +266,27 @@ nav>ul li:hover #sousmenu {
     margin: 7px 0;
 }
 
+.watchtosell, .personal_watches {
+    display: inline-block;
+    background: white;
+    color: black;
+    padding: 20px;
+    margin: 40px;
+    height: 400px;
+    width: 330px;
+    border: solid black 2px;
+    border-radius: 20px;
+}
+
+.watchtosell h2,.personal_watches h2 {
+    text-align: center;
+}
+/* Pour la page profil*/
+#personaldisplay {
+    display:flex;
+    flex-direction: row;
+    justify-content:center;
+}
 .buy {
     width: 125px;
     margin-bottom: 10px;
