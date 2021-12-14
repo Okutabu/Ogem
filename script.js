@@ -37,3 +37,23 @@ function show_filters(filterToShow) {
 
     filter.style.display = display;
 }
+
+/* Quand l'utilisateur clique le menu s'affiche ou non */
+function menuderou() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Ferme le menu déroulant quand l'utilisateur clique en dehors du menu
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
