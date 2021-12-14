@@ -155,7 +155,7 @@ function display_watch()
         foreach ($watches as $watch) {
             echo "<article class='watchtosell'>";
             echo "<h1>" . $watch['name'] . "</h1>";
-            echo "<img src='images/watchesPics/" . $watch['image_token']."' alt='Image Montre'";
+            echo "<img src='images/watchesPics/" . $watch['image_token']."' alt='Image Montre'/>";
             echo "<div class='bandeau'><p>" . $watch['marque'] . "</p>";
             echo "<div class ='likes'><p>" . $watch['likes'] . "</p>";
             echo "<button name='" . $watch['token'] . "' class='heart' id='heart" . $idheart . "' onclick='coeur(heart" . $idheart . ")'></button></div></div>";
