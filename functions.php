@@ -506,7 +506,7 @@ function personal_watches(){
 function approvePost($table){
     $res = True;
     foreach($table as $string){
-        if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=+¬-]/', $string) or empty($string))
+        if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=+¬-]/', $string))
             {
                 $res = false;
                 

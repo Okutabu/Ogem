@@ -18,7 +18,7 @@
                 </div>
 
                 <div id="champ3"><label>Prix</label><br/>
-                    <input required="required" type="text" name="price"><br/>
+                    <input required="required" type="number" name="price"><br/>
                 </div>
 
                 <div id="champ4"><label>Type de vente</label><br/>
