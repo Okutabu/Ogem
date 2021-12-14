@@ -1,5 +1,5 @@
 <?php
-$data = ['etat' => ["Neuf", "Très bon état", "Bon état", "Moyen"], 'materiaux' => ["Acier", "Argent", "Céramique", "Diamant", "Or", "Platine", "Tungstène", "Autre"], 'marque' => ["Audemars Piguet", "Breitling", "Grand Seiko", "Hublot", "IWC", "Jaeger-LeCoultre", "Longines", "Omega", "Patek Philippe", "Richard Mille", "Rolex", "Tag Heuer", "Tissot", "Tudor", "Vacheron Constantin", "Autre"]];
+$data = ['etat' => ["Neuf", "Très bon état", "Bon état", "Moyen"], 'materiaux' => ["Acier", "Argent", "Céramique", "Diamant", "Or", "Platine", "Tungstène", "Autres matériaux"], 'marque' => ["Audemars Piguet", "Breitling", "Grand Seiko", "Hublot", "IWC", "Jaeger-LeCoultre", "Longines", "Omega", "Patek Philippe", "Richard Mille", "Rolex", "Tag Heuer", "Tissot", "Tudor", "Vacheron Constantin", "Autres marques"]];
 //----------------- Partie recherche montres ------------------- 
 
 function get_watches_sorted($sort1)
@@ -23,28 +23,52 @@ function get_watches_sorted($sort1)
 }
 
 function filter_watches(){
+    global $data;
     //on recupere les valeurs dans les get
     $filters = [];
     $currentSort = '';
     foreach ($_GET as $key => $value) {
         if ($key != "action" && $key != "page" && $value != ""){
             $filters[$key] = $value;
-        }
-        if ($key == "sort"){
+        } elseif ($key == "sort"){
             $currentSort = $value;
         }
     }
-    //si ce n'est pas dans le meme ordre qu'avant alors on retrie
-    if ($_SESSION['sort'] != $currentSort){
-        get_watches_sorted($currentSort);
-    }
+    //on rapelle cette fonction pour que ca refasse une requete dans la base de données a chaque fois, si jamais une montre a été ajoutée ou supprimée en temps reel
+    get_watches_sorted($currentSort);
     $watches = $_SESSION['watches'];
-    $_SESSION['sort'] = $currentSort; //on actualise la variable session
-    
-    
-    
-
-
+    $etats = [];
+    $materiaux = [];
+    $marques = [];
+    foreach ($filters as $key => $value){
+        //on recupere les valeurs ou il y a des filtres multiples
+        if ($value == "on"){
+            if (in_array($key, $data["etat"], true)){
+                $etats[] = $value;
+            } elseif (in_array($key, $data["marque"], true)){
+                $marques[] = $value;
+            } elseif (in_array($key, $data["materiaux"], true)){
+                $materiaux[] = $value;
+            }
+            //on traite les filtres uniques
+        } else {
+            foreach ($watches as $watch){
+                if ($key == "buy"){
+                    if($watch["buy"] == $value){
+                        $watchesfilter[] = $watch;
+                    }
+                } elseif ($key == "prixMin"){
+                    if($watch["prix"] >= $value){
+                        $watchesfilter[] = $watch;
+                    }
+                } elseif ($key == "prixMax"){
+                    if($watch["prix"] <= $value){
+                        $watchesfilter[] = $watch;
+                    }
+                }
+            }
+        }
+    }
 }
 
 function display_prices(){
@@ -90,6 +114,9 @@ function display_watch()
         }
         echo "</article>";
         $idheart = $idheart + 1;
+    }
+    if ($watches == []){
+        echo "<h1>Aucun résultat pour ces filtres</h1>";
     }
 }
 

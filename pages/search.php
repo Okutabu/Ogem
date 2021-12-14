@@ -36,9 +36,9 @@
             <div>
                 <label>Type de vente : </label>
                 <select name="buy">
-                    <option value="all">Tous types</option>
-                    <option value="buynowtrue">Achat immédiat</option>
-                    <option value="buynowfalse">Enchère</option>
+                    <option value="">Tous types</option>
+                    <option value="1">Achat immédiat</option>
+                    <option value="0">Enchère</option>
                 </select>
             </div>
             <div>
@@ -60,6 +60,6 @@
 
     </article>
     <?php
-    display_watch(); filter_watches();
+    display_watch();
     ?>
 </main>
