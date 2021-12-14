@@ -48,7 +48,7 @@
                     <option value="date">Le plus récent</option>
                     <option value="prixcroissant">Prix : Croissant</option>
                     <option value="prixdecroissant">Prix : Décroissant</option>
-                    <option value="fin_enchere">Enchère : Fin proche</option>
+                    <option value="finEnchere">Enchère : Fin proche</option>
                 </select>
             </div>
 
