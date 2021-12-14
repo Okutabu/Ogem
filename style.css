@@ -375,6 +375,12 @@ nav>ul li:hover #sousmenu {
     width: 145px;
 }
 
+#noResults {
+    margin-top: 80px;
+    margin-bottom: 30px;
+    font-size: 60px;
+}
+
 
 /* pour la page inscription */
 

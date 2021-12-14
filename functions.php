@@ -28,18 +28,26 @@ function filter_watches(){
     $filters = [];
     $currentSort = '';
     foreach ($_GET as $key => $value) {
-        if ($key != "action" && $key != "page" && $value != ""){
-            $filters[$key] = $value;
+        if ($key != "action" && $key != "page" && $value != "" && $key != "sort"){
+            if($key == "priceMin" || $key == "priceMax"){
+                $filters[$key] = intval($value);
+            } else {
+                $filters[$key] = $value;
+            }
+           
         } elseif ($key == "sort"){
             $currentSort = $value;
         }
     }
+    var_dump($filters);
     //on rapelle cette fonction pour que ca refasse une requete dans la base de données a chaque fois, si jamais une montre a été ajoutée ou supprimée en temps reel
     get_watches_sorted($currentSort);
     $watches = $_SESSION['watches'];
     $etats = [];
     $materiaux = [];
     $marques = [];
+    $watchesfilter = [];
+    $stop = false;
     foreach ($filters as $key => $value){
         //on recupere les valeurs ou il y a des filtres multiples
         if ($value == "on"){
@@ -51,31 +59,36 @@ function filter_watches(){
                 $materiaux[] = $value;
             }
             //on traite les filtres uniques
-        } else {
+        } elseif (!$stop) {
             foreach ($watches as $watch){
                 if ($key == "buy"){
                     if($watch["buy"] == $value){
                         $watchesfilter[] = $watch;
                     }
-                } elseif ($key == "prixMin"){
+                } elseif ($key == "priceMin"){
                     if($watch["prix"] >= $value){
                         $watchesfilter[] = $watch;
                     }
-                } elseif ($key == "prixMax"){
+                } elseif ($key == "priceMax"){
                     if($watch["prix"] <= $value){
                         $watchesfilter[] = $watch;
                     }
                 }
             }
-            $watches = $watchesfilter;
-            unset($watchesfilter);
+            if ($watchesfilter == []){
+                $stop = true;
+            } else {
+                $watches = $watchesfilter;
+                $watchesfilter = [];
+            }
+            
         }
     }
+    unset($watchesfilter);
     foreach ($watches as $watch){
         null;
     }
     $_SESSION['watches'] = $watches;
-
 }
 
 function display_prices(){
@@ -102,32 +115,33 @@ function display_watch()
 {
     $watches = $_SESSION['watches'];
     $idheart = 0;
-    foreach ($watches as $watch) {
-        echo "<article class='watchtosell'>";
-        echo "<h1>" . $watch['name'] . "</h1>";
-        echo "<img src='images/watchesPics/" . $watch['image_token']."' alt='Image Montre'  width='150px' height='150px'>";
-        echo "<div class='bandeau'><p>" . $watch['marque'] . "</p>";
-        echo "<div class ='likes'><p>" . $watch['likes'] . "</p>";
-        echo "<button name='" . $watch['token'] . "' class='heart' id='heart" . $idheart . "' onclick='coeur(heart" . $idheart . ")'></button></div></div>";
-
-        if ($watch['buy']) { //Si le vendeur a décidé de vendre la montre de suite et pas aux enchères
-            echo "<h2>" . $watch['prix'] . " €</h2>";
-            echo "<form method='post' action='.'>";
-            echo" <input type='hidden' name='action' value='suppr'>";
-            echo" <input type='hidden' name='token' value='" . $watch['token'] . "'>";
-            echo" <input type='submit' class='buy buy2' value='Acheter'>";
-            echo" </form>";
-        } else {
-            echo "<h2>Meilleure enchère : " . $watch['prix'] . " €</h2>";
-            echo "<form action='.' method='post'><input type='hidden' name='action' value='enchere'>";
-            echo "<div><label>Enchère rapide : </label><input type='number' class='bid' name='bid' placeholder='" . $watch['prix'] + 1 . "' required='required' autocomplete='off' min='" . $watch['prix'] + 1 . "'>";
-            echo "<input type='submit' class='buy' value='Confirmer'></form></div>";
-        }
-        echo "</article>";
-        $idheart = $idheart + 1;
-    }
     if ($watches == []){
-        echo "<h1>Aucun résultat pour ces filtres</h1>";
+        echo "<h1 id='noResults'>Aucun résultat</h1>";
+    } else {
+        foreach ($watches as $watch) {
+            echo "<article class='watchtosell'>";
+            echo "<h1>" . $watch['name'] . "</h1>";
+            echo "<img src='images/watchesPics/" . $watch['image_token']."' alt='Image Montre'  width='150px' height='150px'>";
+            echo "<div class='bandeau'><p>" . $watch['marque'] . "</p>";
+            echo "<div class ='likes'><p>" . $watch['likes'] . "</p>";
+            echo "<button name='" . $watch['token'] . "' class='heart' id='heart" . $idheart . "' onclick='coeur(heart" . $idheart . ")'></button></div></div>";
+    
+            if ($watch['buy']) { //Si le vendeur a décidé de vendre la montre de suite et pas aux enchères
+                echo "<h2>" . $watch['prix'] . " €</h2>";
+                echo "<form method='post' action='.'>";
+                echo" <input type='hidden' name='action' value='suppr'>";
+                echo" <input type='hidden' name='token' value='" . $watch['token'] . "'>";
+                echo" <input type='submit' class='buy buy2' value='Acheter'>";
+                echo" </form>";
+            } else {
+                echo "<h2>Meilleure enchère : " . $watch['prix'] . " €</h2>";
+                echo "<form action='.' method='post'><input type='hidden' name='action' value='enchere'>";
+                echo "<div><label>Enchère rapide : </label><input type='number' class='bid' name='bid' placeholder='" . $watch['prix'] + 1 . "' required='required' autocomplete='off' min='" . $watch['prix'] + 1 . "'>";
+                echo "<input type='submit' class='buy' value='Confirmer'></form></div>";
+            }
+            echo "</article>";
+            $idheart = $idheart + 1;
+        }
     }
 }
 
