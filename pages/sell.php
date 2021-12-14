@@ -1,14 +1,13 @@
 <section class="form">
     <div class="introduction">
         <h1>Veuillez indiquer les caractéristiques de la montre que vous souhaitez vendre</h1>
-        <h2>Format d'image recommandé 4:3</h2>
     </div>
     <form action="." method="post" class="container" enctype="multipart/form-data">
         <input type="hidden" name="action" value="add_watches" >
         <div class="data">
             <div class="text">
                 <div id="champ1"><label>Nom de la montre</label><br/>
-                    <input type="text" name="name"><br/>
+                    <input required="required" type="text" name="name"><br/>
                 </div>
 
                 <div id="champ2"><label>Marque</label><br/>
@@ -19,7 +18,7 @@
                 </div>
 
                 <div id="champ3"><label>Prix</label><br/>
-                    <input type="number" name="price"><br/>
+                    <input required="required" type="number" name="price"><br/>
                 </div>
 
                 <div id="champ4"><label>Type de vente</label><br/>
@@ -47,7 +46,7 @@
             <div class="file-area" onclick="openfile()">
                 <input type="file" multiple id="mySelector" name="toUpload" accept="image/*" onchange="loadFile(event)" style="display:none;">  
                 <img id="output" />
-                <p id="placeholding">Click here to upload image</p>
+                <p id="placeholding">Cliquez ici pour uploader une image (Format d'image recommandé 4:3)</p>
             </div>
             
         </div>

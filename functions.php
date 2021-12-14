@@ -23,8 +23,10 @@ function get_watches_sorted($sort1)
 }
 
 function filtre($filtres, $nonfiltres, $filtre, $autre, $montres){
+
     $montresfiltrees = [];
-    if ($montres != []){
+    if ($montres != [] && $filtres != []){
+        
         if ($autre){
             foreach($montres as $montre){
                 if (!in_array($montre[$filtre], $nonfiltres)){
@@ -38,6 +40,8 @@ function filtre($filtres, $nonfiltres, $filtre, $autre, $montres){
                 }
             }
         }
+    } elseif ($filtres == []){
+        $montresfiltrees = $montres;
     }
     return $montresfiltrees;
 }
@@ -54,7 +58,6 @@ function filter_watches(){
             } else {
                 $filters[$key] = $value;
             }
-           
         } elseif ($key == "sort"){
             $currentSort = $value;
         }
@@ -62,6 +65,12 @@ function filter_watches(){
     //on rapelle cette fonction pour que ca refasse une requete dans la base de données a chaque fois, si jamais une montre a été ajoutée ou supprimée en temps reel
     get_watches_sorted($currentSort);
     $watches = $_SESSION['watches'];
+    //remplace tous les tirets du bas par des espaces dans les clés du tableau
+    foreach ($filters as $key => $value){
+        unset($filters[$key]);
+        $key = str_replace("_", " ", $key);
+        $filters[$key] = $value;
+    }
     $etats = [];
     $materiaux = [];
     $marques = [];
@@ -71,11 +80,11 @@ function filter_watches(){
         //on recupere les valeurs ou il y a des filtres multiples
         if ($value == "on"){
             if (in_array($key, $data["etat"], true)){
-                $etats[] = $value;
+                $etats[] = $key;
             } elseif (in_array($key, $data["marque"], true)){
-                $marques[] = $value;
+                $marques[] = $key;
             } elseif (in_array($key, $data["materiaux"], true)){
-                $materiaux[] = $value;
+                $materiaux[] = $key;
             }
             //on traite les filtres uniques
         } else {
@@ -101,6 +110,7 @@ function filter_watches(){
             $watchesfilter = [];
         }
     }
+
     //on traite les filtres multiples sauf si le tableau est vide
     if (!$stop){ 
         
@@ -390,18 +400,20 @@ function profil_connected()
     if (isset($_SESSION['user'])) {
         $picture = $_SESSION['user']['picture'];
         echo "<li><a href='.?page=sell'>Vendre</a></li>";
-        echo "<li id='menuderoulant'>";
-        echo '<img src="images/profilePics/' . $picture . '" alt="profil picture" id="profilePic">';
-        echo "<ul id='sousmenu'>";
-        echo "<li><a href='.?page=profile'>Profil</a></li>";
-        echo "<li><a href='.?page=likes'>Coups de coeur</a></li>";
-        echo "<li><a href='.?page=deco'>Déconnexion</a></li>";
+        echo "<div class='dropdown'>";
+        echo '<img onclick="menuderou()" src="images/profilePics/' . $picture . '" alt="profil picture" id="profilePic" class="dropbtn">';
+        echo "<div id='myDropdown' class='dropdown-content'>";
+        echo "<a href='.?page=profile'>Profil</a>";
+        echo "<a href='.?page=likes'>Coups de coeur</a>";
+        echo "<a href='.?page=deco'>Déconnexion</a>";
+        echo "</div></div>";
     } else {
-        echo "<li id='menuderoulant'>";
-        echo '<p>Profil</p>';
-        echo "<ul id='sousmenu'>";
-        echo "<li><a href='.?page=connect'>Connexion</a></li>";
-        echo "<li><a href='.?page=inscription'>Inscription</a></li>";
+        echo "<div class='dropdown'>";
+        echo "<button onclick='menuderou()' class='dropbtn'>Profil</button>";
+        echo "<div id='myDropdown' class='dropdown-content'>";
+        echo "<a href='.?page=connect'>Connexion</a>";
+        echo "<a href='.?page=inscription'>Inscription</a>";
+        echo "</div></div>";
     }
     echo "</ul></li>";
 }
@@ -525,4 +537,3 @@ function watchFormIncorrect(){ // incomplete
     header("Location: .?page=sell");
     
 }
-
