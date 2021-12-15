@@ -52,6 +52,7 @@ if (isset($_POST["action"])){
             
         }else
         {    
+            
             watchFormIncorrect();
         }
         
@@ -63,6 +64,10 @@ if (isset($_POST["action"])){
         like($_POST['token']);
     }
 
+    if ($_POST["action"] == "changeProPic"){
+        $imgToken = registerProfileImage($_FILES);
+        updateProfile($imgToken, $_SESSION['user']['token']);
+    }
 }
 
 if (isset($_GET["action"]) && $_GET["action"] == "filtrer"){

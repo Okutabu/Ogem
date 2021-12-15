@@ -21,10 +21,10 @@
                     <input required="required" type="number" name="price" min="0"><br/>
                 </div>
 
-                <div id="champ4"><label>Type de vente</label><br/>
-                    <select name="buy" id="type_vente-select" onchange="updateField('champ7')">
-                        <option value="buynowtrue">Achat immédiat</option>
+                <div id="champ4" onload="updateField('champ7')"><label>Type de vente</label><br/>
+                    <select name="buy" id="type_vente-select" onchange="updateField('champ7')" >
                         <option value="buynowfalse">Enchère</option>
+                        <option value="buynowtrue">Achat immédiat</option>
                     </select>
                 </div>
 
@@ -42,11 +42,10 @@
                 </div>
 
                 <div id="champ7"><label>Date de fin de l'enchere</label><br/>
-                    <input <?php $_today = getdate();
-                    echo "type='date' name='date' min='".date("Y-m-d")?>><br/>    
+                    <input <?php dateInput()?>><br/>    
                 </div>
 
-
+                <!-- <p id="placeholding">Cliquez ici pour uploader une image (Format d'image recommandé 4:3)</p> -->
             </div>
             <div class="file-area" onclick="openfile()">
                 <input type="file" multiple id="mySelector" name="toUpload" accept="image/*" onchange="loadFile(event)" style="display:none;">  

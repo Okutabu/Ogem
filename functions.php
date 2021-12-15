@@ -476,10 +476,34 @@ function register_image($files){
         echo "fichier trop lourd";
             die;
     }
-    if (!in_array($fileExt, $validExt)){
-        echo "Le fichier n'est une image adaptée";
-        die;
+    
+
+    $resultat = move_uploaded_file($tmpName, $uniqName);
+
+    if ($resultat){
+        echo "transfert terminé";
+        return $imageTokenAndExt;
     }
+    
+    
+
+}
+function registerProfileImage($files){
+
+    $maxSize = 1000000;
+    $validExt = array(".jpeg", ".png", ".jpg");
+    $fileSize = $files['toUpload']['size'];
+    $fileName = $files['toUpload']['name'];
+    $fileExt = ".". strtolower(substr(strrchr($fileName, '.'), 1));
+    $tmpName = $files['toUpload']['tmp_name'];
+    $imageTokenAndExt = bin2hex(openssl_random_pseudo_bytes(64)).$fileExt;
+    $uniqName = "./images/profilePics/".$imageTokenAndExt;
+
+    if ($fileSize > $maxSize){
+        echo "fichier trop lourd";
+            die;
+    }
+    
 
     $resultat = move_uploaded_file($tmpName, $uniqName);
 
@@ -531,7 +555,7 @@ function personal_watches(){
 function approvePost($table){
     $res = True;
     foreach($table as $string){
-        if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=+¬-]/', $string) || empty($string))
+        if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=+¬]/', $string))
             {
                 $res = false;
                 
@@ -586,3 +610,16 @@ function like($watch){
 //     $watches = $bdd->prepare('SELECT * FROM watches where USER )
 //     if ()
 // }
+
+function dateInput(){
+    
+    echo "type='date' name='date' min='".date("Y-m-d")."'";
+}
+
+function updateProfile($image, $usertoken){
+    global $bdd;
+    $insert = $bdd->prepare('UPDATE utilisateurs SET picture = ? WHERE token = ? ;');
+    $insert->execute(array($image, $usertoken));
+                                
+
+}

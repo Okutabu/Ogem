@@ -663,7 +663,7 @@ section.form form div.data {
     margin-right: 40px;
 }
 
-section.form form div.file-area {
+div.file-area {
     border-width: 4px;
     border-style: solid;
     border-image: linear-gradient(to bottom, black, rgba(0, 0, 0, 0)) 1 100%;
@@ -674,7 +674,12 @@ section.form form div.file-area {
     justify-content: center;
 }
 
-section.form form div.file-area input[type=file] {
+div#profile_picture {
+    display: flex;
+    justify-content: space-around;
+}
+
+div.file-area input[type=file] {
     width: 100%;
     text-align: center;
 }
