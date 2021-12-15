@@ -722,11 +722,3 @@ section.form form .data {
 
 /* dev by Avocado */
 
-
-/* Pour la page profil*/
-
-#personaldisplay {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}

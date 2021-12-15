@@ -48,7 +48,6 @@ if (isset($_POST["action"])){
         
         if (approvePost($_POST)){
             add_watches($_SESSION['user']['token'], $_POST['brand'], $_POST['materiaux'], $_POST['name'], $_POST['price'], $_POST['buy'], $_POST['etat'], $imgToken, $_POST['date']);
-            
         }else
         {    
             

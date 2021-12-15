@@ -578,31 +578,69 @@ function watchFormIncorrect(){ // incomplete
 function likepage(){
     global $bdd;
     $mlikes = $_SESSION['user']['likes'];
-    $tablikes = explode("¦",$mlikes);
-    foreach($tablikes as $value){
-        $prslikes = $bdd->prepare('SELECT * FROM `watches` WHERE token = ?');
-        $prslikes->execute(array($value));
-        $watch =$prslikes->fetch();
-        echo "<article class='personal_watches'>";
-        echo "<h1>" . $watch['name'] . "</h1>";
-        echo "<img src='images/watchesPics/" . $watch['image_token'] . ".jpg' alt='Image Montre'>";
-        echo "<div class='bandeau'><p>" . $watch['marque'] . "</p>";
-        echo "<h2>" . $watch['prix'] . " €</h2>";
-        echo "<form class='buy' method='get'>";
-        echo "<input type='hidden' name='action' value='suppr'>";
-        echo "<input type='button' name='token' value='" . $watch["token"] . "'>";
-        echo "</article>";
+    if ($mlikes != "") {
+        $mlikes = rtrim($mlikes, "¦");
+        $tablikes = explode("¦",$mlikes);
+        $idheart = 0;
+        foreach($tablikes as $value){
+            $prslikes = $bdd->prepare('SELECT * FROM `watches` WHERE token = ?');
+            $prslikes->execute(array($value));
+            $watch =$prslikes->fetch();
+            echo "<article class='watchtosell'>";
+            echo "<h1>" . $watch['name'] . "</h1>";
+            echo "<img src='images/watchesPics/" . $watch['image_token']."' alt='Image Montre'/>";
+            echo "<div class='bandeau'><p>" . $watch['marque'] . "</p>";
+            echo "<form method='post' action='.'>";
+            echo" <input type='hidden' name='action' value='like'>";
+            echo" <input type='hidden' name='token' value='" . $watch['token'] . "'>";
+            echo" <input type='submit' value='♥'>";
+            echo" </form>";
+            echo "<div class ='likes'><p>" . $watch['likes'] . "</p>";
+            echo "<button name='" . $watch['token'] . "' class='heart' id='heart" . $idheart . "' onclick='coeur(heart" . $idheart . ")'></button></div></div>";
+
+            if ($watch['buy']) { //Si le vendeur a décidé de vendre la montre de suite et pas aux enchères
+                echo "<h2>" . $watch['prix'] . " €</h2>";
+                echo "<form method='post' action='.'>";
+                echo" <input type='hidden' name='action' value='suppr'>";
+                echo" <input type='hidden' name='token' value='" . $watch['token'] . "'>";
+                echo" <input type='submit' class='buy buy2' value='Acheter'>";
+                echo" </form>";
+            } else {
+                echo "<h2>Meilleure enchère : " . $watch['prix'] . " €</h2>";
+                echo "<form action='.' method='post'><input type='hidden' name='action' value='enchere'>";
+                echo "<div><label>Enchère rapide : </label><input type='number' class='bid' name='bid' placeholder='" . $watch['prix'] + 1 . "' required='required' autocomplete='off' min='" . $watch['prix'] + 1 . "'>";
+                echo "<input type='submit' class='buy' value='Confirmer'></form></div>";
+            }
+            echo "</article>";
+            $idheart = $idheart + 1;
+        }
     }
+    
 }
 
 function like($watch){
     global $bdd;
     $watch = $watch . "¦";
-    $insert = $bdd->prepare('INSERT INTO utilisateurs(likes) VALUES(:likes)');
-    $insert->execute(array('likes' => $watch));
+    $temp = $bdd->prepare('SELECT likes FROM utilisateurs WHERE token = ?');
+    $temp->execute(array($_SESSION['user']['token']));
+    $tempo = $temp->fetch();
+    if (strpos($tempo[0], $watch) || $tempo[0] == $watch){ //si la montre est deja dans la base de données alors on l'enleve
+        $watch = str_replace($watch, "", $tempo[0]);
+    } else { 
+        $watch = $watch . $tempo[0];
+    }
+    $insert = $bdd->prepare('UPDATE utilisateurs SET likes = ? WHERE token = ? ;');
+    $insert->execute(array($watch, $_SESSION['user']['token']));
+    reload_session();
     header('Location: .?page=search');
     die();
-    
+}
+
+function reload_session(){
+    global $bdd;
+    $req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
+    $req->execute(array($_SESSION['user']['token']));
+    $_SESSION['user'] = $req->fetch();
 }
 
 // function whatever(){
