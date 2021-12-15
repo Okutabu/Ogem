@@ -450,6 +450,7 @@ function add_watches($user, $brand, $materiaux, $name, $prix, $buy, $etat, $toke
         'etat' => $etat,
         'date' => $dateFinEnchere
     ));
+    reload_session();
     header('Location: .?page=search');
 }
 
@@ -521,6 +522,7 @@ function del($tok){
     if (isset($_SESSION['user'])) {
         $deletewatch = $bdd->prepare('DELETE FROM watches WHERE token = ?');
         $deletewatch->execute(array($tok));
+        reload_session();
         header('Location: .?page=profile');
         die();
     }
@@ -643,11 +645,6 @@ function reload_session(){
     $_SESSION['user'] = $req->fetch();
 }
 
-// function whatever(){
-//     $date = date("Y-m-d");
-//     $watches = $bdd->prepare('SELECT * FROM watches where USER )
-//     if ()
-// }
 
 function dateInput(){
     
@@ -658,6 +655,6 @@ function updateProfile($image, $usertoken){
     global $bdd;
     $insert = $bdd->prepare('UPDATE utilisateurs SET picture = ? WHERE token = ? ;');
     $insert->execute(array($image, $usertoken));
-                                
+    reload_session();
 
 }
