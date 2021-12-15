@@ -10,6 +10,7 @@
                 </div>
                 <input type="submit" value="Envoyer" style="display:none;" id="submit">
                 <input type="image" alt="Submit" src="images/arrow.svg" width="100px" height="300px" onclick="postform()">
+    </div>
 </form>
     
     <div id="personaldisplay">
