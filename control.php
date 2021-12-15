@@ -59,6 +59,10 @@ if (isset($_POST["action"])){
     if ($_POST["action"] == "suppr"){
         del($_POST['token']);
     }
+    if ($_POST["action"] == "like"){
+        like($_POST['token']);
+    }
+
 }
 
 if (isset($_GET["action"]) && $_GET["action"] == "filtrer"){

@@ -3,7 +3,7 @@
     <div id="personaldisplay">
 
         <?php
-                personal_watches();
+            personal_watches();
         ?>
     </div>
 </main>
