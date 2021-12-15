@@ -2,7 +2,7 @@
     <form action="." method="post" class="container" enctype="multipart/form-data">
         <input type="hidden" name="action" value="changeProPic" >
         <div id="profile_picture">
-                    <h1>Changer sa photo de profile</h1>
+                    <h1>Changer sa photo de profil</h1>
                 <div class="file-area" onclick="openfile()">
                         <input type="file" multiple id="mySelector" name="toUpload" accept="image/*" onchange="loadFile(event)" style="display:none;">  
                         <img id="output" />
