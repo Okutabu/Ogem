@@ -12,6 +12,7 @@ function coeur(heart) {
     } else {
         heart.classList.add("liked");
     }
+    
 }
 
 function loadFile(event) {

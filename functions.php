@@ -62,7 +62,6 @@ function filter_watches(){
     //on rapelle cette fonction pour que ca refasse une requete dans la base de données a chaque fois, si jamais une montre a été ajoutée ou supprimée en temps reel
     get_watches_sorted($currentSort);
     $watches = $_SESSION['watches'];
-    var_dump($watches);
     //remplace tous les tirets du bas par des espaces dans les clés du tableau
     foreach ($filters as $key => $value){
         unset($filters[$key]);
@@ -165,6 +164,11 @@ function display_watch()
             echo "<h1>" . $watch['name'] . "</h1>";
             echo "<img src='images/watchesPics/" . $watch['image_token']."' alt='Image Montre'/>";
             echo "<div class='bandeau'><p>" . $watch['marque'] . "</p>";
+            echo "<form method='post' action='.'>";
+            echo" <input type='hidden' name='action' value='like'>";
+            echo" <input type='hidden' name='token' value='" . $watch['token'] . "'>";
+            echo" <input type='submit' value='♥'>";
+            echo" </form>";
             echo "<div class ='likes'><p>" . $watch['likes'] . "</p>";
             echo "<button name='" . $watch['token'] . "' class='heart' id='heart" . $idheart . "' onclick='coeur(heart" . $idheart . ")'></button></div></div>";
     
@@ -509,7 +513,7 @@ function del($tok){
 function personal_watches(){
     global $bdd;
     $me = $_SESSION['user']['pseudo'];
-    $prswatche = $bdd->prepare('SELECT * FROM watches WHERE user = ?');
+    $prswatche = $bdd->prepare('SELECT * FROM `watches` WHERE user = ?');
     $prswatche->execute(array($me));
 
     foreach($prswatche as $watch){
@@ -555,17 +559,26 @@ function likepage(){
         $prslikes = $bdd->prepare('SELECT * FROM `watches` WHERE token = ?');
         $prslikes->execute(array($value));
         $watch =$prslikes->fetch();
-
-            echo "<article class='personal_watches'>";
-            echo "<h1>" . $watch['name'] . "</h1>";
-            echo "<img src='images/watchesPics/" . $watch['image_token'] . ".jpg' alt='Image Montre'>";
-            echo "<div class='bandeau'><p>" . $watch['marque'] . "</p>";
-                echo "<h2>" . $watch['prix'] . " €</h2>";
-                echo "<form class='buy' method='get'>";
-                echo"<input type='hidden' name='action' value='suppr'>";
-                echo"<input type='button' name='token' value='" . $watch["token"] . "'>";
-            echo "</article>";
+        echo "<article class='personal_watches'>";
+        echo "<h1>" . $watch['name'] . "</h1>";
+        echo "<img src='images/watchesPics/" . $watch['image_token'] . ".jpg' alt='Image Montre'>";
+        echo "<div class='bandeau'><p>" . $watch['marque'] . "</p>";
+        echo "<h2>" . $watch['prix'] . " €</h2>";
+        echo "<form class='buy' method='get'>";
+        echo "<input type='hidden' name='action' value='suppr'>";
+        echo "<input type='button' name='token' value='" . $watch["token"] . "'>";
+        echo "</article>";
     }
+}
+
+function like($watch){
+    global $bdd;
+    $watch = $watch . "¦";
+    $insert = $bdd->prepare('INSERT INTO utilisateurs(likes) VALUES(:likes)');
+    $insert->execute(array('likes' => $watch));
+    header('Location: .?page=search');
+    die();
+    
 }
 
 // function whatever(){
