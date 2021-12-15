@@ -45,6 +45,7 @@
                 <label>Trier par : </label>
                 <select name="sort">
                     <option value="views">Populaire</option>
+                    <option value="likes">Les plus aimées</option>
                     <option value="prixcroissant">Prix : Croissant</option>
                     <option value="prixdecroissant">Prix : Décroissant</option>
                 </select>

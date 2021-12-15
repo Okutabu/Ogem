@@ -61,6 +61,9 @@ if (isset($_POST["action"])){
     if ($_POST["action"] == "like"){
         like($_POST['token']);
     }
+    if ($_POST["action"] == "enchere"){
+        encherir($_POST['token'], $_POST['bid']);
+    }
 
     if ($_POST["action"] == "changeProPic"){
         $imgToken = registerProfileImage($_FILES);
