@@ -68,5 +68,7 @@ function updateField($fieldID){
     {
         champ.style.display = "inline-grid";
     }
-    console.log("whatsiup");
+    
 }
+
+
